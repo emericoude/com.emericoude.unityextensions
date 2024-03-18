@@ -1,0 +1,16 @@
+{
+    "name": "emericoude.unityextensions.gizmos",
+    "rootNamespace": "Emeric.Utilities.Gizmos",
+    "references": [
+        "GUID:b6528c6ff2b67d4428a2705dc9b1f90d"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
