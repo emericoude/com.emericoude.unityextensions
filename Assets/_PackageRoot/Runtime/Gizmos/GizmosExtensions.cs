@@ -1,21 +1,21 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
 using Emeric.Utilities.Physics;
 
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace Emeric.Utilities.Gizmos
 {
 	public static class GizmosExtensions
 	{
+		public const float THICKNESS = 0.0001f;
+
 		#region Draw Capsule
 
 		/// <summary> Draws a "wired" capsule. </summary>
 		/// <remarks> Rotation of the capsule is not accurate. </remarks>
-		/// <param name="capsuleCollider">The collider to source.</param>
+		/// <param name="capsuleCollider"> The collider to source. </param>
 		public static void DrawWireCapsule (CapsuleCollider capsuleCollider)
 		{
 			capsuleCollider.GetParametersForOverlap(out Vector3 point0, out Vector3 point1, out float radius);
@@ -23,10 +23,10 @@ namespace Emeric.Utilities.Gizmos
 		}
 
 		/// <summary> Draws a "wired" capsule. </summary>
-		/// <param name="point0">The center of the sphere at the start of the capsule.</param>
-		/// <param name="point1">The center of the sphere at the end of the capsule.</param>
-		/// <param name="radius">The radius of the capsule.</param>
-		/// <param name="cylinderResolution">The resolution of the cylinder. In other words, the amount of faces to draw around the circumference.</param>
+		/// <param name="point0"> The center of the sphere at the start of the capsule. </param>
+		/// <param name="point1"> The center of the sphere at the end of the capsule. </param>
+		/// <param name="radius"> The radius of the capsule. </param>
+		/// <param name="cylinderResolution"> The resolution of the cylinder. In other words, the amount of faces to draw around the circumference. </param>
 		public static void DrawWireCapsule (Vector3 point0, Vector3 point1, float radius)
 		{
 			Matrix4x4 oldMatrix = UnityEngine.Gizmos.matrix;
@@ -53,8 +53,8 @@ namespace Emeric.Utilities.Gizmos
 		}
 
 		/// <summary> Draws a "solid" capsule. </summary>
-		/// <param name="capsuleCollider">The collider to source.</param>
-		/// <param name="cylinderResolution">The resolution of the cylinder. In other words, the amount of faces to draw around the circumference.</param>
+		/// <param name="capsuleCollider"> The collider to source. </param>
+		/// <param name="cylinderResolution"> The resolution of the cylinder. In other words, the amount of faces to draw around the circumference. </param>
 		public static void DrawCapsule (CapsuleCollider capsuleCollider, int cylinderResolution = 128)
 		{
 			capsuleCollider.GetParametersForOverlap(out Vector3 point0, out Vector3 point1, out float radius);
@@ -62,10 +62,10 @@ namespace Emeric.Utilities.Gizmos
 		}
 
 		/// <summary> Draws a "solid" capsule. </summary>
-		/// <param name="point0">The center of the sphere at the start of the capsule.</param>
-		/// <param name="point1">The center of the sphere at the end of the capsule.</param>
-		/// <param name="radius">The radius of the capsule.</param>
-		/// <param name="cylinderResolution">The resolution of the cylinder. In other words, the amount of faces to draw around the circumference.</param>
+		/// <param name="point0"> The center of the sphere at the start of the capsule. </param>
+		/// <param name="point1"> The center of the sphere at the end of the capsule. </param>
+		/// <param name="radius"> The radius of the capsule. /param>
+		/// <param name="cylinderResolution"> The resolution of the cylinder. In other words, the amount of faces to draw around the circumference. </param>
 		public static void DrawCapsule (Vector3 point0, Vector3 point1, float radius, int cylinderResolution = 128)
 		{
 			Vector3 center = Vector3.Lerp(point0, point1, 0.5f);
@@ -81,13 +81,13 @@ namespace Emeric.Utilities.Gizmos
 		#region Draw Cylinder
 
 		/// <summary> Draws a cylinder using faces. </summary>
-		/// <param name="position">The center of the cylinder.</param>
-		/// <param name="orientation">The orientation of the cylinder.</param>
-		/// <param name="radius">The radius of the cylinder.</param>
-		/// <param name="height">The height of the cylinder.</param>
-		/// <param name="resolution">The resolution of the cylinder. In other words, the amount of faces to draw around the circumference.</param>
-		/// <param name="thickness">The thickness of the cylinder's faces.</param>
-		public static void DrawWireCylinder (Vector3 position, Vector3 orientation, float radius, float height, int resolution = 128, float thickness = 0.001f)
+		/// <param name="position"> The center of the cylinder. </param>
+		/// <param name="orientation"> The orientation of the cylinder. </param>
+		/// <param name="radius"> The radius of the cylinder. </param>
+		/// <param name="height"> The height of the cylinder. </param>
+		/// <param name="resolution"> The resolution of the cylinder. In other words, the amount of faces to draw around the circumference. </param>
+		/// <param name="thickness"> The thickness of the cylinder's faces. </param>
+		public static void DrawWireCylinder (Vector3 position, Vector3 orientation, float radius, float height, int resolution = 128)
 		{
 			Matrix4x4 oldMatrix = UnityEngine.Gizmos.matrix;
 
@@ -101,7 +101,7 @@ namespace Emeric.Utilities.Gizmos
 				float angle = 360f * i / resolution;
 				Quaternion q = Quaternion.AngleAxis(angle, Vector3.up);
 				Vector3 capsulePosition = position + rotation * q * Vector3.forward * radius;
-				Vector3 size = new Vector3(faceWidth, height, thickness);
+				Vector3 size = new Vector3(faceWidth, height, THICKNESS);
 				Quaternion segmentRotation = rotation * q;
 				Matrix4x4 matrix = Matrix4x4.TRS(capsulePosition, segmentRotation, Vector3.one);
 				UnityEngine.Gizmos.matrix = matrix;
@@ -114,13 +114,13 @@ namespace Emeric.Utilities.Gizmos
 		}
 
 		/// <summary> Draws a cylinder using faces. </summary>
-		/// <param name="position">The center of the cylinder.</param>
-		/// <param name="orientation">The orientation of the cylinder.</param>
-		/// <param name="radius">The radius of the cylinder.</param>
-		/// <param name="height">The height of the cylinder.</param>
-		/// <param name="resolution">The resolution of the cylinder. In other words, the amount of faces to draw around the circumference.</param>
-		/// <param name="thickness">The thickness of the cylinder's faces.</param>
-		public static void DrawCylinder (Vector3 position, Vector3 orientation, float radius, float height, int resolution = 128, float thickness = 0.001f)
+		/// <param name="position"> The center of the cylinder. </param>
+		/// <param name="orientation"> The orientation of the cylinder. </param>
+		/// <param name="radius"> The radius of the cylinder. </param>
+		/// <param name="height"> The height of the cylinder. </param>
+		/// <param name="resolution"> The resolution of the cylinder. In other words, the amount of faces to draw around the circumference. </param>
+		/// <param name="thickness"> The thickness of the cylinder's faces. </param>
+		public static void DrawCylinder (Vector3 position, Vector3 orientation, float radius, float height, int resolution = 128)
 		{
 			Matrix4x4 oldMatrix = UnityEngine.Gizmos.matrix;
 
@@ -134,7 +134,7 @@ namespace Emeric.Utilities.Gizmos
 				float angle = 360f * i / resolution;
 				Quaternion q = Quaternion.AngleAxis(angle, Vector3.up);
 				Vector3 capsulePosition = position + rotation * q * Vector3.forward * radius;
-				Vector3 size = new Vector3(faceWidth, height, thickness);
+				Vector3 size = new Vector3(faceWidth, height, THICKNESS);
 				Quaternion segmentRotation = rotation * q;
 				Matrix4x4 matrix = Matrix4x4.TRS(capsulePosition, segmentRotation, Vector3.one);
 				UnityEngine.Gizmos.matrix = matrix;
@@ -208,8 +208,28 @@ namespace Emeric.Utilities.Gizmos
 		}
 
 		#endregion
+		#region Double Sided
 
-		//TODO: Draw inverse box
+		/// <summary> Draws a hollow box at center with size. </summary>
+		/// <remarks> This is useful when you want to see the box from inside, e.g. for a large killzone that englobes your level. <br/>
+		/// This however draws 6 cubes rather than 1, so use it sparingly. </remarks>
+		public static void DrawCubeDoubleSided (Vector3 center, Vector3 size, Quaternion rotation = default)
+		{
+			Matrix4x4 oldMatrix = UnityEngine.Gizmos.matrix;
+
+			UnityEngine.Gizmos.matrix = Matrix4x4.TRS(center, rotation, size);
+			Vector3 thicknessVector = UnityEngine.Gizmos.matrix.lossyScale * THICKNESS;
+			UnityEngine.Gizmos.DrawCube(new Vector3(0.5f, 0f, 0f), new Vector3(thicknessVector.x, 1f, 1f));
+			UnityEngine.Gizmos.DrawCube(new Vector3(-0.5f, 0f, 0f), new Vector3(thicknessVector.x, 1f, 1f));
+			UnityEngine.Gizmos.DrawCube(new Vector3(0f, 0.5f, 0f), new Vector3(1f, thicknessVector.y, 1f));
+			UnityEngine.Gizmos.DrawCube(new Vector3(0f, -0.5f, 0f), new Vector3(1f, thicknessVector.y, 1f));
+			UnityEngine.Gizmos.DrawCube(new Vector3(0f, 0f, 0.5f), new Vector3(1f, 1f, thicknessVector.z));
+			UnityEngine.Gizmos.DrawCube(new Vector3(0f, 0f, -0.5f), new Vector3(1f, 1f, thicknessVector.z));
+
+			UnityEngine.Gizmos.matrix = oldMatrix;
+		}
+
+		#endregion
 		//TODO: Inside of AnimatedGizmos, add animated gizmos like spherecasts!
 	}
 }

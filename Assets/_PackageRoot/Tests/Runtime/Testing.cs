@@ -8,11 +8,10 @@ using Emeric.Utilities.Gizmos;
 public class Testing : MonoBehaviour
 {
 	public Color color = Color.red;
-	public CapsuleCollider capsuleCollider;
 
 	private void OnDrawGizmos ()
 	{
 		Gizmos.color = color;
-		GizmosExtensions.DrawWireCapsule(capsuleCollider);
+		GizmosExtensions.DrawCubeDoubleSided(transform.position, transform.localScale, transform.rotation);
 	}
 }
