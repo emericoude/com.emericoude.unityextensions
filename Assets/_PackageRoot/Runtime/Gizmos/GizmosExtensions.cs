@@ -9,7 +9,8 @@ namespace Emeric.Utilities.Gizmos
 {
 	public static class GizmosExtensions
 	{
-		public const float THICKNESS = 0.0001f;
+		/// <summary> Thickness used by various functions. Default is 0.0001f. </summary>
+		public static float Thickness = 0.0001f;
 
 		#region Draw Capsule
 
@@ -101,7 +102,7 @@ namespace Emeric.Utilities.Gizmos
 				float angle = 360f * i / resolution;
 				Quaternion q = Quaternion.AngleAxis(angle, Vector3.up);
 				Vector3 capsulePosition = position + rotation * q * Vector3.forward * radius;
-				Vector3 size = new Vector3(faceWidth, height, THICKNESS);
+				Vector3 size = new Vector3(faceWidth, height, Thickness);
 				Quaternion segmentRotation = rotation * q;
 				Matrix4x4 matrix = Matrix4x4.TRS(capsulePosition, segmentRotation, Vector3.one);
 				UnityEngine.Gizmos.matrix = matrix;
@@ -134,7 +135,7 @@ namespace Emeric.Utilities.Gizmos
 				float angle = 360f * i / resolution;
 				Quaternion q = Quaternion.AngleAxis(angle, Vector3.up);
 				Vector3 capsulePosition = position + rotation * q * Vector3.forward * radius;
-				Vector3 size = new Vector3(faceWidth, height, THICKNESS);
+				Vector3 size = new Vector3(faceWidth, height, Thickness);
 				Quaternion segmentRotation = rotation * q;
 				Matrix4x4 matrix = Matrix4x4.TRS(capsulePosition, segmentRotation, Vector3.one);
 				UnityEngine.Gizmos.matrix = matrix;
@@ -218,7 +219,7 @@ namespace Emeric.Utilities.Gizmos
 			Matrix4x4 oldMatrix = UnityEngine.Gizmos.matrix;
 
 			UnityEngine.Gizmos.matrix = Matrix4x4.TRS(center, rotation, size);
-			Vector3 thicknessVector = UnityEngine.Gizmos.matrix.lossyScale * THICKNESS;
+			Vector3 thicknessVector = UnityEngine.Gizmos.matrix.lossyScale * Thickness;
 			UnityEngine.Gizmos.DrawCube(new Vector3(0.5f, 0f, 0f), new Vector3(thicknessVector.x, 1f, 1f));
 			UnityEngine.Gizmos.DrawCube(new Vector3(-0.5f, 0f, 0f), new Vector3(thicknessVector.x, 1f, 1f));
 			UnityEngine.Gizmos.DrawCube(new Vector3(0f, 0.5f, 0f), new Vector3(1f, thicknessVector.y, 1f));
@@ -230,6 +231,5 @@ namespace Emeric.Utilities.Gizmos
 		}
 
 		#endregion
-		//TODO: Inside of AnimatedGizmos, add animated gizmos like spherecasts!
 	}
 }
