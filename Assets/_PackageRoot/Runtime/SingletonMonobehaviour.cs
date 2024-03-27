@@ -6,14 +6,14 @@ using UnityEngine;
 namespace Emeric.Utilities
 {
     /// <summary> A base implementation of the singleton pattern. </summary>
-    /// <remarks> 
-    /// If you want persistence, use <see cref="PersistentSingletonMonobehaviour{T}"/> instead. <br/>
-    /// If you want the singleton to be generated if it is missing, create your own implementation instead.
-    /// </remarks>
-    public abstract class SingletonMonobehaviour<T> : MonoBehaviour where T : SingletonMonobehaviour<T>
+    /// <remarks> If you want persistence, use <see cref="PersistentSingletonMonoBehaviour{T}"/> instead. <br/>
+    /// If you want a "lazy" singleton (i.e. to be created when first fetched), use <see cref="LazySingletonMonoBehaviour{T}{T}"/> instead. </remarks>
+    [DefaultExecutionOrder(-10)]
+    public abstract class SingletonMonoBehaviour<T> : MonoBehaviour where T : SingletonMonoBehaviour<T>
     {
-        protected static T _instance;
+        /// <summary> The instance of this singleton. </summary>
         public static T Instance { get { return _instance; } }
+        protected static T _instance;
 
         protected virtual void Awake()
         {
@@ -36,8 +36,9 @@ namespace Emeric.Utilities
         }
     }
 
-    /// <summary> A variation of <see cref="SingletonMonobehaviour{T}"/> which adds persistence (<see cref="Object.DontDestroyOnLoad(Object)"/>). </summary>
-    public abstract class PersistentSingletonMonobehaviour<T> : SingletonMonobehaviour<T> where T : PersistentSingletonMonobehaviour<T>
+    /// <summary> A variation of <see cref="SingletonMonoBehaviour{T}"/> which adds persistence (<see cref="Object.DontDestroyOnLoad(Object)"/>). </summary>
+    [DefaultExecutionOrder(-10)]
+    public abstract class PersistentSingletonMonoBehaviour<T> : SingletonMonoBehaviour<T> where T : PersistentSingletonMonoBehaviour<T>
     {
         protected override bool SingletonInitialization()
         {
@@ -49,5 +50,30 @@ namespace Emeric.Utilities
 
             return false;
         }
+    }
+
+    /// <summary> A variation of <see cref="SingletonMonoBehaviour{T}"/> which creates the singleton automatically when first fetched. </summary>
+    /// <remarks> This expects to be fully generated at runtime. There should be no existing instance in the scene from the get-go. </remarks>
+    public abstract class LazySingletonMonoBehaviour<T> : MonoBehaviour where T : LazySingletonMonoBehaviour<T>
+    {
+        private static T _instance;
+
+        /// <summary> The instance of this singleton. </summary>
+        public static T Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new GameObject(typeof(T).Name).AddComponent<T>();
+                    _instance.SingletonAwake();
+                }
+                return _instance;
+            }
+        }
+
+        /// <summary> Called when the singleton is created as it is first fetched. </summary>
+        /// <remarks> Override this to add any initialization you might need before receiving the instance. </remarks>
+        protected virtual void SingletonAwake() { }
     }
 }

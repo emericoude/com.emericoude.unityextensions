@@ -5,7 +5,7 @@ using Emeric.Utilities;
 
 using UnityEngine;
 
-public class TestSingleton : PersistentSingletonMonobehaviour<TestSingleton>
+public class TestSingleton : PersistentSingletonMonoBehaviour<TestSingleton>
 {
     
 }
