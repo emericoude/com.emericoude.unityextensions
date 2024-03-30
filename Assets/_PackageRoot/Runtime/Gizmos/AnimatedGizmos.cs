@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 using UnityEditor;
+
 using UnityEngine;
 
 namespace Emeric.Utilities.Gizmos
@@ -26,10 +27,10 @@ namespace Emeric.Utilities.Gizmos
 		private static float targetTime;
 		private static float lastRecordedTime;
 		private static float animationDuration = 0.5f;
-        private static float animationTime;
+		private static float animationTime;
 
 #if UNITY_EDITOR
-        static AnimatedGizmos ()
+		static AnimatedGizmos ()
 		{
 			EditorApplication.update += EditorUpdate;
 		}
@@ -45,15 +46,15 @@ namespace Emeric.Utilities.Gizmos
 				AnimatedGizmos.targetTime = timeSinceStartup + AnimatedGizmos.animationDuration;
 			}
 
-            AnimatedGizmos.animationTime = Mathf.InverseLerp(
-				AnimatedGizmos.lastRecordedTime, 
-				AnimatedGizmos.targetTime, 
-				timeSinceStartup
-			);
-        }
+			AnimatedGizmos.animationTime = Mathf.InverseLerp(
+			AnimatedGizmos.lastRecordedTime,
+			AnimatedGizmos.targetTime,
+			timeSinceStartup
+		);
+		}
 #endif
 
-		public static float GetAnimationTime()
+		public static float GetAnimationTime ()
 		{
 			return AnimatedGizmos.animationTime;
 		}

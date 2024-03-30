@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 
 namespace Emeric.Utilities.Math
@@ -14,7 +15,7 @@ namespace Emeric.Utilities.Math
 		}
 
 		/// <summary> Returns a vector where all values have the absolute of 1.</summary>
-		public static Vector3 Abs(this Vector3 vector)
+		public static Vector3 Abs (this Vector3 vector)
 		{
 			return new Vector3(Mathf.Abs(vector.x), Mathf.Abs(vector.y), Mathf.Abs(vector.z));
 		}

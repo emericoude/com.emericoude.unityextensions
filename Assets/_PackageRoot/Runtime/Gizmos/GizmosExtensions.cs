@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+
 using Emeric.Utilities.Physics;
 
 using UnityEngine;
@@ -234,55 +235,55 @@ namespace Emeric.Utilities.Gizmos
 			UnityEngine.Gizmos.matrix = oldMatrix;
 		}
 
-        #endregion
-        #region Animated Gizmos
+		#endregion
+		#region Animated Gizmos
 
-		public static void DrawSphereCast(Vector3 position, float radius, Vector3 direction, out RaycastHit hit, float maxDistance = Mathf.Infinity, int layerMask = ~0, QueryTriggerInteraction queryTriggerInteraction = QueryTriggerInteraction.UseGlobal)
+		public static void DrawSphereCast (Vector3 position, float radius, Vector3 direction, out RaycastHit hit, float maxDistance = Mathf.Infinity, int layerMask = ~0, QueryTriggerInteraction queryTriggerInteraction = QueryTriggerInteraction.UseGlobal)
 		{
 			Color previousColor = UnityEngine.Gizmos.color;
 
 			Vector3 endPoint = position;
 			if (UnityEngine.Physics.SphereCast(position, radius, direction, out hit, maxDistance, layerMask, queryTriggerInteraction))
 			{
-                UnityEngine.Gizmos.color = AnimatedGizmos.PositiveFeedbackColor;
-				endPoint = position + ( direction * Vector3.Distance(position, hit.point));
-				endPoint -= direction * (radius - Vector3.Distance(endPoint,hit.point));
-            }
+				UnityEngine.Gizmos.color = AnimatedGizmos.PositiveFeedbackColor;
+				endPoint = position + (direction * Vector3.Distance(position, hit.point));
+				endPoint -= direction * (radius - Vector3.Distance(endPoint, hit.point));
+			}
 			else
 			{
-                UnityEngine.Gizmos.color = AnimatedGizmos.NegativeFeedbackColor;
-				endPoint = position + ( direction * maxDistance );
-            }
+				UnityEngine.Gizmos.color = AnimatedGizmos.NegativeFeedbackColor;
+				endPoint = position + (direction * maxDistance);
+			}
 
-            GizmosExtensions.DrawCapsule(position, endPoint, radius);
-            UnityEngine.Gizmos.DrawSphere(Vector3.Lerp(position, endPoint, AnimatedGizmos.GetAnimationTime()), radius);
+			GizmosExtensions.DrawCapsule(position, endPoint, radius);
+			UnityEngine.Gizmos.DrawSphere(Vector3.Lerp(position, endPoint, AnimatedGizmos.GetAnimationTime()), radius);
 
-            UnityEngine.Gizmos.color = previousColor;
+			UnityEngine.Gizmos.color = previousColor;
 		}
 
-        public static void DrawWireSphereCast(Vector3 position, float radius, Vector3 direction, out RaycastHit hit, float maxDistance = Mathf.Infinity, int layerMask = ~0, QueryTriggerInteraction queryTriggerInteraction = QueryTriggerInteraction.UseGlobal)
-        {
-            Color previousColor = UnityEngine.Gizmos.color;
+		public static void DrawWireSphereCast (Vector3 position, float radius, Vector3 direction, out RaycastHit hit, float maxDistance = Mathf.Infinity, int layerMask = ~0, QueryTriggerInteraction queryTriggerInteraction = QueryTriggerInteraction.UseGlobal)
+		{
+			Color previousColor = UnityEngine.Gizmos.color;
 
-            Vector3 endPoint = position;
-            if (UnityEngine.Physics.SphereCast(position, radius, direction, out hit, maxDistance, layerMask, queryTriggerInteraction))
-            {
-                UnityEngine.Gizmos.color = AnimatedGizmos.PositiveFeedbackColor;
-                endPoint = position + ( direction * Vector3.Distance(position, hit.point) );
-                endPoint -= direction * ( radius - Vector3.Distance(endPoint, hit.point) );
-            }
-            else
-            {
-                UnityEngine.Gizmos.color = AnimatedGizmos.NegativeFeedbackColor;
-                endPoint = position + ( direction * maxDistance );
-            }
+			Vector3 endPoint = position;
+			if (UnityEngine.Physics.SphereCast(position, radius, direction, out hit, maxDistance, layerMask, queryTriggerInteraction))
+			{
+				UnityEngine.Gizmos.color = AnimatedGizmos.PositiveFeedbackColor;
+				endPoint = position + (direction * Vector3.Distance(position, hit.point));
+				endPoint -= direction * (radius - Vector3.Distance(endPoint, hit.point));
+			}
+			else
+			{
+				UnityEngine.Gizmos.color = AnimatedGizmos.NegativeFeedbackColor;
+				endPoint = position + (direction * maxDistance);
+			}
 
-            GizmosExtensions.DrawWireCapsule(position, endPoint, radius);
-            UnityEngine.Gizmos.DrawWireSphere(Vector3.Lerp(position, endPoint, AnimatedGizmos.GetAnimationTime()), radius);
+			GizmosExtensions.DrawWireCapsule(position, endPoint, radius);
+			UnityEngine.Gizmos.DrawWireSphere(Vector3.Lerp(position, endPoint, AnimatedGizmos.GetAnimationTime()), radius);
 
-            UnityEngine.Gizmos.color = previousColor;
-        }
+			UnityEngine.Gizmos.color = previousColor;
+		}
 
-        #endregion
-    }
+		#endregion
+	}
 }

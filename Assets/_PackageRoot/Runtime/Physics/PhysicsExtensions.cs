@@ -14,7 +14,7 @@ namespace Emeric.Utilities.Physics
 		/// <param name="targetCollider">The collider to look for.</param>
 		/// <param name="maxAmountForNonAlloc">Default is 8. This uses "NonAlloc" version of <see cref="Physics.OverlapBoxNonAlloc(Vector3, Vector3, Collider[])"/> functions, you must specify a number of allocation possible if you expect a higher amount of possible hits.</param>
 		/// <returns><see langword="false"/> if <paramref name="sourceCollider"/> is a <see cref="MeshCollider"/>; otherwise <see langword="true"/> if <paramref name="sourceCollider"/> touches <paramref name="targetCollider"/>;  otherwise <see langword="false"/>.</returns>
-		public static bool IsInContactWith(this Collider sourceCollider, Collider targetCollider, int maxAmountForNonAlloc = 8)
+		public static bool IsInContactWith (this Collider sourceCollider, Collider targetCollider, int maxAmountForNonAlloc = 8)
 		{
 			int layerMask = (1 << targetCollider.gameObject.layer);
 			QueryTriggerInteraction triggerInteraction = targetCollider.isTrigger ? QueryTriggerInteraction.Collide : QueryTriggerInteraction.Ignore;
@@ -23,7 +23,7 @@ namespace Emeric.Utilities.Physics
 			int hitAmount = -1;
 			if (sourceCollider is BoxCollider boxCollider)
 			{
-				hitAmount = UnityEngine.Physics.OverlapBoxNonAlloc(boxCollider.bounds.center,boxCollider.size / 2,hits,boxCollider.transform.rotation,layerMask,triggerInteraction);
+				hitAmount = UnityEngine.Physics.OverlapBoxNonAlloc(boxCollider.bounds.center, boxCollider.size / 2, hits, boxCollider.transform.rotation, layerMask, triggerInteraction);
 			}
 			else if (sourceCollider is CapsuleCollider capsuleCollider)
 			{
