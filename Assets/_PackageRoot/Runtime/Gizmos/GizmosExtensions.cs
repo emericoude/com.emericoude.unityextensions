@@ -238,7 +238,7 @@ namespace Emeric.Utilities.Gizmos
 		#endregion
 		#region Animated Gizmos
 
-		public static void DrawSphereCast (Vector3 position, float radius, Vector3 direction, out RaycastHit hit, float maxDistance = Mathf.Infinity, int layerMask = ~0, QueryTriggerInteraction queryTriggerInteraction = QueryTriggerInteraction.UseGlobal)
+		public static void DrawSphereCast (Vector3 position, float radius, Vector3 direction, out RaycastHit hit, float maxDistance = Mathf.Infinity, int layerMask = ~0, QueryTriggerInteraction queryTriggerInteraction = QueryTriggerInteraction.UseGlobal, float animationSpeed = 1.0f)
 		{
 			Color previousColor = UnityEngine.Gizmos.color;
 
@@ -256,12 +256,16 @@ namespace Emeric.Utilities.Gizmos
 			}
 
 			GizmosExtensions.DrawCapsule(position, endPoint, radius);
-			UnityEngine.Gizmos.DrawSphere(Vector3.Lerp(position, endPoint, AnimatedGizmos.GetAnimationTime()), radius);
+			if (AnimatedGizmos.Enabled)
+			{
+				animationSpeed = Vector3.Distance(position, endPoint) * (animationSpeed / 100.0f);
+				UnityEngine.Gizmos.DrawSphere(Vector3.Lerp(position, endPoint, AnimatedGizmos.Instance.GetAnimationTime(animationSpeed)), radius);
+			}
 
 			UnityEngine.Gizmos.color = previousColor;
 		}
 
-		public static void DrawWireSphereCast (Vector3 position, float radius, Vector3 direction, out RaycastHit hit, float maxDistance = Mathf.Infinity, int layerMask = ~0, QueryTriggerInteraction queryTriggerInteraction = QueryTriggerInteraction.UseGlobal)
+		public static void DrawWireSphereCast (Vector3 position, float radius, Vector3 direction, out RaycastHit hit, float maxDistance = Mathf.Infinity, int layerMask = ~0, QueryTriggerInteraction queryTriggerInteraction = QueryTriggerInteraction.UseGlobal, float animationSpeed = 1.0f)
 		{
 			Color previousColor = UnityEngine.Gizmos.color;
 
@@ -279,7 +283,11 @@ namespace Emeric.Utilities.Gizmos
 			}
 
 			GizmosExtensions.DrawWireCapsule(position, endPoint, radius);
-			UnityEngine.Gizmos.DrawWireSphere(Vector3.Lerp(position, endPoint, AnimatedGizmos.GetAnimationTime()), radius);
+			if (AnimatedGizmos.Enabled)
+			{
+				animationSpeed = Vector3.Distance(position, endPoint) * (animationSpeed / 100.0f);
+				UnityEngine.Gizmos.DrawWireSphere(Vector3.Lerp(position, endPoint, AnimatedGizmos.Instance.GetAnimationTime(animationSpeed)), radius);
+			}
 
 			UnityEngine.Gizmos.color = previousColor;
 		}

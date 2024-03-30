@@ -11,52 +11,79 @@ namespace Emeric.Utilities.Gizmos
 	//TODO explore singleton version, editor update is not useful.
 	//TODO explore per-gizmos time, associate each to an identifier string object+component+identifier
 
-#if UNITY_EDITOR
-	[InitializeOnLoad]
-#endif
-	public static class AnimatedGizmos
+	public class AnimatedGizmos : LazySingletonMonoBehaviour<AnimatedGizmos>
 	{
-		/// <summary> Toggle this to turn animated gizmos on or off. </summary>
-		public static bool Enabled = true;
+		private static bool _enabled = true;
+		public static bool Enabled 
+		{ 
+			get 
+			{ 
+				return _enabled && Application.isPlaying; 
+			} 
+			set
+			{
+				_enabled = value;
+			}
+		}
 
 		/// <summary> Color to describe a positive feedback, such as a hit. Green with half transparency by default. </summary>
 		public static Color PositiveFeedbackColor = Color.green.WithAlpha(0.5f);
 		/// <summary> Color to describe a negative feedback, such as a miss. Red with half transparency by default. </summary>
 		public static Color NegativeFeedbackColor = Color.red.WithAlpha(0.5f);
 
-		private static float targetTime;
-		private static float lastRecordedTime;
-		private static float animationDuration = 0.5f;
-		private static float animationTime;
+		private Dictionary<float, AnimationInfo> animationInfoByDuration = new Dictionary<float, AnimationInfo>();
 
-#if UNITY_EDITOR
-		static AnimatedGizmos ()
-		{
-			EditorApplication.update += EditorUpdate;
+		private class AnimationInfo {
+			public float TargetTime;
+			public float PreviousTime;
+			public bool Pong = false;
+
+			public AnimationInfo(float duration)
+			{
+				this.PreviousTime = Time.time;
+				this.TargetTime = Time.time + duration;
+			}
 		}
 
-		private static void EditorUpdate ()
+		private void OnDrawGizmos ()
 		{
 			if (!AnimatedGizmos.Enabled) return;
 
-			float timeSinceStartup = (float)EditorApplication.timeSinceStartup;
-			if (timeSinceStartup > AnimatedGizmos.targetTime)
+			float currentTime = Time.time;
+			foreach (var kvp in this.animationInfoByDuration)
 			{
-				AnimatedGizmos.lastRecordedTime = timeSinceStartup;
-				AnimatedGizmos.targetTime = timeSinceStartup + AnimatedGizmos.animationDuration;
+				if (kvp.Value.TargetTime <= currentTime)
+				{
+					kvp.Value.PreviousTime = currentTime;
+					kvp.Value.TargetTime = currentTime + kvp.Key;
+					kvp.Value.Pong = !kvp.Value.Pong;
+				}
+			}
+		}
+
+		public float GetAnimationTime(float duration = 1.0f, bool isPingPong = false)
+		{
+			duration = this.RoundToPrecision(duration);
+			this.AddAnimationDurationIfMissing(duration);
+
+			if (this.animationInfoByDuration.TryGetValue(duration, out var info))
+			{
+				if (isPingPong && info.Pong) return Mathf.InverseLerp(info.TargetTime, info.PreviousTime, Time.time);
+				return Mathf.InverseLerp(info.PreviousTime, info.TargetTime, Time.time);
 			}
 
-			AnimatedGizmos.animationTime = Mathf.InverseLerp(
-			AnimatedGizmos.lastRecordedTime,
-			AnimatedGizmos.targetTime,
-			timeSinceStartup
-		);
+			return 0.0f;
 		}
-#endif
 
-		public static float GetAnimationTime ()
+		private void AddAnimationDurationIfMissing (float duration)
 		{
-			return AnimatedGizmos.animationTime;
+			if (this.animationInfoByDuration.ContainsKey(duration)) return;
+			this.animationInfoByDuration.Add(duration, new AnimationInfo(duration));
+		}
+
+		private float RoundToPrecision(float duration)
+		{
+			return Mathf.Max(0.1f, Mathf.Round(duration * 10.0f) / 10.0f);
 		}
 	}
 }
