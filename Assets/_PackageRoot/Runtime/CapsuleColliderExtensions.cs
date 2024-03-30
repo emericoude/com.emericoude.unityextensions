@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-namespace Emeric.Utilities.Physics
+namespace Emericoude.UnityExtensions
 {
 	public static class CapsuleColliderExtensions
 	{

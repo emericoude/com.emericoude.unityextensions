@@ -2,10 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-using Emeric.Utilities.Gizmos;
-using Emeric.Utilities.Math;
-
 using UnityEngine;
+using Emericoude.UnityExtensions;
 
 public class AnimatedGizmosTests : MonoBehaviour
 {

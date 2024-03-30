@@ -4,7 +4,7 @@ using System.Linq;
 
 using UnityEngine;
 
-namespace Emeric.Utilities
+namespace Emericoude.UnityExtensions
 {
 	public static class CollectionsExtensions
 	{

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-namespace Emeric.Utilities.Math
+namespace Emericoude.UnityExtensions
 {
 	public enum DeltaTimeScale
 	{

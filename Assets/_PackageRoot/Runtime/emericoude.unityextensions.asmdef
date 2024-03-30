@@ -1,6 +1,6 @@
 {
-    "name": "emericoude.unityextensions.utilities",
-    "rootNamespace": "Emeric.Utilities",
+    "name": "emericoude.unityextensions",
+    "rootNamespace": "Emericoude.UnityExtensions",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Xml.Linq;
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Emeric.Utilities
+namespace Emericoude.UnityExtensions
 {
 	public static class GameObjectExtensions
 	{

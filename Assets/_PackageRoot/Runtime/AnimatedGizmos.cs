@@ -1,11 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 
-using UnityEditor;
-
 using UnityEngine;
 
-namespace Emeric.Utilities.Gizmos
+namespace Emericoude.UnityExtensions
 {
 
 	//TODO explore singleton version, editor update is not useful.

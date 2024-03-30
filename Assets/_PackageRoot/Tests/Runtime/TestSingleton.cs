@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-using Emeric.Utilities;
+using Emericoude.UnityExtensions;
 
 using UnityEngine;
 

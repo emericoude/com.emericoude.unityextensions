@@ -2,11 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-using Emeric.Utilities.Physics;
-
 using UnityEngine;
 
-namespace Emeric.Utilities.Gizmos
+namespace Emericoude.UnityExtensions
 {
 	public static class GizmosExtensions
 	{
