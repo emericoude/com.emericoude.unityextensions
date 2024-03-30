@@ -258,8 +258,9 @@ namespace Emeric.Utilities.Gizmos
 			GizmosExtensions.DrawCapsule(position, endPoint, radius);
 			if (AnimatedGizmos.Enabled)
 			{
-				animationSpeed = Vector3.Distance(position, endPoint) * (animationSpeed / 100.0f);
-				UnityEngine.Gizmos.DrawSphere(Vector3.Lerp(position, endPoint, AnimatedGizmos.Instance.GetAnimationTime(animationSpeed)), radius);
+				//float animationDuration = Vector3.Distance(position, endPoint) * (animationSpeed / 100.0f); //speed accurate
+				float animationDuration = 1.0f /Vector3.Distance(position, endPoint) / animationSpeed; //distance-based
+				UnityEngine.Gizmos.DrawSphere(Vector3.Lerp(position, endPoint, AnimatedGizmos.Instance.GetAnimationTime(animationDuration)), radius);
 			}
 
 			UnityEngine.Gizmos.color = previousColor;
@@ -285,8 +286,9 @@ namespace Emeric.Utilities.Gizmos
 			GizmosExtensions.DrawWireCapsule(position, endPoint, radius);
 			if (AnimatedGizmos.Enabled)
 			{
-				animationSpeed = Vector3.Distance(position, endPoint) * (animationSpeed / 100.0f);
-				UnityEngine.Gizmos.DrawWireSphere(Vector3.Lerp(position, endPoint, AnimatedGizmos.Instance.GetAnimationTime(animationSpeed)), radius);
+				//float animationDuration = Vector3.Distance(position, endPoint) * (animationSpeed / 100.0f); //speed accurate
+				float animationDuration = 1.0f / Vector3.Distance(position, endPoint) / animationSpeed; //distance-based
+				UnityEngine.Gizmos.DrawWireSphere(Vector3.Lerp(position, endPoint, AnimatedGizmos.Instance.GetAnimationTime(animationDuration)), radius);
 			}
 
 			UnityEngine.Gizmos.color = previousColor;
