@@ -38,16 +38,21 @@ namespace Emericoude.UnityExtensions
 			return curve.Evaluate(time);
 		}
 
-		public static AnimationCurve ScaleCurve (this AnimationCurve curve, float maxX, float maxY)
+		/// <summary> Scales a curve by the given factor, keeping the curve's shape. </summary>
+		/// <param name="curve"> The curve to scale. </param>
+		/// <param name="timeScale"> The horizontal (or time) scaling factor. </param>
+		/// <param name="valueScale"> The vertical (or value) scaling factor. </param>
+		/// <returns> A new animation curve scaled by the given factor. </returns>
+		public static AnimationCurve ScaleCurve (this AnimationCurve curve, float timeScale, float valueScale)
 		{
 			AnimationCurve scaledCurve = new AnimationCurve();
 			for (int i = 0; i < curve.keys.Length; i++)
 			{
 				Keyframe keyframe = curve.keys[i];
-				keyframe.value = curve.keys[i].value * maxY;
-				keyframe.time = curve.keys[i].time * maxX;
-				keyframe.inTangent = curve.keys[i].inTangent * maxY / maxX;
-				keyframe.outTangent = curve.keys[i].outTangent * maxY / maxX;
+				keyframe.value = curve.keys[i].value * valueScale;
+				keyframe.time = curve.keys[i].time * timeScale;
+				keyframe.inTangent = curve.keys[i].inTangent * valueScale / timeScale;
+				keyframe.outTangent = curve.keys[i].outTangent * valueScale / timeScale;
 
 				scaledCurve.AddKey(keyframe);
 			}
