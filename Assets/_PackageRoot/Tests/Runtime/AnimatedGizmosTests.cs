@@ -8,6 +8,7 @@ using Emericoude.UnityExtensions;
 public class AnimatedGizmosTests : MonoBehaviour
 {
 	[Header("Curve field")]
+	[BetterCurveField]
 	[SerializeField] AnimationCurve Curve;
 
 	[Header("Sphere Cast")]
