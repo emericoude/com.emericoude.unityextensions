@@ -16,7 +16,7 @@ namespace Emericoude.UnityExtensions
 		/// <returns> A value between 0 and 1, representing where <paramref name="time"/> stands in the <paramref name="curve"/>, using <see cref="AnimationCurve.Evaluate(float)"/>. </returns>
 		public static float AutoEvaluate(this AnimationCurve curve, ref float time, DeltaTimeScale deltaTime = DeltaTimeScale.DeltaTime)
 		{
-			float maxTime = curve.keys.Last().time;
+			float maxTime = curve.keys.LastOrDefault().time;
 			time = Mathf.MoveTowards(time, maxTime, deltaTime.GetDeltaTime());
 			return curve.Evaluate(time);
 		}
@@ -27,13 +27,31 @@ namespace Emericoude.UnityExtensions
 		/// <param name="deltaTime"> The timescale used for moving the curve, <see cref="Time.deltaTime"/> by default. </param>
 		/// <param name="targetTime"> The target time. This is clamped in the curve's minimum and maximum duration. </param>
 		/// <returns> A value between 0 and 1, representing where <paramref name="time"/> stands in the <paramref name="curve"/>, using <see cref="AnimationCurve.Evaluate(float)"/>. </returns>
-		public static float AutoEvaluate (this AnimationCurve curve, ref float time, float targetTime, DeltaTimeScale deltaTime = DeltaTimeScale.DeltaTime)
+		public static float AutoEvaluateTowards (this AnimationCurve curve, ref float time, float targetTime, DeltaTimeScale deltaTime = DeltaTimeScale.DeltaTime)
 		{
 			float minTime = curve.keys[0].time;
-			float maxTime = curve.keys.Last().time;
+			float maxTime = curve.keys.LastOrDefault().time;
 
 			targetTime = Mathf.Clamp(targetTime, minTime, maxTime);
 			time = Mathf.MoveTowards(time, targetTime, deltaTime.GetDeltaTime());
+
+			return curve.Evaluate(time);
+		}
+
+		/// <summary> Moves <paramref name="time"/> along the <paramref name="curve"/>, towards <paramref name="targetTimeRelative"/> (between 0 and 1) using <paramref name="deltaTime"/>. </summary>
+		/// <param name="curve"> The curve used for evaluation. </param>
+		/// <param name="time"> The curve's current time passed in reference. For you, this should likely be a variable in your script. </param>
+		/// <param name="deltaTime"> The timescale used for moving the curve, <see cref="Time.deltaTime"/> by default. </param>
+		/// <param name="targetTimeRelative"> The target time. This is clamped between 0 and 1. </param>
+		/// <remarks> This differs from <see cref="AutoEvaluateTowards(AnimationCurve, ref float, float, DeltaTimeScale)"/> in that the target time is a relative point in the curve, 0 is the beginning, 1 is the end. </remarks>
+		/// <returns> A value between 0 and 1, representing where <paramref name="time"/> stands in the <paramref name="curve"/>, using <see cref="AnimationCurve.Evaluate(float)"/>. </returns>
+		public static float AutoEvaluateTowardsRelative (this AnimationCurve curve, ref float time, float targetTimeRelative, DeltaTimeScale deltaTime = DeltaTimeScale.DeltaTime)
+		{
+			float minTime = curve.keys[0].time;
+			float maxTime = curve.keys.LastOrDefault().time;
+
+			targetTimeRelative = Mathf.Lerp(minTime, maxTime, targetTimeRelative);
+			time = Mathf.MoveTowards(time, targetTimeRelative, deltaTime.GetDeltaTime());
 
 			return curve.Evaluate(time);
 		}
