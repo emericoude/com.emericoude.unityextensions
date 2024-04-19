@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 
 using UnityEditor;
-
 using UnityEngine;
-using UnityEngine.UIElements;
 
-using Emericoude.UnityExtensions;
+using Emericoude.Math;
 
-namespace Emericoude.UnityExtensions.Editor
+namespace Emericoude.Editor
 {
 	[CustomPropertyDrawer(typeof(BetterCurveFieldAttribute))]
 	public class BetterCurveDrawer : PropertyDrawer

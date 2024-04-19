@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-namespace Emericoude.UnityExtensions
+namespace Emericoude
 {
     /// <summary> A base implementation of the singleton pattern. </summary>
     /// <remarks> If you want persistence, use <see cref="PersistentSingletonMonoBehaviour{T}"/> instead. <br/>

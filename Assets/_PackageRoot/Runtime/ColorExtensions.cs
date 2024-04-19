@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-namespace Emericoude.UnityExtensions
+namespace Emericoude
 {
 	public static class ColorExtensions
 	{

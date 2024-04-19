@@ -5,7 +5,7 @@ using System.Linq;
 
 using UnityEngine;
 
-namespace Emericoude.UnityExtensions
+namespace Emericoude.Math
 {
 	public static class CurveExtensions
 	{

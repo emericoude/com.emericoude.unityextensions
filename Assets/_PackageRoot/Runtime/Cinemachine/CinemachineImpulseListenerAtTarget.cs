@@ -7,7 +7,7 @@ using UnityEngine;
 using Cinemachine;
 #endif
 
-namespace Emericoude.CinemachineExtensions
+namespace Emericoude.Cinemachine
 {
 #if CINEMACHINE
 	/// <summary> Overrides the <seealso cref="CinemachineImpulseListener"/> to listen for impulses from the target's location. </summary>

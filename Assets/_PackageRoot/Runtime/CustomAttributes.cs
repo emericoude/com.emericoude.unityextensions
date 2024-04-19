@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-namespace Emericoude.UnityExtensions
+namespace Emericoude
 {
 	/// <summary> Draws a curve's duration and value fields to be modified easily and while keeping the curve's shape, 
 	/// without needing to go into the curve editor. </summary>

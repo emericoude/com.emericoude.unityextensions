@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-using Emericoude.UnityExtensions;
-
 using UnityEngine;
+
+using Emericoude.Collections;
 
 public class StopwatchTester : MonoBehaviour
 {

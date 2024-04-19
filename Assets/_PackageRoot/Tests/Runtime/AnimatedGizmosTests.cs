@@ -3,7 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
-using Emericoude.UnityExtensions;
+
+using Emericoude;
+using Emericoude.Gizmos;
+using Emericoude.Math;
 
 public class AnimatedGizmosTests : MonoBehaviour
 {

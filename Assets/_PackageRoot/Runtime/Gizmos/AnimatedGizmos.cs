@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-namespace Emericoude.UnityExtensions
+namespace Emericoude.Gizmos
 {
 
 	//TODO explore singleton version, editor update is not useful.

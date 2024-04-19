@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Emericoude.UnityExtensions
+using Emericoude.SceneManagement;
+
+namespace Emericoude
 {
 	public static class GameObjectExtensions
 	{
