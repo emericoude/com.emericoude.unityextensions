@@ -36,7 +36,7 @@ namespace Emericoude.Editor
 				//apply changes to backing curve
 				float xScale = floatFields[0] / lastKeyframe.time;
 				float yScale = floatFields[1] / lastKeyframe.value;
-				backingCurve = backingCurve.ScaleCurve(xScale, yScale);
+				backingCurve = backingCurve.Scale(xScale, yScale);
 			}
 
 			//Draw curve field

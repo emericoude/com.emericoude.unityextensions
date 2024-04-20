@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 using Emericoude.SceneManagement;
 
-namespace Emericoude
+namespace Emericoude.Gameplay
 {
 	public static class GameObjectExtensions
 	{

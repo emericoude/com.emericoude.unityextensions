@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-namespace Emericoude
+namespace Emericoude.Gameplay
 {
 	public enum DeltaTimeScale
 	{

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-using Emericoude;
+using Emericoude.Gameplay.Framework;
 
 public class TestSingleton : PersistentSingletonMonoBehaviour<TestSingleton>
 {

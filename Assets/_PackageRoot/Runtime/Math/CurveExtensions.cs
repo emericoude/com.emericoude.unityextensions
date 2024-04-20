@@ -5,6 +5,8 @@ using System.Linq;
 
 using UnityEngine;
 
+using Emericoude.Gameplay;
+
 namespace Emericoude.Math
 {
 	public static class CurveExtensions
@@ -58,19 +60,19 @@ namespace Emericoude.Math
 
 		/// <summary> Scales a curve by the given factor, keeping the curve's shape. </summary>
 		/// <param name="curve"> The curve to scale. </param>
-		/// <param name="timeScale"> The horizontal (or time) scaling factor. </param>
-		/// <param name="valueScale"> The vertical (or value) scaling factor. </param>
+		/// <param name="timeScalingFactor"> The horizontal (or time) scaling factor. </param>
+		/// <param name="valueScalingFactor"> The vertical (or value) scaling factor. </param>
 		/// <returns> A new animation curve scaled by the given factor. </returns>
-		public static AnimationCurve ScaleCurve (this AnimationCurve curve, float timeScale, float valueScale)
+		public static AnimationCurve Scale (this AnimationCurve curve, float timeScalingFactor, float valueScalingFactor)
 		{
 			AnimationCurve scaledCurve = new AnimationCurve();
 			for (int i = 0; i < curve.keys.Length; i++)
 			{
 				Keyframe keyframe = curve.keys[i];
-				keyframe.value = curve.keys[i].value * valueScale;
-				keyframe.time = curve.keys[i].time * timeScale;
-				keyframe.inTangent = curve.keys[i].inTangent * valueScale / timeScale;
-				keyframe.outTangent = curve.keys[i].outTangent * valueScale / timeScale;
+				keyframe.value = curve.keys[i].value * valueScalingFactor;
+				keyframe.time = curve.keys[i].time * timeScalingFactor;
+				keyframe.inTangent = curve.keys[i].inTangent * valueScalingFactor / timeScalingFactor;
+				keyframe.outTangent = curve.keys[i].outTangent * valueScalingFactor / timeScalingFactor;
 
 				scaledCurve.AddKey(keyframe);
 			}

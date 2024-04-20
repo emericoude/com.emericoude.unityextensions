@@ -31,5 +31,19 @@ namespace Emericoude.Math
 			Vector3 AV = value - a;
 			return Vector3.Dot(AV, AB) / Vector3.Dot(AB, AB);
 		}
-	}
+
+        /// <summary> Slightly more efficient than <see cref="Vector3.Distance(Vector3, Vector3)"/>. </summary>
+        /// <returns> The distance between point a and point b, squared. </returns>
+        public static float DistanceSqr(this Vector3 a, Vector3 b)
+        {
+            return (a - b).sqrMagnitude;
+        }
+
+		/// <summary> Checks if a vector is approximately the same as another. Using a tolerance value (default: 0.0001). </summary>
+		/// <returns> True if the distance sqr is within the tolerance margin; otherwise false. </returns>
+		public static bool Approximately(this Vector3 a, Vector3 b, float tolerance = 0.0001f)
+		{
+			return (a.DistanceSqr(b) <= tolerance);
+		}
+    }
 }

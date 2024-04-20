@@ -19,5 +19,12 @@ namespace Emericoude.Math
 		{
 			return Mathf.Max(vector.x, vector.y);
 		}
+
+		/// <summary> Slightly more efficient than <see cref="Vector2.Distance(Vector2, Vector2)"/>. </summary>
+		/// <returns> The distance between point a and point b, squared. </returns>
+		public static float DistanceSqr(this Vector2 a, Vector2 b)
+		{
+			return (a - b).sqrMagnitude;
+		}
 	}
 }
