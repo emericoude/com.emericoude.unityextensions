@@ -283,7 +283,7 @@ GameObject:
   - component: {fileID: 157916837}
   - component: {fileID: 157916836}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: StopWatchTester
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -302,7 +302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   runOnstart: 1
-  IterationCount: 100000
+  iterationCount: 1000000
 --- !u!4 &157916837
 Transform:
   m_ObjectHideFlags: 0
@@ -1100,9 +1100,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc2f5d5143c261e45b436ec853336628, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Method: 0
-  LookAxes: {x: 1, y: 1, z: 1}
-  Flipped: 0
+  rotationMethod: 0
+  rotationAxes: {x: 1, y: 1, z: 1}
+  flipped: 0
+  defaultTargetIsMainCamera: 1
+  target: {fileID: 0}
 --- !u!1 &1902253598
 GameObject:
   m_ObjectHideFlags: 0
@@ -1307,11 +1309,11 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 261729028}
+  - {fileID: 454698342}
   - {fileID: 1902253600}
   - {fileID: 561876111}
   - {fileID: 2146536710}
   - {fileID: 345700855}
   - {fileID: 24864893}
   - {fileID: 157916837}
-  - {fileID: 454698342}
   - {fileID: 1877313021}
