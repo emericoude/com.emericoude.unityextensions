@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-
 using UnityEngine;
 
 namespace Emericoude.Physics
@@ -20,37 +17,42 @@ namespace Emericoude.Physics
 			point0 = point1 = capsuleCollider.bounds.center;
 			radius = capsuleCollider.radius;
 
+			Vector3 lossyScale = transform.lossyScale;
+			
 			if (capsuleCollider.direction == 0) //X
 			{
-				radius *= Mathf.Max(transform.lossyScale.y, transform.lossyScale.z);
-				height *= transform.lossyScale.x;
+				radius *= Mathf.Max(lossyScale.y, lossyScale.z);
+				height *= lossyScale.x;
 
 				if (height >= radius * 2)
 				{
-					point0 -= (transform.right * (height / 2 - radius));
-					point1 += (transform.right * (height / 2 - radius));
+					Vector3 right = transform.right;
+					point0 -= (right * (height / 2 - radius));
+					point1 += (right * (height / 2 - radius));
 				}
 			}
 			else if (capsuleCollider.direction == 1) //Y
 			{
-				radius *= Mathf.Max(transform.lossyScale.x, transform.lossyScale.z);
-				height *= transform.lossyScale.z;
+				radius *= Mathf.Max(lossyScale.x, lossyScale.z);
+				height *= lossyScale.y;
 
 				if (height >= radius * 2)
 				{
-					point0 -= (transform.up * (height / 2 - radius));
-					point1 += (transform.up * (height / 2 - radius));
+					Vector3 up = transform.up;
+					point0 -= (up * (height / 2 - radius));
+					point1 += (up * (height / 2 - radius));
 				}
 			}
 			else if (capsuleCollider.direction == 2) //Z
 			{
-				radius *= Mathf.Max(transform.lossyScale.x, transform.lossyScale.y);
-				height *= transform.lossyScale.z;
+				radius *= Mathf.Max(lossyScale.x, lossyScale.y);
+				height *= lossyScale.z;
 
 				if (height >= radius * 2)
 				{
-					point0 -= (transform.forward * (height / 2 - radius));
-					point1 += (transform.forward * (height / 2 - radius));
+					Vector3 forward = transform.forward;
+					point0 -= (forward * (height / 2 - radius));
+					point1 += (forward * (height / 2 - radius));
 				}
 			}
 		}

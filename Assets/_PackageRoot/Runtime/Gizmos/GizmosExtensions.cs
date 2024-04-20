@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-
 using UnityEngine;
 using Emericoude.Physics;
 
@@ -10,7 +6,7 @@ namespace Emericoude.Gizmos
 	public static class GizmosExtensions
 	{
 		/// <summary> Thickness used by various functions. Default is 0.0001f. </summary>
-		public static float Thickness = 0.0001f;
+		private const float Thickness = 0.0001f;
 
 		#region Draw Capsule
 
@@ -27,7 +23,6 @@ namespace Emericoude.Gizmos
 		/// <param name="point0"> The center of the sphere at the start of the capsule. </param>
 		/// <param name="point1"> The center of the sphere at the end of the capsule. </param>
 		/// <param name="radius"> The radius of the capsule. </param>
-		/// <param name="cylinderResolution"> The resolution of the cylinder. In other words, the amount of faces to draw around the circumference. </param>
 		public static void DrawWireCapsule (Vector3 point0, Vector3 point1, float radius)
 		{
 			Matrix4x4 oldMatrix = UnityEngine.Gizmos.matrix;
@@ -65,7 +60,7 @@ namespace Emericoude.Gizmos
 		/// <summary> Draws a "solid" capsule. </summary>
 		/// <param name="point0"> The center of the sphere at the start of the capsule. </param>
 		/// <param name="point1"> The center of the sphere at the end of the capsule. </param>
-		/// <param name="radius"> The radius of the capsule. /param>
+		/// <param name="radius"> The radius of the capsule. </param>
 		/// <param name="cylinderResolution"> The resolution of the cylinder. In other words, the amount of faces to draw around the circumference. </param>
 		public static void DrawCapsule (Vector3 point0, Vector3 point1, float radius, int cylinderResolution = 128)
 		{
@@ -87,7 +82,6 @@ namespace Emericoude.Gizmos
 		/// <param name="radius"> The radius of the cylinder. </param>
 		/// <param name="height"> The height of the cylinder. </param>
 		/// <param name="resolution"> The resolution of the cylinder. In other words, the amount of faces to draw around the circumference. </param>
-		/// <param name="thickness"> The thickness of the cylinder's faces. </param>
 		public static void DrawWireCylinder (Vector3 position, Vector3 orientation, float radius, float height, int resolution = 128)
 		{
 			Color oldColor = UnityEngine.Gizmos.color;
@@ -124,7 +118,6 @@ namespace Emericoude.Gizmos
 		/// <param name="radius"> The radius of the cylinder. </param>
 		/// <param name="height"> The height of the cylinder. </param>
 		/// <param name="resolution"> The resolution of the cylinder. In other words, the amount of faces to draw around the circumference. </param>
-		/// <param name="thickness"> The thickness of the cylinder's faces. </param>
 		public static void DrawCylinder (Vector3 position, Vector3 orientation, float radius, float height, int resolution = 128)
 		{
 			Matrix4x4 oldMatrix = UnityEngine.Gizmos.matrix;
@@ -159,7 +152,6 @@ namespace Emericoude.Gizmos
 		public static void DrawCollider (Collider collider)
 		{
 			Matrix4x4 oldMatrix = UnityEngine.Gizmos.matrix;
-
 			UnityEngine.Gizmos.matrix = collider.transform.localToWorldMatrix;
 
 			if (collider is BoxCollider boxCollider)
@@ -186,10 +178,7 @@ namespace Emericoude.Gizmos
 		/// <param name="collider"> The collider you want to draw. </param>
 		public static void DrawWireCollider (Collider collider)
 		{
-			if (collider is MeshCollider) return;
-
 			Matrix4x4 oldMatrix = UnityEngine.Gizmos.matrix;
-
 			UnityEngine.Gizmos.matrix = collider.transform.localToWorldMatrix;
 
 			if (collider is BoxCollider boxCollider)
@@ -241,7 +230,7 @@ namespace Emericoude.Gizmos
 		{
 			Color previousColor = UnityEngine.Gizmos.color;
 
-			Vector3 endPoint = position;
+			Vector3 endPoint;
 			if (UnityEngine.Physics.SphereCast(position, radius, direction, out hit, maxDistance, layerMask, queryTriggerInteraction))
 			{
 				UnityEngine.Gizmos.color = AnimatedGizmos.PositiveFeedbackColor;
@@ -269,7 +258,7 @@ namespace Emericoude.Gizmos
 		{
 			Color previousColor = UnityEngine.Gizmos.color;
 
-			Vector3 endPoint = position;
+			Vector3 endPoint;
 			if (UnityEngine.Physics.SphereCast(position, radius, direction, out hit, maxDistance, layerMask, queryTriggerInteraction))
 			{
 				UnityEngine.Gizmos.color = AnimatedGizmos.PositiveFeedbackColor;

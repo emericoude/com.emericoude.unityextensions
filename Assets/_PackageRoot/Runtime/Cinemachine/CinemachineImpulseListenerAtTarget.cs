@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-
 using UnityEngine;
 
 #if CINEMACHINE
@@ -26,34 +23,32 @@ namespace Emericoude.Cinemachine
 		/// <param name="state"> The current virtual camera state. </param>
 		/// <param name="deltaTime"> The current applicable deltaTime. </param>
 		/// <remarks> This is an override of <see cref="CinemachineImpulseListener"/> which modifies <see cref="CinemachineImpulseManager.GetImpulseAt(Vector3, bool, int, out Vector3, out Quaternion)"/> to use the <see cref="target"/>'s position. </remarks>
-		protected override void PostPipelineStageCallback (CinemachineVirtualCameraBase vcam,
-			 CinemachineCore.Stage stage, ref CameraState state, float deltaTime)
+		protected override void PostPipelineStageCallback (CinemachineVirtualCameraBase vcam, CinemachineCore.Stage stage, ref CameraState state, float deltaTime)
 		{
-			if (stage == m_ApplyAfter && deltaTime >= 0)
+			if (stage != m_ApplyAfter || !(deltaTime >= 0)) return;
+			
+			//this is copied from the base class, the only difference is target.position inside of GetImpulseAt.
+			bool hasImpulse = CinemachineImpulseManager.Instance.GetImpulseAt(target.position, m_Use2DDistance, m_ChannelMask, out var impulsePos, out var impulseRot);
+			bool hasReaction = m_ReactionSettings.GetReaction(deltaTime, impulsePos, out var reactionPos, out var reactionRot);
+
+			if (hasImpulse)
 			{
-				//this is copied from the base class, the only difference is target.position inside of GetImpulseAt.
-				bool haveImpulse = CinemachineImpulseManager.Instance.GetImpulseAt(target.position, m_Use2DDistance, m_ChannelMask, out var impulsePos, out var impulseRot);
-				bool haveReaction = m_ReactionSettings.GetReaction(deltaTime, impulsePos, out var reactionPos, out var reactionRot);
+				impulseRot = Quaternion.SlerpUnclamped(Quaternion.identity, impulseRot, m_Gain);
+				impulsePos *= m_Gain;
+			}
 
-				if (haveImpulse)
-				{
-					impulseRot = Quaternion.SlerpUnclamped(Quaternion.identity, impulseRot, m_Gain);
-					impulsePos *= m_Gain;
-				}
+			if (hasReaction)
+			{
+				impulsePos += reactionPos;
+				impulseRot *= reactionRot;
+			}
 
-				if (haveReaction)
-				{
-					impulsePos += reactionPos;
-					impulseRot *= reactionRot;
-				}
+			if (hasImpulse || hasReaction)
+			{
+				if (m_UseCameraSpace) impulsePos = state.RawOrientation * impulsePos;
 
-				if (haveImpulse || haveReaction)
-				{
-					if (m_UseCameraSpace) impulsePos = state.RawOrientation * impulsePos;
-
-					state.PositionCorrection += impulsePos;
-					state.OrientationCorrection = state.OrientationCorrection * impulseRot;
-				}
+				state.PositionCorrection += impulsePos;
+				state.OrientationCorrection = state.OrientationCorrection * impulseRot;
 			}
 		}
 	}

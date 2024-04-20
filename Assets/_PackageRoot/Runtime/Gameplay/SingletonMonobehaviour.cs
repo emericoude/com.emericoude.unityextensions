@@ -1,19 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
-
 using UnityEngine;
 
 namespace Emericoude.Gameplay.Framework
 {
     /// <summary> A base implementation of the singleton pattern. </summary>
     /// <remarks> If you want persistence, use <see cref="PersistentSingletonMonoBehaviour{T}"/> instead. <br/>
-    /// If you want a "lazy" singleton (i.e. to be created when first fetched), use <see cref="LazySingletonMonoBehaviour{T}{T}"/> instead. </remarks>
+    /// If you want a "lazy" singleton (i.e. to be created when first fetched), use <see cref="LazySingletonMonoBehaviour{T}"/> instead. </remarks>
     [DefaultExecutionOrder(-10)]
     public abstract class SingletonMonoBehaviour<T> : MonoBehaviour where T : SingletonMonoBehaviour<T>
     {
         /// <summary> The instance of this singleton. </summary>
-        public static T Instance { get { return _instance; } }
-        protected static T _instance;
+        public static T Instance => _instance;
+        private static T _instance;
 
         protected virtual void Awake()
         {
@@ -42,13 +39,10 @@ namespace Emericoude.Gameplay.Framework
     {
         protected override bool SingletonInitialization()
         {
-            if (base.SingletonInitialization())
-            {
-                DontDestroyOnLoad(this);
-                return true;
-            }
-
-            return false;
+            if (!base.SingletonInitialization()) return false;
+            
+            DontDestroyOnLoad(this);
+            return true;
         }
     }
 

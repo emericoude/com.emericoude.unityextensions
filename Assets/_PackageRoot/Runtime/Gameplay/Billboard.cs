@@ -1,6 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-
+using System;
 using UnityEngine;
 
 namespace Emericoude.Gameplay.Common
@@ -15,58 +13,71 @@ namespace Emericoude.Gameplay.Common
             LookAtTarget,
             CopyTargetRotation
         }
-
+        
         [Tooltip("The method to billboard this object.\n\n" +
-            "LookAtTarget: Looks directly the target, generally the camera.\n\n" +
-            "CopyTargetRotation: Copies the target's rotation (reversed). Generally more niche.")]
-        public BillboardMethod Method = BillboardMethod.LookAtTarget;
+                 "LookAtTarget: Looks directly the target, generally the camera.\n\n" +
+                 "CopyTargetRotation: Copies the target's rotation (reversed). Generally more niche.")]
+        public BillboardMethod rotationMethod = BillboardMethod.LookAtTarget;
 
         [Tooltip("How the rotation is applied to each axes. Set an axis to 0 if you don't want the billboard to have influence over that axis.")]
-        public Vector3 LookAxes = Vector3.one;
+        public Vector3 rotationAxes = Vector3.one;
 
         [Tooltip("Set this to true to flip the billboard. Useful for certain things like world-space UI that generally needs to face away from the camera.")]
-        public bool Flipped = false;
+        public bool flipped = false;
 
-        private Transform target;
+        [Tooltip("If true, assigns the 'main' camera on start as the target. This only works if target is unassigned.")]
+        [SerializeField] private bool defaultTargetIsMainCamera = true;
+        
+        [Tooltip("The billboard target.")]
+        [SerializeField] private Transform target;
 
         private void Start()
         {
-            target = Camera.main.transform;
+            if (defaultTargetIsMainCamera && target == null)
+            {
+                var mainCamera = Camera.main;
+                if (mainCamera != null)
+                {
+                    SetTarget(mainCamera.transform);
+                }
+            }
+            
+            enabled = target != null;
         }
 
         private void LateUpdate()
         {
-            if (target == null) return;
             transform.rotation = this.GetBillboardRotation();
         }
 
-        protected virtual Quaternion GetBillboardRotation()
+        private Quaternion GetBillboardRotation()
         {
-            Quaternion rotation = this.Method switch
+            Quaternion targetRotation = this.rotationMethod switch
             {
                 BillboardMethod.LookAtTarget => Quaternion.LookRotation(target.position - transform.position).normalized,
                 BillboardMethod.CopyTargetRotation => Quaternion.LookRotation(-target.transform.forward),
-                _ => Quaternion.LookRotation(target.position - transform.position).normalized
+                _ => throw new ArgumentOutOfRangeException()
             };
 
-            if (Flipped)
+            if (flipped)
             {
-                rotation = Quaternion.Euler(-rotation.eulerAngles.x, rotation.eulerAngles.y + 180, -rotation.eulerAngles.z);
+                targetRotation = Quaternion.Euler(-targetRotation.eulerAngles.x, targetRotation.eulerAngles.y + 180, -targetRotation.eulerAngles.z);
             }
 
             Vector3 currentRotationEuler = transform.rotation.eulerAngles;
-            Vector3 targetRotationEuler = rotation.eulerAngles;
+            Vector3 targetRotationEuler = targetRotation.eulerAngles;
 
             return Quaternion.Euler(
-                Mathf.LerpUnclamped(currentRotationEuler.x, targetRotationEuler.x, LookAxes.x),
-                Mathf.LerpUnclamped(currentRotationEuler.y, targetRotationEuler.y, LookAxes.y),
-                Mathf.LerpUnclamped(currentRotationEuler.z, targetRotationEuler.z, LookAxes.z)
+                Mathf.LerpUnclamped(currentRotationEuler.x, targetRotationEuler.x, rotationAxes.x),
+                Mathf.LerpUnclamped(currentRotationEuler.y, targetRotationEuler.y, rotationAxes.y),
+                Mathf.LerpUnclamped(currentRotationEuler.z, targetRotationEuler.z, rotationAxes.z)
             );
         }
 
-        public void SetTarget(Transform target)
+        public void SetTarget(Transform newTarget)
         {
-            this.target = target;
+            target = newTarget;
+            enabled = target != null;
         }
     }
 }

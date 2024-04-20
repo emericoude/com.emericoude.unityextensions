@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -49,12 +46,7 @@ namespace Emericoude.Gameplay
 				}
 			}
 
-			if (go == null)
-			{
-				return new GameObject();
-			}
-
-			return GameObject.Instantiate(go, position, rotation, parent);
+			return go == null ? new GameObject() : Object.Instantiate(go, position, rotation, parent);
 		}
 	}
 }

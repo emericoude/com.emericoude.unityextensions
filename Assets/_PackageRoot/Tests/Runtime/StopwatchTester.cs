@@ -5,18 +5,21 @@ using System.Diagnostics;
 using UnityEngine;
 
 using Emericoude.Collections;
+using UnityEngine.Serialization;
 
 public class StopwatchTester : MonoBehaviour
 {
-	int[] testList = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 	public bool runOnstart = false;
-	public int IterationCount = 100000;
+	public int iterationCount = 100000;
+	
+	private readonly int[] _testList = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
 	void Start ()
 	{
 		if (!runOnstart) return;
 		PerformIteration_One();
 		PerformIteration_Two();
+		PerformIteration_Three();
 	}
 
 	[ContextMenu("Perform iteration 1")]
@@ -24,13 +27,13 @@ public class StopwatchTester : MonoBehaviour
 	{
 		Stopwatch timer = Stopwatch.StartNew();
 
-		for (int i = 0; i < this.IterationCount; i++)
+		for (int i = 0; i < this.iterationCount; i++)
 		{
-			int random = testList.GetRandomElement(testList.Length);
+			int random = _testList.GetRandomElement(_testList.Length);
 		}
 
 		timer.Stop();
-		UnityEngine.Debug.Log("Time taken for the operation: " + timer.ElapsedMilliseconds + " milliseconds");
+		UnityEngine.Debug.Log("Time taken for the operation (1): " + timer.ElapsedMilliseconds + " milliseconds");
 	}
 
 	[ContextMenu("Perform iteration 2")]
@@ -38,12 +41,26 @@ public class StopwatchTester : MonoBehaviour
 	{
 		Stopwatch timer = Stopwatch.StartNew();
 
-		for (int i = 0; i < this.IterationCount; i++)
+		for (int i = 0; i < this.iterationCount; i++)
 		{
-			int random = testList.GetRandomElement();
+			int random = _testList.GetRandomElement();
 		}
 
 		timer.Stop();
-		UnityEngine.Debug.Log("Time taken for the operation: " + timer.ElapsedMilliseconds + " milliseconds");
+		UnityEngine.Debug.Log("Time taken for the operation (2): " + timer.ElapsedMilliseconds + " milliseconds");
+	}
+	
+	[ContextMenu("Perform iteration 3")]
+	public void PerformIteration_Three ()
+	{
+		Stopwatch timer = Stopwatch.StartNew();
+
+		for (int i = 0; i < this.iterationCount; i++)
+		{
+			//implement iteration here
+		}
+
+		timer.Stop();
+		UnityEngine.Debug.Log("Time taken for the operation (3): " + timer.ElapsedMilliseconds + " milliseconds");
 	}
 }
