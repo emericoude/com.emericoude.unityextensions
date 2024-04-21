@@ -10,6 +10,13 @@ namespace Emericoude.Math
 		{
 			return Mathf.Max(vector.x, vector.y, vector.z);
 		}
+		
+		/// <summary>Finds the smallest component inside the vector; either x, y or z.</summary>
+		/// <returns>The <paramref name="vector"/>'s X, Y or Z component, whichever is the smallest.</returns>
+		public static float SmallestComponent (this Vector3 vector)
+		{
+			return Mathf.Min(vector.x, vector.y, vector.z);
+		}
 
 		/// <summary> Returns a vector where all values have the absolute of 1.</summary>
 		public static Vector3 Abs (this Vector3 vector)

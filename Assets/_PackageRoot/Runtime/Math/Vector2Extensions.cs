@@ -10,11 +10,18 @@ namespace Emericoude.Math
 			return new Vector2(Mathf.Abs(vector.x), Mathf.Abs(vector.y));
 		}
 
-		/// <summary>Finds the largest component inside the vector; either x, y or z.</summary>
+		/// <summary>Finds the largest component inside the vector; either x or y.</summary>
 		/// <returns>The <paramref name="vector"/>'s X or Y component, whichever is the largest.</returns>
 		public static float LargestComponent (this Vector2 vector)
 		{
 			return Mathf.Max(vector.x, vector.y);
+		}
+		
+		/// <summary>Finds the smallest component inside the vector; either x or y.</summary>
+		/// <returns>The <paramref name="vector"/>'s X or Y component, whichever is the smallest.</returns>
+		public static float SmallestComponent (this Vector2 vector)
+		{
+			return Mathf.Min(vector.x, vector.y);
 		}
 
 		/// <summary> Slightly more efficient than <see cref="Vector2.Distance(Vector2, Vector2)"/>. </summary>
