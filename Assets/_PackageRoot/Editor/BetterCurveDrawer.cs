@@ -29,6 +29,11 @@ namespace Emericoude.Editor
 			AnimationCurve backingCurve = new AnimationCurve();
 			backingCurve.CopyFrom(property.animationCurveValue);
 
+			if (backingCurve.keys.Length <= 1)
+			{
+				backingCurve = AnimationCurve.Linear(0f, 0f, 1f, 1f);
+			}
+
 			if (EditorGUI.EndChangeCheck())
 			{
 				if (floatFields[0] != 0f && floatFields[1] != 0f)

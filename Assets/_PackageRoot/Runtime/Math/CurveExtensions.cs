@@ -62,10 +62,15 @@ namespace Emericoude.Math
 		{
 			float minTime = curve.keys[0].time;
 			float maxTime = curve.keys.LastOrDefault().time;
-			
 			float targetTime = forward ? maxTime : minTime;
-			time = Mathf.MoveTowards(time, targetTime, deltaTime.GetDeltaTime());
 
+			if (forward && Mathf.Approximately(time, targetTime))
+			{
+				forward = !forward;
+				targetTime = forward ? maxTime : minTime;
+			}
+			
+			time = Mathf.MoveTowards(time, targetTime, deltaTime.GetDeltaTime());
 			return curve.Evaluate(time);
 		}
 
