@@ -64,7 +64,7 @@ namespace Emericoude.Math
 			float maxTime = curve.keys.LastOrDefault().time;
 			float targetTime = forward ? maxTime : minTime;
 
-			if (forward && Mathf.Approximately(time, targetTime))
+			if (Mathf.Approximately(time, targetTime))
 			{
 				forward = !forward;
 				targetTime = forward ? maxTime : minTime;
