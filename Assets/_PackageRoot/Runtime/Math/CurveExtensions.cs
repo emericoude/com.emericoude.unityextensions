@@ -53,6 +53,22 @@ namespace Emericoude.Math
 			return curve.Evaluate(time);
 		}
 
+		/// <summary> Moves <paramref name="time"/> along the <paramref name="curve"/>, in a back and forth fashion using <paramref name="deltaTime"/>. </summary>
+		/// <param name="curve"> The curve used for evaluation. </param>
+		/// <param name="time"> The curve's current time passed in reference. For you, this should likely be a variable in your script. </param>
+		/// <param name="deltaTime"> The timescale used for moving the curve, <see cref="Time.deltaTime"/> by default. </param>
+		/// <returns> A value between 0 and 1, representing where <paramref name="time"/> stands in the <paramref name="curve"/>, using <see cref="AnimationCurve.Evaluate(float)"/>. </returns>
+		public static float AutoEvaluatePingPong(this AnimationCurve curve, ref float time, ref bool forward, DeltaTimeScale deltaTime = DeltaTimeScale.DeltaTime)
+		{
+			float minTime = curve.keys[0].time;
+			float maxTime = curve.keys.LastOrDefault().time;
+			
+			float targetTime = forward ? maxTime : minTime;
+			time = Mathf.MoveTowards(time, targetTime, deltaTime.GetDeltaTime());
+
+			return curve.Evaluate(time);
+		}
+
 		/// <summary> Scales a curve by the given factor, keeping the curve's shape. </summary>
 		/// <param name="curve"> The curve to scale. </param>
 		/// <param name="timeScalingFactor"> The horizontal (or time) scaling factor. </param>
@@ -74,6 +90,5 @@ namespace Emericoude.Math
 
 			return scaledCurve;
 		}
-
 	}
 }

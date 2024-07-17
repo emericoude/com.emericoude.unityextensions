@@ -31,10 +31,13 @@ namespace Emericoude.Editor
 
 			if (EditorGUI.EndChangeCheck())
 			{
-				//apply changes to backing curve
-				float xScale = floatFields[0] / lastKeyframe.time;
-				float yScale = floatFields[1] / lastKeyframe.value;
-				backingCurve = backingCurve.Scale(xScale, yScale);
+				if (floatFields[0] != 0f && floatFields[1] != 0f)
+				{
+					//apply changes to backing curve
+					float xScale = floatFields[0] / lastKeyframe.time;
+					float yScale = floatFields[1] / lastKeyframe.value;
+					backingCurve = backingCurve.Scale(xScale, yScale);
+				}
 			}
 
 			//Draw curve field
