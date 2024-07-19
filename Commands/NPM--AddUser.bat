@@ -1,2 +1,2 @@
-cd ..\Assets\_PackageRoot
+cd ..\Assets\com.emericoude.unityextensions
 npm adduser
