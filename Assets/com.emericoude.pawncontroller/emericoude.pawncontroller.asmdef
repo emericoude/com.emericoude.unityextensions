@@ -1,6 +1,6 @@
 {
     "name": "emericoude.pawncontroller",
-    "rootNamespace": "Emericoude",
+    "rootNamespace": "Emericoude.Gameplay.PawnController",
     "references": [
         "GUID:75469ad4d38634e559750d17036d5f7c"
     ],

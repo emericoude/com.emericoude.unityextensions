@@ -1,0 +1,12 @@
+{
+    "name": "com.emericoude.rounds",
+    "displayName": "Emeric's Round Framework for Unity",
+    "version": "0.0.1",
+    "unity": "2022.3",
+    "description": "A framework for integrating a round-based flow to your game.",
+    "author": {
+        "name": "Emeric Coude",
+        "email": "emericmax9@hotmail.com",
+        "url": "https://github.com/emericoude"
+    } 
+}
