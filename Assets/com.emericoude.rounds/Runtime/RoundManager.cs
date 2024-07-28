@@ -1,57 +1,156 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using Sirenix.OdinInspector;
-using Sirenix.Utilities;
-using UnityEngine;
+
+using UnityEngine;  
 
 namespace Emericoude.Gameplay.Rounds
 {
+    /// <summary>
+    /// Handles a sequence of round through a queue. <para/>
+    /// 
+    /// Note that, by default, rounds commencing and concluding can be handled by either the round manager or the rounds themselves.
+    /// Since a mix of both is desired, it is vital that this loop is properly handled so that it cannot loop indefinitely.
+    /// As of now, rounds will notify this manager when they commence and when they conclude for the flow to be handled. <para/>
+    /// 
+    /// This should provide a seamless implementation, where you can either call <see cref="CommenceNextRound"/> here,
+    /// or call <see cref="Round"/>.Commence() and <see cref="Round"/>.Conclude() manually (or from within a round itself). <para/>
+    ///
+    /// As an example, the <see cref="TimedRound"/> will conclude itself when its timer expires.
+    /// </summary>
     public class RoundManager : MonoBehaviour
     {
-        [Header("Settings")] 
-        [SerializeField] protected bool beginOnStart = true;
+        /// <summary> Handles a change in round. </summary>
+        /// <param name="previous"> The previous round. Null if there are none. </param>
+        /// <param name="current"> The current (newly commenced) round. </param>
+        public delegate void RoundChangedEventHandler(Round previous, Round current);
+        
+        /// <summary> Invoked commencing the first round (when we have no <see cref="PreviousRound"/>). </summary>
+        public event Action OnRoundSequenceCommenced;
+
+        /// <summary> Invoked when a new round commences. </summary>
+        public event RoundChangedEventHandler OnRoundChanged;
+        
+        /// <summary> Invoked when we empty our queue. </summary>
+        /// <remarks> Still called if <see cref="loopSequence"/> is true, before we refill the queue. </remarks>
+        public event Action OnRoundSequenceExhausted;
+        
+        /// <summary> The <see cref="roundSequenceSettings"/>'s rounds, represented in an active queue. </summary>
+        public Queue<Round> RoundQueue { get; protected set; }
+        
+        /// <summary> The round at the top of the <see cref="RoundQueue"/>. </summary>
+        /// <remarks> Can be null if the queue is null or empty. </remarks>
+        public Round CurrentRound => RoundQueue?.Peek();
+        
+        /// <summary> The previous round. </summary>
+        /// <remarks> Can be null if no round has concluded yet. </remarks>
+        public Round PreviousRound { get; protected set; }
 
         [Header("Settings: Rounds")] 
-        [SerializeField] protected List<Round> rounds = new List<Round>();
-        
-        public Round CurrentRound => RoundQueue.Peek();
-        public Round PreviousRound { get; protected set; }
-        public Queue<Round> RoundQueue { get; protected set; }
+        [Tooltip("The round sequence for this round manager.")]
+        public RoundSequence roundSequenceSettings;
         
         protected virtual void Awake()
         {
-            RoundQueue = new Queue<Round>(rounds);
+            RoundQueue = new Queue<Round>(roundSequenceSettings.Sequence);
+            foreach (var round in RoundQueue)
+            {
+                round.Awake(this);
+            }
         }
 
         protected virtual void Start()
         {
-            if (beginOnStart && rounds.Count > 0)
+            if (roundSequenceSettings && roundSequenceSettings.CommenceOnStart)
             {
+                if (roundSequenceSettings.Sequence == null || roundSequenceSettings.Sequence.Count <= 0)
+                {
+                    Debug.LogWarning("Round sequence is null or empty, and cannot start.");
+                    return;
+                }
+                
                 CommenceNextRound();
             }
         }
 
-        protected virtual void CommenceNextRound()
+        protected void Update()
         {
             if (RoundQueue.TryPeek(out Round roundAtTopOfQueue))
             {
-                if (roundAtTopOfQueue.Status == Round.RoundStatus.Queued)
+                if (roundAtTopOfQueue.State == RoundState.Ongoing)
+                {
+                    roundAtTopOfQueue.Update();
+                }
+            }
+        }
+
+        /// <summary> Concludes the current round and begins the next one. Use this to begin the sequence as well. </summary>
+        /// <remarks> This may run multiple times if it needs to conclude the current round. </remarks>
+        public virtual void CommenceNextRound()
+        {
+            if (roundSequenceSettings.Sequence.Count < 0)
+            {
+                Debug.LogWarning("Round manager has no rounds, cannot commence next round.");
+                return;
+            }
+            
+            if (RoundQueue.TryPeek(out Round roundAtTopOfQueue))
+            {
+                if (roundAtTopOfQueue.State == RoundState.Queued)
                 {
                     roundAtTopOfQueue.Commence();
+                    if (PreviousRound == null) OnRoundSequenceCommenced?.Invoke();
+                    OnRoundChanged?.Invoke(PreviousRound, roundAtTopOfQueue);
                 }
-                else if (roundAtTopOfQueue.Status == Round.RoundStatus.Ongoing)
+                else
                 {
                     roundAtTopOfQueue.Conclude();
-                    PreviousRound = roundAtTopOfQueue;
-                    RoundQueue.Dequeue();
-                    
-                    CommenceNextRound(); //run it again
                 }
             }
             else
             {
-                Debug.LogWarning("Queue is out of rounds, cannot commence next round.");
+                OnRoundSequenceExhausted?.Invoke();
+                if (roundSequenceSettings.Loops)
+                {
+                    RoundQueue = new Queue<Round>(roundSequenceSettings.Sequence);
+                    CommenceNextRound();
+                }
+            }
+        }
+
+        /// <summary> Called by a <see cref="Round"/> when it is commencing. </summary>
+        /// <remarks>
+        /// - If the round is not queued, nothing will happen. <br/>
+        /// - If the round is not the first in the queue, all previous rounds will be dequeued without going through a normal flow, effectively being skipped.
+        /// </remarks>
+        /// <param name="round"> The round that is commencing. </param>
+        public void NotifyOfRoundCommencing(Round round)
+        {
+            if (round.State != RoundState.Queued) return;
+            
+            while (CurrentRound != round)
+            {
+                RoundQueue.Dequeue();
+            }
+            
+            CommenceNextRound();
+        }
+
+        /// <summary> Called by a <see cref="Round"/> when it is concluding. </summary>
+        /// <remarks>
+        /// - If the round is not at the top of the queue, nothing will happen. <br/>
+        /// - If the round is not ongoing or paused, nothing will happen.
+        /// </remarks>
+        /// <param name="round"> The round that is concluding. </param>
+        public void NotifyOfRoundConclusion(Round round)
+        {
+            if (RoundQueue.TryPeek(out Round roundAtTopOfQueue))
+            {
+                if (roundAtTopOfQueue != round) return;
+                if (round.State != RoundState.Ongoing && round.State != RoundState.Paused) return;
+                
+                PreviousRound = roundAtTopOfQueue;
+                RoundQueue.Dequeue();
+                CommenceNextRound();
             }
         }
     }

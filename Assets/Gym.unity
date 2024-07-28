@@ -1940,8 +1940,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378f66c8feecdf44dad1f5261196e1e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  beginOnStart: 1
-  rounds: []
+  roundSequenceSettings: {fileID: 11400000, guid: 98a79671bd621df4f982287faacf957e, type: 2}
 --- !u!4 &1291312131
 Transform:
   m_ObjectHideFlags: 0
