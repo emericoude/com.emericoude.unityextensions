@@ -1,7 +1,9 @@
 {
     "name": "emericoude.rounds",
     "rootNamespace": "Emericoude.Gameplay.Rounds",
-    "references": [],
+    "references": [
+        "GUID:138d2d27ffdc72340b421282d1704db2"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
