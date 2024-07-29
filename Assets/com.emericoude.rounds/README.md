@@ -11,6 +11,8 @@ TimedRound as an example.
 A round should be self-contained and self-sufficient. It should manage its own state the moment it is
 told to commence. Use the events available to update feedback (such as UI elements).
 
+It is primordial that you implement the Clone function to its fullest, copying over every serializable field.
+
 ### Round Manager
 The round manager handles the round's flow. Only one can be active at a time, and they are considered
 in a queue. Note that rounds manage their own state once they are told to be active, and will automatically

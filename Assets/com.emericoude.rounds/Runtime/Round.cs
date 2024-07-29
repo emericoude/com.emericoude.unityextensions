@@ -40,6 +40,11 @@ namespace Emericoude.Gameplay.Rounds
         /// <summary> This round's state. </summary>
         public RoundState State { get; protected set; } = RoundState.Queued;
 
+        /// <summary> Defines how your round type is copied over. Used for runtime. </summary>
+        /// <remarks> IT IS PRIMORDIAL TO IMPLEMENT THIS SO THAT ALL SERIALIZED SETTINGS ARE COPIED AT RUNTIME. </remarks>
+        /// <returns> An exact clone of this round. Used for runtime. </returns>
+        public abstract Round Clone();
+
         /// <summary> Use this to initialize anything that should be initialized before start. </summary>
         /// <param name="roundManager"> The round manager handling this round. </param>
         public virtual void Awake(RoundManager roundManager)

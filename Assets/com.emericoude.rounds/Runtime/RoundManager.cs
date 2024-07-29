@@ -51,7 +51,7 @@ namespace Emericoude.Gameplay.Rounds
         
         protected virtual void Awake()
         {
-            RoundQueue = new Queue<Round>(roundSequenceSettings.Sequence);
+            RoundQueue = new Queue<Round>(roundSequenceSettings.CopySequence());
             foreach (var round in RoundQueue)
             {
                 round.Awake(this);
@@ -62,9 +62,9 @@ namespace Emericoude.Gameplay.Rounds
         {
             if (roundSequenceSettings && roundSequenceSettings.CommenceOnStart)
             {
-                if (roundSequenceSettings.Sequence == null || roundSequenceSettings.Sequence.Count <= 0)
+                if (RoundQueue.Count <= 0)
                 {
-                    Debug.LogWarning("Round sequence is null or empty, and cannot start.");
+                    Debug.LogWarning("Round queue is empty, cannot commence.");
                     return;
                 }
                 
@@ -87,9 +87,9 @@ namespace Emericoude.Gameplay.Rounds
         /// <remarks> This may run multiple times if it needs to conclude the current round. </remarks>
         public virtual void CommenceNextRound()
         {
-            if (roundSequenceSettings.Sequence.Count < 0)
+            if (RoundQueue.Count < 0)
             {
-                Debug.LogWarning("Round manager has no rounds, cannot commence next round.");
+                Debug.LogWarning("Round manager has no rounds queued, and cannot commence next round.");
                 return;
             }
             
@@ -111,7 +111,7 @@ namespace Emericoude.Gameplay.Rounds
                 OnRoundSequenceExhausted?.Invoke();
                 if (roundSequenceSettings.Loops)
                 {
-                    RoundQueue = new Queue<Round>(roundSequenceSettings.Sequence);
+                    RoundQueue = new Queue<Round>(roundSequenceSettings.CopySequence());
                     CommenceNextRound();
                 }
             }

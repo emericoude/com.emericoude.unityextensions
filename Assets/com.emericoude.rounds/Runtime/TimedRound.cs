@@ -22,6 +22,14 @@ namespace Emericoude.Gameplay.Rounds
         /// <summary> Can be used to speed up or slow down the timer. </summary>
         public float TimerSpeedModifier { get; set; } = 1f;
 
+        //Implement clone, it is important that any serialized value is copied over.
+        public override Round Clone()
+        {
+            var clone = new TimedRound();
+            clone.Duration = Duration;
+            return clone;
+        }
+
         public override void Commence()
         {
             //keep base.Commence() in your implementations, so that the flow is properly handled by the round manager
