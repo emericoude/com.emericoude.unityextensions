@@ -138,7 +138,6 @@ namespace Emericoude.Gameplay.Rounds
         /// <summary> Called by a <see cref="Round"/> when it is concluding. </summary>
         /// <remarks>
         /// - If the round is not at the top of the queue, nothing will happen. <br/>
-        /// - If the round is not ongoing or paused, nothing will happen.
         /// </remarks>
         /// <param name="round"> The round that is concluding. </param>
         public void NotifyOfRoundConclusion(Round round)
@@ -146,9 +145,8 @@ namespace Emericoude.Gameplay.Rounds
             if (RoundQueue.TryPeek(out Round roundAtTopOfQueue))
             {
                 if (roundAtTopOfQueue != round) return;
-                if (round.State != RoundState.Ongoing && round.State != RoundState.Paused) return;
                 
-                PreviousRound = roundAtTopOfQueue;
+                PreviousRound = round;
                 RoundQueue.Dequeue();
                 CommenceNextRound();
             }
