@@ -51,11 +51,7 @@ namespace Emericoude.Gameplay.Rounds
         
         protected virtual void Awake()
         {
-            RoundQueue = new Queue<Round>(roundSequenceSettings.CopySequence());
-            foreach (var round in RoundQueue)
-            {
-                round.Awake(this);
-            }
+            SetupQueue();
         }
 
         protected virtual void Start()
@@ -80,6 +76,16 @@ namespace Emericoude.Gameplay.Rounds
                 {
                     roundAtTopOfQueue.Update();
                 }
+            }
+        }
+
+        /// <summary> Creates the queue and initializes its round via Awake. </summary>
+        protected virtual void SetupQueue()
+        {
+            RoundQueue = new Queue<Round>(roundSequenceSettings.CopySequence());
+            foreach (var round in RoundQueue)
+            {
+                round.Awake(this);
             }
         }
 
@@ -111,7 +117,7 @@ namespace Emericoude.Gameplay.Rounds
                 OnRoundSequenceExhausted?.Invoke();
                 if (roundSequenceSettings.Loops)
                 {
-                    RoundQueue = new Queue<Round>(roundSequenceSettings.CopySequence());
+                    SetupQueue();
                     CommenceNextRound();
                 }
             }
