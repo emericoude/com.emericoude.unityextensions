@@ -3,9 +3,7 @@ using UnityEngine;
 
 namespace Emericoude.Gameplay.Common
 {
-    /// <summary>
-    /// A simple billboard implementation that should cover most billboard types.
-    /// </summary>
+    /// <summary> A simple billboard implementation that should cover most billboard types. </summary>
     public class Billboard : MonoBehaviour
     {
         public enum BillboardMethod
@@ -14,6 +12,17 @@ namespace Emericoude.Gameplay.Common
             CopyTargetRotation
         }
         
+        private static Camera cachedMainCamera;
+        private Vector3 cachedLocalPosition;
+        
+        [Header("Settings: Target")]
+        [Tooltip("If true, assigns the 'main' camera on start as the target. This only works if target is unassigned.")]
+        [SerializeField] private bool defaultTargetIsMainCamera = true;
+        
+        [Tooltip("The billboard target.")]
+        [SerializeField] private Transform target;
+        
+        [Header("Settings: Rotation")]
         [Tooltip("The method to billboard this object.\n\n" +
                  "LookAtTarget: Looks directly the target, generally the camera.\n\n" +
                  "CopyTargetRotation: Copies the target's rotation (reversed). Generally more niche.")]
@@ -25,29 +34,36 @@ namespace Emericoude.Gameplay.Common
         [Tooltip("Set this to true to flip the billboard. Useful for certain things like world-space UI that generally needs to face away from the camera.")]
         public bool flipped = false;
 
-        [Tooltip("If true, assigns the 'main' camera on start as the target. This only works if target is unassigned.")]
-        [SerializeField] private bool defaultTargetIsMainCamera = true;
+        [Header("Settings: Position")] 
+        [Tooltip("A world-space offset from its parent. Useful if you want something to always stay on top of an object, such as a healthbar.")]
+        public Vector3 worldSpaceOffset = Vector3.zero;
         
-        [Tooltip("The billboard target.")]
-        [SerializeField] private Transform target;
-
-        private void Start()
+        protected virtual void Start()
         {
+            cachedLocalPosition = transform.localPosition;
+            
             if (defaultTargetIsMainCamera && target == null)
             {
-                var mainCamera = Camera.main;
-                if (mainCamera != null)
+                if (cachedMainCamera == null)
                 {
-                    SetTarget(mainCamera.transform);
+                    cachedMainCamera = Camera.main;
                 }
+
+                SetTarget(cachedMainCamera.transform);
             }
-            
-            enabled = target != null;
         }
 
         private void LateUpdate()
         {
-            transform.rotation = this.GetBillboardRotation();
+            transform.position = GetBillboardPosition();
+            transform.rotation = GetBillboardRotation();
+        }
+
+        private Vector3 GetBillboardPosition()
+        {
+            return transform.parent ? 
+                transform.parent.position + cachedLocalPosition + worldSpaceOffset : 
+                cachedLocalPosition + worldSpaceOffset;
         }
 
         private Quaternion GetBillboardRotation()
