@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-using UnityEngine;  
+using UnityEngine;
 
 namespace Emericoude.Gameplay.Rounds
 {
@@ -35,14 +35,17 @@ namespace Emericoude.Gameplay.Rounds
         public event Action OnRoundSequenceExhausted;
         
         /// <summary> The <see cref="roundSequenceSettings"/>'s rounds, represented in an active queue. </summary>
+        [DrawInDebugInfoBox]
         public Queue<Round> RoundQueue { get; protected set; }
         
         /// <summary> The round at the top of the <see cref="RoundQueue"/>. </summary>
         /// <remarks> Can be null if the queue is null or empty. </remarks>
+        [DrawInDebugInfoBox]
         public Round CurrentRound => RoundQueue?.Peek();
         
         /// <summary> The previous round. </summary>
         /// <remarks> Can be null if no round has concluded yet. </remarks>
+        [DrawInDebugInfoBox]
         public Round PreviousRound { get; protected set; }
 
         [Header("Settings: Rounds")] 

@@ -38,6 +38,7 @@ namespace Emericoude.Gameplay.Rounds
         public RoundManager RoundManager { get; protected set; }
         
         /// <summary> This round's state. </summary>
+        [DrawInDebugInfoBox]
         public RoundState State { get; protected set; } = RoundState.Queued;
 
         /// <summary> Defines how your round type is copied over. Used for runtime. </summary>

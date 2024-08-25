@@ -9,17 +9,19 @@ namespace Emericoude.Gameplay.Rounds
     /// <summary> A round with a timer attached to it, concluding itself once it is expired. </summary>
     public class TimedRound : Round
     {
-#if ODIN_INSPECTOR
+        #if ODIN_INSPECTOR
         [SuffixLabel("seconds"), MinValue(0f)]
-#endif
+        #endif
         [Tooltip("This round's duration in seconds.")]
         public float Duration = 60;
-
+        
         /// <summary> This round's timer. </summary>
         /// <remarks> Only counted down if the round is ongoing. </remarks>
+        [DrawInDebugInfoBox]
         public float Timer { get; set; }
-
+        
         /// <summary> Can be used to speed up or slow down the timer. </summary>
+        [DrawInDebugInfoBox]
         public float TimerSpeedModifier { get; set; } = 1f;
 
         //Implement clone, it is important that any serialized value is copied over.
