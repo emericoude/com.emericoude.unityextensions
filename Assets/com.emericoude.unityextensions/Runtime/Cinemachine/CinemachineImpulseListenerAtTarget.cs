@@ -26,6 +26,12 @@ namespace Emericoude.Cinemachine
 		protected override void PostPipelineStageCallback (CinemachineVirtualCameraBase vcam, CinemachineCore.Stage stage, ref CameraState state, float deltaTime)
 		{
 			if (stage != ApplyAfter || !(deltaTime >= 0)) return;
+
+			if (target == null)
+			{
+				Debug.LogWarning("Cinemachine Impulse Listener's target is null, reverting to camera.");
+				target = vcam.transform;
+			}
 			
 			//this is copied from the base class, the only difference is target.position inside of GetImpulseAt.
 			bool hasImpulse = CinemachineImpulseManager.Instance.GetImpulseAt(target.position, Use2DDistance, ChannelMask, out var impulsePos, out var impulseRot);
