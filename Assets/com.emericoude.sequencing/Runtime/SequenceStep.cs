@@ -2,10 +2,10 @@ using System;
 
 using UnityEngine;
 
-namespace Emericoude.Gameplay.Rounds
+namespace Emericoude.Gameplay.Sequencing
 {
     /// <summary> A round's state. </summary>
-    public enum RoundState
+    public enum StepState
     {
         /// <summary> In queue, waiting to be started. </summary>
         Queued,
@@ -17,13 +17,13 @@ namespace Emericoude.Gameplay.Rounds
         Concluded
     }
     
-    /// <summary> A specific state, phase or moment during your game's flow. You can implement how a round flows and function by inheriting it. Look at <see cref="TimedRound"/> as a example. </summary>
-    /// <remarks> As per this implementation, only one round per <see cref="RoundManager"/> should be active at a time. </remarks>
+    /// <summary> A specific state, phase or moment during your game's flow. You can implement how a round flows and function by inheriting it. Look at <see cref="TimedSequenceStep"/> as a example. </summary>
+    /// <remarks> As per this implementation, only one round per <see cref="Sequencer"/> should be active at a time. </remarks>
     [Serializable]
-    public abstract class Round
+    public abstract class SequenceStep
     {
         /// <summary> Invoked when the round begins. </summary>
-        public event Action OnCommenced;
+        public event Action OnBegun;
         
         /// <summary> Invoked when the round ends. </summary>
         public event Action OnConcluded;
@@ -34,32 +34,32 @@ namespace Emericoude.Gameplay.Rounds
         /// <summary> Invoked when the round is unpaused. </summary>
         public event Action OnResumed;
         
-        /// <summary> The <see cref="RoundManager"/> owning this round. </summary>
-        public RoundManager RoundManager { get; protected set; }
+        /// <summary> The <see cref="Sequencer"/> owning this round. </summary>
+        public Sequencer Sequencer { get; protected set; }
         
         /// <summary> This round's state. </summary>
         [DrawInDebugInfoBox]
-        public RoundState State { get; protected set; } = RoundState.Queued;
+        public StepState State { get; protected set; } = StepState.Queued;
 
         /// <summary> Defines how your round type is copied over. Used for runtime. </summary>
         /// <remarks> IT IS PRIMORDIAL TO IMPLEMENT THIS SO THAT ALL SERIALIZED SETTINGS ARE COPIED AT RUNTIME. </remarks>
         /// <returns> An exact clone of this round. Used for runtime. </returns>
-        public abstract Round Clone();
+        public abstract SequenceStep Clone();
 
         /// <summary> Use this to initialize anything that should be initialized before start. </summary>
-        /// <param name="roundManager"> The round manager handling this round. </param>
-        public virtual void Awake(RoundManager roundManager)
+        /// <param name="sequencer"> The round manager handling this round. </param>
+        public virtual void Awake(Sequencer sequencer)
         {
-            RoundManager = roundManager;
+            Sequencer = sequencer;
         }
         
-        /// <summary> Commences (starts, begins) the round. </summary>
+        /// <summary> Begins (starts, begins) the round. </summary>
         /// <remarks> By default, this will notify the round manager of its commencing, potentially skipping previously queued rounds. </remarks>
-        public virtual void Commence()
+        public virtual void Begin()
         {
-            State = RoundState.Ongoing;
-            RoundManager.NotifyOfRoundCommencing(this);
-            OnCommenced?.Invoke();
+            State = StepState.Ongoing;
+            Sequencer.NotifyOfStepBeginning(this);
+            OnBegun?.Invoke();
         }
 
         /// <summary> Update tick that is used if the state is ongoing. </summary>
@@ -74,34 +74,34 @@ namespace Emericoude.Gameplay.Rounds
         /// <remarks> By default, this will notify the round manager of its conclusion so the next round can be started. </remarks>
         public virtual void Conclude()
         {
-            State = RoundState.Concluded;
-            RoundManager.NotifyOfRoundConclusion(this);
+            State = StepState.Concluded;
+            Sequencer.NotifyOfStepConcluding(this);
             OnConcluded?.Invoke();
         }
 
         /// <summary> Pauses the round if it is ongoing. </summary>
         public virtual void Pause()
         {
-            if (State != RoundState.Ongoing)
+            if (State != StepState.Ongoing)
             {
                 Debug.LogWarning($"Cannot pause a round that is {State}.");
                 return;
             }
 
-            State = RoundState.Paused;
+            State = StepState.Paused;
             OnPaused?.Invoke();
         }
 
         /// <summary> Unpauses the round if it is paused. </summary>
         public virtual void Resume()
         {
-            if (State != RoundState.Paused)
+            if (State != StepState.Paused)
             {
                 Debug.LogWarning($"Cannot resume a round that is {State}.");
                 return;
             }
             
-            State = RoundState.Ongoing;
+            State = StepState.Ongoing;
             OnResumed?.Invoke();
         }
     }

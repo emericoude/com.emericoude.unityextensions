@@ -1,6 +1,6 @@
 {
-    "name": "emericoude.rounds",
-    "rootNamespace": "Emericoude.Gameplay.Rounds",
+    "name": "emericoude.sequencing",
+    "rootNamespace": "Emericoude.Gameplay.Sequencing",
     "references": [
         "GUID:138d2d27ffdc72340b421282d1704db2"
     ],

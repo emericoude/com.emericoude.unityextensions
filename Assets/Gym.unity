@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1911,51 +1910,6 @@ MonoBehaviour:
   radius: 1
   rotateTowardsCenter: 1
   angleDistribution: 57
---- !u!1 &1291312129
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1291312131}
-  - component: {fileID: 1291312130}
-  m_Layer: 0
-  m_Name: RoundManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1291312130
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1291312129}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 378f66c8feecdf44dad1f5261196e1e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  roundSequenceSettings: {fileID: 11400000, guid: 98a79671bd621df4f982287faacf957e, type: 2}
---- !u!4 &1291312131
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1291312129}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1398168915
 GameObject:
   m_ObjectHideFlags: 0
@@ -2618,11 +2572,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc2f5d5143c261e45b436ec853336628, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultTargetIsMainCamera: 1
+  target: {fileID: 0}
   rotationMethod: 0
   rotationAxes: {x: 1, y: 1, z: 1}
   flipped: 0
-  defaultTargetIsMainCamera: 1
-  target: {fileID: 0}
+  worldSpaceOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &1902253598
 GameObject:
   m_ObjectHideFlags: 0
@@ -2920,5 +2875,4 @@ SceneRoots:
   - {fileID: 1877313021}
   - {fileID: 1871632352}
   - {fileID: 754376512}
-  - {fileID: 1291312131}
   - {fileID: 588296147}

@@ -4,16 +4,16 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 #endif
 
-namespace Emericoude.Gameplay.Rounds
+namespace Emericoude.Gameplay.Sequencing
 {
     /// <summary> A round with a timer attached to it, concluding itself once it is expired. </summary>
-    public class TimedRound : Round
+    public class TimedSequenceStep : SequenceStep
     {
         #if ODIN_INSPECTOR
         [SuffixLabel("seconds"), MinValue(0f)]
         #endif
         [Tooltip("This round's duration in seconds.")]
-        public float Duration = 60;
+        [SerializeField] protected float Duration = 60;
         
         /// <summary> This round's timer. </summary>
         /// <remarks> Only counted down if the round is ongoing. </remarks>
@@ -25,17 +25,17 @@ namespace Emericoude.Gameplay.Rounds
         public float TimerSpeedModifier { get; set; } = 1f;
 
         //Implement clone, it is important that any serialized value is copied over.
-        public override Round Clone()
+        public override SequenceStep Clone()
         {
-            var clone = new TimedRound();
+            var clone = new TimedSequenceStep();
             clone.Duration = Duration;
             return clone;
         }
 
-        public override void Commence()
+        public override void Begin()
         {
             //keep base.Commence() in your implementations, so that the flow is properly handled by the round manager
-            base.Commence(); 
+            base.Begin(); 
 
             Timer = Duration;
         }
@@ -58,7 +58,7 @@ namespace Emericoude.Gameplay.Rounds
             // it's good practice to clean things up in the Conclude function.
             Timer = 0f;
             
-            //Call base.Conclude() when you're ready for the flow to be handled by the manager.
+            //Call base.Conclude() when you're ready for the flow to be handled by the sequencer.
             base.Conclude();
         }
     }

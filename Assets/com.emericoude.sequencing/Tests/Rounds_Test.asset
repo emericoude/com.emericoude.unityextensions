@@ -12,12 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 569a2f1ca01be664a95a30dda5f34d54, type: 3}
   m_Name: Rounds_Test
   m_EditorClassIdentifier: 
+  beginOnStart: 1
+  loopSequence: 1
   sequence:
-  - rid: 2506624377473728587
+  - rid: 7633829644670074936
   references:
     version: 2
     RefIds:
-    - rid: 2506624377473728587
-      type: {class: TimedRound, ns: Emericoude.Gameplay.Rounds, asm: emericoude.rounds}
+    - rid: 7633829644670074936
+      type: {class: TimedSequenceStep, ns: Emericoude.Gameplay.Sequencing, asm: emericoude.sequencing}
       data:
         Duration: 60

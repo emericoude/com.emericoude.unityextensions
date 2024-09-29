@@ -1,0 +1,12 @@
+{
+    "name": "com.emericoude.sequencing",
+    "displayName": "Emeric's Sequencing Framework for Unity",
+    "version": "2.0.0",
+    "unity": "2022.3",
+    "description": "A framework for integrating a round-like flow to your game.",
+    "author": {
+        "name": "Emeric Coude",
+        "email": "emericmax9@hotmail.com",
+        "url": "https://github.com/emericoude"
+    }
+}
