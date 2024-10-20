@@ -8,43 +8,45 @@ namespace Emericoude.Gameplay.PawnController
     [SelectionBase]
     public abstract class Controller : MonoBehaviour
     {
-        public event Action<Pawn> OnPossess;
-        public event Action<Pawn> OnUnpossess;
+        /// <summary> Event invoked at the end of the possession process. Passing the new pawn. </summary>
+        public event Action<Pawn> OnPossessPawn;
         
+        /// <summary> Event invoked at the end of the unpossession process. Passing the old pawn. </summary>
+        public event Action<Pawn> OnUnpossessPawn;
+        
+        /// <summary> The currently possessed pawn. </summary>
         public Pawn Pawn { get; private set; }
+        
+        public virtual bool IsPlayer() => this is PlayerController;
+        public virtual bool IsAI() => this is not PlayerController;
 
+        /// <summary> Possess a pawn. If one is already possessed, unpossess that one first. </summary>
+        /// <param name="pawn"> The new pawn to possess. </param>
         public virtual void PossessPawn(Pawn pawn)
         {
             if (pawn.Controller != null)
             {
-                pawn.Controller.UnpossessPawn();
+                pawn.Controller.UnpossessCurrentPawn();
             }
             
             if (this.Pawn != null)
             {
-                this.UnpossessPawn();
+                this.UnpossessCurrentPawn();
             }
             
             this.Pawn = pawn;
-            this.Pawn.Possess(this);
-            this.OnPossess?.Invoke(this.Pawn);
+            this.Pawn.RegisterControllerPossession(this);
+            this.OnPossessPawn?.Invoke(this.Pawn);
         }
 
-        public virtual void UnpossessPawn()
+        /// <summary> Unpossess the currently possessed pawn.</summary>
+        public virtual void UnpossessCurrentPawn()
         {
-            OnUnpossess?.Invoke(this.Pawn);
-            this.Pawn.Unpossess();
+            var previousPawn = this.Pawn;
+            this.Pawn.UnregisterPossessingController();
             this.Pawn = null;
-        }
-
-        public virtual bool IsPlayer()
-        {
-            return this is PlayerController;
-        }
-
-        public virtual bool IsAI()
-        {
-            return this is not PlayerController;
+            
+            OnUnpossessPawn?.Invoke(previousPawn);
         }
     }
 }

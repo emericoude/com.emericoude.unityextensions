@@ -16,7 +16,8 @@ namespace Emericoude.Gameplay.PawnController
             Pawn = 1
         }
 
-        [Header("Settings")] 
+        [Header("Settings")]
+        [Tooltip("The default pawn for this player. If assigned, the pawn is automatically possessed on start.")]
         [SerializeField] private Pawn defaultPawn;
         
         [Header("Settings: Input")]
@@ -27,7 +28,7 @@ namespace Emericoude.Gameplay.PawnController
 
         public PlayerInput Inputs => playerInput;
 
-        protected virtual void Awake()
+        protected virtual void Start()
         {
             if (defaultPawn != null)
             {
