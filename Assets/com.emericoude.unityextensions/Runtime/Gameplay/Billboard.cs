@@ -12,8 +12,7 @@ namespace Emericoude.Gameplay.Common
             CopyTargetRotation
         }
         
-        private static Camera cachedMainCamera;
-        private Vector3 cachedLocalPosition;
+        private static Camera staticallyCachedMainCamera;
         
         [Header("Settings: Target")]
         [Tooltip("If true, assigns the 'main' camera on start as the target. This only works if target is unassigned.")]
@@ -38,19 +37,23 @@ namespace Emericoude.Gameplay.Common
         [Tooltip("A world-space offset from its parent. Useful if you want something to always stay on top of an object, such as a healthbar.")]
         public Vector3 worldSpaceOffset = Vector3.zero;
         
+        private Vector3 cachedLocalPosition;
+        
         protected virtual void Start()
         {
             cachedLocalPosition = transform.localPosition;
             
             if (defaultTargetIsMainCamera && target == null)
             {
-                if (cachedMainCamera == null)
+                if (staticallyCachedMainCamera == null)
                 {
-                    cachedMainCamera = Camera.main;
+                    staticallyCachedMainCamera = Camera.main;
                 }
 
-                SetTarget(cachedMainCamera.transform);
+                SetTarget(staticallyCachedMainCamera?.transform);
             }
+
+            enabled = target != null;
         }
 
         private void LateUpdate()
