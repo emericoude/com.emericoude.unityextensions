@@ -10,7 +10,18 @@ namespace Emericoude
 	/// <summary> Draws a curve's duration and value fields to be modified easily and while keeping the curve's shape, 
 	/// without needing to go into the curve editor. </summary>
 	[AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
-	public class BetterCurveFieldAttribute : PropertyAttribute { }
+	public class BetterCurveFieldAttribute : PropertyAttribute
+	{
+		public readonly string TimePropertyLabel;
+		public readonly string ValuePropertyLabel;
+		public bool isFoldout;
+
+		public BetterCurveFieldAttribute(string timePropertyLabel = "Time", string valuePropertyLabel = "Value")
+		{
+			this.TimePropertyLabel = timePropertyLabel;
+			this.ValuePropertyLabel = valuePropertyLabel;
+		}
+	}
 	
 	/// <summary> Displays the field or property inside an "Info" box. Does nothing if you do not have Odin Inspector. </summary>
 	/// <remarks> This combines the following attributes from Odin: [ShowInInspector], [ReadOnly], [VerticalGroup] and [FoldoutGroup]. </remarks>

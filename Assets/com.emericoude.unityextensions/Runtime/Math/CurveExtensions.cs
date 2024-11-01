@@ -85,8 +85,8 @@ namespace Emericoude.Math
 			for (int i = 0; i < curve.keys.Length; i++)
 			{
 				Keyframe keyframe = curve.keys[i];
-				keyframe.value = curve.keys[i].value * valueScalingFactor;
 				keyframe.time = curve.keys[i].time * timeScalingFactor;
+				keyframe.value = curve.keys[i].value * valueScalingFactor;
 				keyframe.inTangent = curve.keys[i].inTangent * valueScalingFactor / timeScalingFactor;
 				keyframe.outTangent = curve.keys[i].outTangent * valueScalingFactor / timeScalingFactor;
 
@@ -94,6 +94,29 @@ namespace Emericoude.Math
 			}
 
 			return scaledCurve;
+		}
+
+		/// <summary> Moves a key to the givne time and value, but tries to retain the general shape of the tangents. </summary>
+		/// <param name="curve"> The target curve. </param>
+		/// <param name="index"> The key index to target. </param>
+		/// <param name="time"> The new time (x-axis) of the key. </param>
+		/// <param name="value"> The new value (y-axis) of the key. </param>
+		/// <returns> The new keyframe, modified. </returns>
+		public static Keyframe MoveKey (this AnimationCurve curve, int index, float time, float value)
+		{
+			var keyframe = curve.keys[index];
+			var timeScalingFactor = keyframe.time == 0f ? 0f : time / keyframe.time;
+			var valueScalingFactor = keyframe.value == 0f ? 0f : value / keyframe.value;
+			keyframe.time = timeScalingFactor == 0f ? time : keyframe.time * timeScalingFactor;
+			keyframe.value = valueScalingFactor == 0f ? value : keyframe.value * valueScalingFactor;
+			if (timeScalingFactor != 0f)
+			{
+				keyframe.inTangent *= valueScalingFactor / timeScalingFactor;
+				keyframe.outTangent *= valueScalingFactor / timeScalingFactor;
+			}
+			
+			curve.MoveKey(index, keyframe);
+			return keyframe;
 		}
 	}
 }
