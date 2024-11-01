@@ -30,27 +30,61 @@ namespace Emericoude.Editor
 		public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
 		{
 			return this.Attribute.isFoldout
-				? (EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing) * (property.animationCurveValue.keys.Length + 3)
+				? (EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing) * (property.animationCurveValue.keys.Length + 4)
 				: EditorGUIUtility.singleLineHeight;
 		}
 
 		private void DrawFoldoutDrawer(Rect position, SerializedProperty property, GUIContent propertyLabel)
 		{
-			position.y += EditorGUIUtility.singleLineHeight * 2f;
-			position.x += position.width * 0.01f;
+			position.height = EditorGUIUtility.singleLineHeight;
+			position.y += EditorGUIUtility.singleLineHeight * 3f + EditorGUIUtility.standardVerticalSpacing;
+			position.x += position.width * 0.05f;
+			position.width -= position.width * 0.05f;
+			
 			
 			var backingCurve = this.CreateBackingCurve(property);
+			
+			//scale
+			Keyframe lastKeyframe = backingCurve.keys.Last();
+			var scaleFloatFields = new float[] { lastKeyframe.time, lastKeyframe.value };
+			var scaleGuiContents = new GUIContent[]
+			{
+				new ($"{this.Attribute.TimePropertyLabel} Scale", $"Use this to scale the time of the entire curve. This is generally the best way to modify to overall values while maintaining the exact shape fo the curve."), 
+				new ($"{this.Attribute.ValuePropertyLabel} Scale", $"Use this to scale the value of the entire curve. This is generally the best way to modify to overall values while maintaining the exact shape fo the curve.")
+			};
+			EditorGUI.BeginChangeCheck();
+			EditorGUI.MultiFloatField(position, scaleGuiContents, scaleFloatFields);
+			if (EditorGUI.EndChangeCheck())
+			{
+				//apply changes to backing curve
+				float xScale = scaleFloatFields[0] / lastKeyframe.time;
+				float yScale = scaleFloatFields[1] / lastKeyframe.value;
+				backingCurve = backingCurve.Scale(xScale, yScale);
+			}
+			
+			position.x += position.width * 0.05f;
+			position.width -= position.width * 0.05f;
+			
+			//keys
 			for (int i = 0; i < property.animationCurveValue.length; i++)
 			{
 				Keyframe keyframe = property.animationCurveValue.keys[i];
 				var floatFields = new float[] { keyframe.time, keyframe.value };
-				var guiContents = new GUIContent[] { new (this.Attribute.TimePropertyLabel), new (this.Attribute.ValuePropertyLabel) };
+				var guiContents = new GUIContent[]
+				{
+					new ($"Key {i}:   {this.Attribute.TimePropertyLabel}", $"Use this to move the key's time (x-axis), keeping relatively accurate tangents."), 
+					new ($"  {this.Attribute.ValuePropertyLabel}", $"Use this to move the key's value (y-axis), keeping relatively accurate tangents.")
+				};
 				
 				position.position += new Vector2(0.0f, EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing);
 				position.height = EditorGUIUtility.singleLineHeight;
 				
 				EditorGUI.BeginChangeCheck();
-				EditorGUI.MultiFloatField(position, new ($"Key {i}"), guiContents, floatFields);
+				EditorGUI.MultiFloatField(
+					position, 
+					guiContents, 
+					floatFields
+				);
 				if (EditorGUI.EndChangeCheck())
 				{
 					backingCurve.MoveKey(i, floatFields[0], floatFields[1]);

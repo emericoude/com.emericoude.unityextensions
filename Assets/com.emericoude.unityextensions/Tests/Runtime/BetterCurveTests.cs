@@ -8,6 +8,6 @@ public class BetterCurveTests : MonoBehaviour
     [BetterCurveField]
     public AnimationCurve improvedCurve;
 
-    [BetterCurveField( "Time", "Wow")] 
+    [BetterCurveField( "Time", "Force")] 
     public AnimationCurve improvedCurvePlus;
 }
