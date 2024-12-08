@@ -2080,6 +2080,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f80dccf664d3b8a4490a04d92fb664e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  testFiniteSFM: 0
+  testFiniteSFMSerialized: 0
+  testHierarchicalSFM: 1
   stateDuration: 1
   firstMonoState: {fileID: 1137793519}
   secondMonoState: {fileID: 1137793518}

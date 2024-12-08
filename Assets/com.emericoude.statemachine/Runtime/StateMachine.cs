@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Emericoude.StateMachines
 {
-    public class FiniteStateMachine
+    public class StateMachine : IState
     {
         public delegate void OnStateChangedDelegate(IState from, IState to);
         public event OnStateChangedDelegate OnStateChanged;
@@ -11,6 +11,11 @@ namespace Emericoude.StateMachines
         private StateNode current;
         private readonly Dictionary<Type, StateNode> nodes = new();
         private readonly HashSet<ITransition> globalTransitions = new();
+
+        public void OnEnter()
+        {
+            this.current.State?.OnEnter();
+        }
 
         public void Update()
         {
@@ -25,6 +30,11 @@ namespace Emericoude.StateMachines
         public void FixedUpdate()
         {
             this.current.State?.FixedUpdate();
+        }
+
+        public void OnExit()
+        {
+            this.current.State?.OnExit();
         }
 
         public void SetState(IState state)
