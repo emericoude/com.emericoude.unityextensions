@@ -1,0 +1,12 @@
+{
+    "name": "com.emericoude.state-machines",
+    "displayName": "Emericoude's State Machines",
+    "version": "0.0.1",
+    "unity": "2022.3",
+    "description": "A collection of state machine utilities.",
+    "author": {
+        "name": "Emeric Coude",
+        "email": "emericmax9@hotmail.com",
+        "url": "https://github.com/emericoude"
+    } 
+}

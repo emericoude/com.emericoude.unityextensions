@@ -6,13 +6,12 @@ using UnityEngine;
 
 using Emericoude.Collections;
 using UnityEngine.Serialization;
+using Debug = UnityEngine.Debug;
 
 public class StopwatchTester : MonoBehaviour
 {
 	public bool runOnstart = false;
 	public int iterationCount = 100000;
-	
-	private readonly int[] _testList = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
 	void Start ()
 	{
@@ -27,10 +26,7 @@ public class StopwatchTester : MonoBehaviour
 	{
 		Stopwatch timer = Stopwatch.StartNew();
 
-		for (int i = 0; i < this.iterationCount; i++)
-		{
-			int random = _testList.GetRandomElement(_testList.Length);
-		}
+		//write test here
 
 		timer.Stop();
 		UnityEngine.Debug.Log("Time taken for the operation (1): " + timer.ElapsedMilliseconds + " milliseconds");
@@ -41,11 +37,8 @@ public class StopwatchTester : MonoBehaviour
 	{
 		Stopwatch timer = Stopwatch.StartNew();
 
-		for (int i = 0; i < this.iterationCount; i++)
-		{
-			int random = _testList.GetRandomElement();
-		}
-
+		//write test here
+		
 		timer.Stop();
 		UnityEngine.Debug.Log("Time taken for the operation (2): " + timer.ElapsedMilliseconds + " milliseconds");
 	}
@@ -55,11 +48,8 @@ public class StopwatchTester : MonoBehaviour
 	{
 		Stopwatch timer = Stopwatch.StartNew();
 
-		for (int i = 0; i < this.iterationCount; i++)
-		{
-			//implement iteration here
-		}
-
+		//write test here
+		
 		timer.Stop();
 		UnityEngine.Debug.Log("Time taken for the operation (3): " + timer.ElapsedMilliseconds + " milliseconds");
 	}
