@@ -1,5 +1,6 @@
 ﻿namespace Emericoude.StateMachines
 {
+    /// <summary> Concrete implementation of a ITransition used by state machines, which should cover most needs. </summary>
     public class Transition : ITransition
     {
         public IState To { get; }
