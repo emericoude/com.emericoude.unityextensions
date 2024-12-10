@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace Emericoude.StateMachines
 {
     public interface IState

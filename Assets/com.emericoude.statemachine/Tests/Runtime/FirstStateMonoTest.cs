@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace Emericoude.StateMachines.Tests
+﻿namespace Emericoude.StateMachines.Tests
 {
     public class FirstStateMonoTest : TimedStateMono
     {
