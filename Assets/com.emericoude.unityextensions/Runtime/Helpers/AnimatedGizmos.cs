@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Emericoude.Helpers
 {
-	public class AnimatedGizmos : LazySingletonMonoBehaviour<AnimatedGizmos>
+	public class AnimatedGizmos : LazySingleton<AnimatedGizmos>
 	{
 		private static bool _enabled = true;
 		public static bool Enabled 

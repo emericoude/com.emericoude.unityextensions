@@ -1,6 +1,6 @@
 using Emericoude.Framework;
 
-public class TestSingleton : PersistentSingletonMonoBehaviour<TestSingleton>
+public class TestSingleton : PersistentSingleton<TestSingleton>
 {
     
 }
