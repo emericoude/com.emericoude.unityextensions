@@ -1,7 +1,7 @@
 using Emericoude.Physics;
 using UnityEngine;
 
-namespace Emericoude
+namespace Emericoude.Physics
 {
     [RequireComponent(typeof(CollisionContactEvents))]
     public abstract class CollisionContactEventListener : MonoBehaviour

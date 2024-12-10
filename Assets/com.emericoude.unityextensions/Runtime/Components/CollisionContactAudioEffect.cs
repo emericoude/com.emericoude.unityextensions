@@ -1,8 +1,9 @@
 using System.Collections;
 using Emericoude.Attributes;
+using Emericoude.Physics;
 using UnityEngine;
 
-namespace Emericoude
+namespace Emericoude.Feel
 {
     public class CollisionContactAudioEffect : CollisionContactEventListener
     {

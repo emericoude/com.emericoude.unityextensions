@@ -1,10 +1,11 @@
 using System.Linq;
 using Emericoude.Framework;
+using Emericoude.Physics;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.VFX;
 
-namespace Emericoude
+namespace Emericoude.Feel
 {
     public class CollisionContactVisualEffect : CollisionContactEventListener
     {

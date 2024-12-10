@@ -3,7 +3,7 @@ using Emericoude.Framework;
 using UnityEngine;
 using UnityEngine.VFX;
 
-namespace Emericoude.Framework
+namespace Emericoude.Feel
 {
     /// <summary> A simple singleton object pool for vfx. Feed it <see cref="VisualEffect"/> prefabs and it will group them into individual pools. </summary>
     public class LazyVisualEffectPool : LazyObjectPool<LazyVisualEffectPool, string, VisualEffect>
