@@ -1,3 +1,4 @@
+using Emericoude.Attributes;
 using UnityEngine;
 
 #if ODIN_INSPECTOR

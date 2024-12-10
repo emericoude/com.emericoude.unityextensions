@@ -1,7 +1,7 @@
 {
     "name": "com.emericoude.sequencing",
     "displayName": "Emeric's Sequencing Framework for Unity",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "unity": "2022.3",
     "description": "A framework for integrating a round-like flow to your game.",
     "author": {
