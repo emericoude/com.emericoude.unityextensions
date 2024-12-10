@@ -1,12 +1,8 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-
+using Emericoude.Attributes;
+using Emericoude.Helpers;
 using UnityEngine;
-
-using Emericoude;
-using Emericoude.Gizmos;
-using Emericoude.Math;
 
 public class AnimatedGizmosTests : MonoBehaviour
 {
@@ -31,8 +27,8 @@ public class AnimatedGizmosTests : MonoBehaviour
 	{
 		foreach (var sphereCastParam in this.sphereCastParameters)
 		{
-			if (sphereCastParam.wired) GizmosExtensions.DrawWireSphereCast(transform.position, transform.localScale.LargestComponent(), sphereCastParam.direction, out RaycastHit hit, sphereCastParam.maxDistance);
-			else GizmosExtensions.DrawSphereCast(transform.position, transform.localScale.LargestComponent(), sphereCastParam.direction, out RaycastHit hit, sphereCastParam.maxDistance);
+			if (sphereCastParam.wired) GizmosHelpers.DrawWireSphereCast(transform.position, transform.localScale.LargestComponent(), sphereCastParam.direction, out RaycastHit hit, sphereCastParam.maxDistance);
+			else GizmosHelpers.DrawSphereCast(transform.position, transform.localScale.LargestComponent(), sphereCastParam.direction, out RaycastHit hit, sphereCastParam.maxDistance);
 		}
 	}
 }

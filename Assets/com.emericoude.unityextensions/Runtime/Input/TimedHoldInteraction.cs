@@ -1,18 +1,16 @@
 using System.ComponentModel;
-
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
 
 #if UNITY_EDITOR
+using Sirenix.OdinInspector;
+#endif
+#if ODIN_INSPECTOR
 using UnityEditor;
 #endif
 
-#if ODIN_INSPECTOR
-using Sirenix.OdinInspector;
-#endif
-
-namespace Emericoude
+namespace Emericoude.Inputs
 {
     /// <summary>
     /// A <see cref="HoldInteraction"/> with a maximum duration. The interaction is cancelled upon reaching its maximum duration. <br/>

@@ -1,6 +1,5 @@
-using System;
 using System.Collections.Generic;
-using Emericoude;
+using Emericoude.Attributes;
 using UnityEngine;
 
 public class TypeFilterTest : MonoBehaviour
@@ -13,5 +12,3 @@ public class TypeFilterTest : MonoBehaviour
     [SerializeReference, TypeFilter(typeof(BaseClass))]
     public List<BaseClass> TypeFilteredBaseThingList = new List<BaseClass>();
 }
-
-

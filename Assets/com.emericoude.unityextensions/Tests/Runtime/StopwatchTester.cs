@@ -1,12 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Diagnostics;
-
 using UnityEngine;
-
-using Emericoude.Collections;
-using UnityEngine.Serialization;
-using Debug = UnityEngine.Debug;
 
 public class StopwatchTester : MonoBehaviour
 {

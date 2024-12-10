@@ -1,12 +1,11 @@
-using System;
+using Emericoude.Gameplay;
 using UnityEditor;
 using UnityEngine;
-using Emericoude.Gameplay.Common;
 
-namespace Emericoude.UnityExtensions.Editor
+namespace Emericoude.EditorExtensions
 {
     [CustomEditor(typeof(Billboard))]
-    public class BillboardEditor : UnityEditor.Editor
+    public class BillboardEditor : Editor
     {
         private void OnSceneGUI()
         {

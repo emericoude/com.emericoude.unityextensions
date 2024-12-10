@@ -1,11 +1,10 @@
 using System.Linq;
-
-using UnityEditor;
+using Emericoude.Attributes;
+using Emericoude.Helpers;
+using UnityEditor;	
 using UnityEngine;
 
-using Emericoude.Math;
-
-namespace Emericoude.Editor
+namespace Emericoude.EditorExtensions
 {
 	[CustomPropertyDrawer(typeof(BetterCurveFieldAttribute))]
 	public class BetterCurveDrawer : PropertyDrawer

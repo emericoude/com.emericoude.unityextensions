@@ -1,5 +1,5 @@
 using System;
-using Emericoude;
+using Emericoude.Attributes;
 using Sirenix.OdinInspector;
 using UnityEngine;
 

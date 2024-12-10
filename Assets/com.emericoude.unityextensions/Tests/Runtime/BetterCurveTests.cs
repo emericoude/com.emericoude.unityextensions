@@ -1,4 +1,4 @@
-using Emericoude;
+using Emericoude.Attributes;
 using UnityEngine;
 
 public class BetterCurveTests : MonoBehaviour
