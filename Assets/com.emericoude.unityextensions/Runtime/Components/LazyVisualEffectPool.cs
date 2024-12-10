@@ -36,7 +36,7 @@ namespace Emericoude.Feel
             return visualEffectInstance;
         }
 
-        protected override void GetPoolObject(VisualEffect effect)
+        protected override void OnGetPoolObject(VisualEffect effect)
         {
             effect.gameObject.SetActive(true);
             if (this.currentTargetShouldAutoPlay)
@@ -46,22 +46,22 @@ namespace Emericoude.Feel
             }
         }
 
-        protected override void ReleasePoolObject(VisualEffect effect)
+        protected override void OnReleasePoolObject(VisualEffect effect)
         {
             effect.Stop();
             effect.gameObject.SetActive(false);
         }
 
-        protected override void DestroyPoolObject(VisualEffect effect)
+        protected override void OnDestroyPoolObject(VisualEffect effect)
         {
-            base.DestroyPoolObject(effect);
+            Destroy(effect.gameObject);
         }
 
         private IEnumerator WaitForEffectToBeDone(VisualEffect effect)
         {
             yield return new WaitForSeconds(WAIT_FOR_EFFECT_TICK_RATE); //wait a frame just to be sure
             while (effect.HasAnySystemAwake()) yield return new WaitForSeconds(WAIT_FOR_EFFECT_TICK_RATE);
-            this.ReleasePoolObject(effect);
+            this.Release(effect);
         }
     }
 }

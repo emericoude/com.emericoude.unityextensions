@@ -80,9 +80,12 @@ namespace Emericoude.Framework
                 this.Templates.Add(key, template);
             }
 
-            this.CurrentKey = this.GetObjectKey(template);
+            this.CurrentKey = key;
             return pool.Get();
         }
+
+        /// <summary> Releases an object from its pool. </summary>
+        public void Release(TObject objectInstance) => this.ObjectPools[this.GetObjectKey(objectInstance)].Release(objectInstance);
         
         /// <returns> A key used for grouping pools of similar things. </returns>
         /// <remarks> This should ideally return the same key for a template or an instance of it. </remarks>
@@ -90,24 +93,24 @@ namespace Emericoude.Framework
         
         /// <returns> A new object pool. </returns>
         /// <seealso cref="CreatePoolObject"/>
-        /// <seealso cref="GetPoolObject"/>
-        /// <seealso cref="ReleasePoolObject"/>
-        /// <seealso cref="DestroyPoolObject"/>
+        /// <seealso cref="OnGetPoolObject"/>
+        /// <seealso cref="OnReleasePoolObject"/>
+        /// <seealso cref="OnDestroyPoolObject"/>
         protected virtual ObjectPool<TObject> CreatePool()
         {
             return new ObjectPool<TObject>(
                 this.CreatePoolObject,
-                this.GetPoolObject,
-                this.ReleasePoolObject,
-                this.DestroyPoolObject
+                this.OnGetPoolObject,
+                this.OnReleasePoolObject,
+                this.OnDestroyPoolObject
             );
         }
         
         /// <summary> Object Pool's CreateFunc. This is used to construct an object pool. By default, this will instantiate the object as a child of this' transform. </summary>
         /// <returns> A new, ready-to-use pool object. </returns>
-        /// <seealso cref="GetPoolObject"/>
-        /// <seealso cref="ReleasePoolObject"/>
-        /// <seealso cref="DestroyPoolObject"/>
+        /// <seealso cref="OnGetPoolObject"/>
+        /// <seealso cref="OnReleasePoolObject"/>
+        /// <seealso cref="OnDestroyPoolObject"/>
         protected virtual TObject CreatePoolObject()
         {
             return Instantiate(this.Templates[this.CurrentKey], this.transform);
@@ -116,22 +119,22 @@ namespace Emericoude.Framework
         /// <returns> Object Pool's ActionOnGet. This is used to construct an object pool. </returns>
         /// <remarks> Use this to make sure the object is ready-to-use. </remarks>
         /// <seealso cref="CreatePoolObject"/>
-        /// <seealso cref="ReleasePoolObject"/>
-        /// <seealso cref="DestroyPoolObject"/>
-        protected abstract void GetPoolObject(TObject poolObject);
+        /// <seealso cref="OnReleasePoolObject"/>
+        /// <seealso cref="OnDestroyPoolObject"/>
+        protected abstract void OnGetPoolObject(TObject poolObject);
         
         /// <returns> Object Pool's ActionOnRelease. This is used to construct an object pool. </returns>
         /// <seealso cref="CreatePoolObject"/>
-        /// <seealso cref="GetPoolObject"/>
-        /// <seealso cref="DestroyPoolObject"/>
-        protected abstract void ReleasePoolObject(TObject poolObject);
+        /// <seealso cref="OnGetPoolObject"/>
+        /// <seealso cref="OnDestroyPoolObject"/>
+        protected abstract void OnReleasePoolObject(TObject poolObject);
 
         /// <returns> Object Pool's ActionOnDestroy. This is used to construct an object pool. By default, this will destroy the object. </returns>
         /// <remarks> Use this to make sure the object gets cleaned up properly. </remarks>
         /// <seealso cref="CreatePoolObject"/>
-        /// <seealso cref="GetPoolObject"/>
-        /// <seealso cref="ReleasePoolObject"/>
-        protected virtual void DestroyPoolObject(TObject poolObject)
+        /// <seealso cref="OnGetPoolObject"/>
+        /// <seealso cref="OnReleasePoolObject"/>
+        protected virtual void OnDestroyPoolObject(TObject poolObject)
         {
             Destroy(poolObject);
         }
