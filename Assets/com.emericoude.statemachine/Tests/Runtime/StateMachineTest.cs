@@ -73,17 +73,17 @@ namespace Emericoude.StateMachines.Tests
 
         private void Update()
         {
-            this.stateMachine?.Update();
-            this.stateMachineUsingSerializedStates?.Update();
-            this.hierarchicalStateMachine?.Update();
+            this.stateMachine?.OnUpdate();
+            this.stateMachineUsingSerializedStates?.OnUpdate();
+            this.hierarchicalStateMachine?.OnUpdate();
             this.wasSwapInvokedThisFrame = false;
         }
 
         private void FixedUpdate()
         {
-            this.stateMachine?.FixedUpdate();
-            this.stateMachineUsingSerializedStates?.FixedUpdate();
-            this.hierarchicalStateMachine?.FixedUpdate();
+            this.stateMachine?.OnFixedUpdate();
+            this.stateMachineUsingSerializedStates?.OnFixedUpdate();
+            this.hierarchicalStateMachine?.OnFixedUpdate();
         }
 
         private void OnStateChanged(IState from, IState to)

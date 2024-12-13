@@ -7,9 +7,9 @@ namespace Emericoude.StateMachines
         /// <summary> Called whenever the state is entered. </summary>
         public void OnEnter();
         /// <summary> Called every frame if the state is the active one. </summary>
-        public void Update();
+        public void OnUpdate();
         /// <summary> Called every physics frame if the state is the active one. </summary>
-        public void FixedUpdate();
+        public void OnFixedUpdate();
         /// <summary> Called whenever the state is exited. </summary>
         public void OnExit();
     }

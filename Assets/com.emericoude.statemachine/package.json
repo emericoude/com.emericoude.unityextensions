@@ -1,7 +1,7 @@
 {
     "name": "com.emericoude.state-machines",
     "displayName": "Emericoude's State Machines",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "unity": "2022.3",
     "description": "A collection of state machine utilities.",
     "author": {

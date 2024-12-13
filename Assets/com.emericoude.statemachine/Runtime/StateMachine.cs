@@ -38,19 +38,19 @@ namespace Emericoude.StateMachines
             this.current.State?.OnEnter();
         }
 
-        public virtual void Update()
+        public virtual void OnUpdate()
         {
             if (this.TryEvaluateTransitions(out var transition))
             {
                 this.ChangeState(transition.To);
             }
             
-            this.current.State?.Update();
+            this.current.State?.OnUpdate();
         }
 
-        public virtual void FixedUpdate()
+        public virtual void OnFixedUpdate()
         {
-            this.current.State?.FixedUpdate();
+            this.current.State?.OnFixedUpdate();
         }
 
         public virtual void OnExit()

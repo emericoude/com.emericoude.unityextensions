@@ -23,12 +23,12 @@ namespace Emericoude.StateMachines.Tests
             this.timer = this.Duration;
         }
 
-        public void Update()
+        public void OnUpdate()
         {
             this.timer -= Time.deltaTime;
         }
 
-        public void FixedUpdate()
+        public void OnFixedUpdate()
         {
         }
 
