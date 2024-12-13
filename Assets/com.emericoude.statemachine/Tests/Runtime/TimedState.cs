@@ -13,7 +13,11 @@ namespace Emericoude.StateMachines.Tests
         {
             this.Duration = duration;
         }
-        
+
+        public void OnInit()
+        {
+        }
+
         public void OnEnter()
         {
             this.timer = this.Duration;

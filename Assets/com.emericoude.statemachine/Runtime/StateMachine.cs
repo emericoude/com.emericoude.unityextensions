@@ -25,12 +25,20 @@ namespace Emericoude.StateMachines
             this.current = this.GetOrAddNode(defaultState);
         }
 
-        public void OnEnter()
+        public virtual void OnInit()
+        {
+            foreach (var node in this.nodes.Values)
+            {
+                node.State.OnInit();
+            }
+        }
+
+        public virtual void OnEnter()
         {
             this.current.State?.OnEnter();
         }
 
-        public void Update()
+        public virtual void Update()
         {
             if (this.TryEvaluateTransitions(out var transition))
             {
@@ -40,14 +48,21 @@ namespace Emericoude.StateMachines
             this.current.State?.Update();
         }
 
-        public void FixedUpdate()
+        public virtual void FixedUpdate()
         {
             this.current.State?.FixedUpdate();
         }
 
-        public void OnExit()
+        public virtual void OnExit()
         {
             this.current.State?.OnExit();
+        }
+        
+        /// <summary> Hard sets the current state. This does NOT exit the current state if there is one. </summary>
+        public void SetState<T>() where T : IState
+        {
+            this.current = this.nodes[typeof(T)];
+            this.current.State?.OnEnter();
         }
 
         /// <summary> Hard sets the current state. This does NOT exit the current state if there is one. </summary>
