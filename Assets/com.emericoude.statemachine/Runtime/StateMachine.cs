@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Emericoude.Attributes;
 
 namespace Emericoude.StateMachines
 {
@@ -7,6 +8,7 @@ namespace Emericoude.StateMachines
     /// At the current time, this tool is built mainly to be managed in code. The manager of the state machine should
     /// create the state machine and its states and its transitions. Although it is possible to make states which
     /// are MonoBehaviours for example. </summary>
+    [Serializable]
     public class StateMachine : IState
     {
         public delegate void OnStateChangedDelegate(IState from, IState to);
@@ -14,7 +16,9 @@ namespace Emericoude.StateMachines
         /// <summary> Invoked when a state change occurs. </summary>
         public event OnStateChangedDelegate OnStateChanged;
         
+        [DrawInDebugInfoBox]
         private StateNode current;
+        
         private readonly Dictionary<Type, StateNode> nodes = new();
         private readonly HashSet<ITransition> fromAnyTransitions = new();
 
@@ -88,6 +92,13 @@ namespace Emericoude.StateMachines
             this.OnStateChanged?.Invoke(previousState, nextState);
         }
 
+        /// <summary> Adds a state node to the state machine. You don't need to use this, you can use <see cref="AddTransition"/> directly. </summary>
+        /// <returns> The added state. </returns>
+        public IState AddState(IState state)
+        {
+            return this.GetOrAddNode(state).State;
+        }
+
         /// <summary> Add a transition from one state to another with a condition. This also registers states
         /// to the state machine if they aren't already. </summary>
         public void AddTransition(IState from, IState to, IPredicate condition)
@@ -139,9 +150,12 @@ namespace Emericoude.StateMachines
         }
         
         /// <summary> A wrapper containing a state and its transitions. </summary>
+        [Serializable]
         private class StateNode
         {
+            [DrawInDebugInfoBox]
             public IState State { get; }
+            [DrawInDebugInfoBox]
             public HashSet<ITransition> Transitions { get; }
 
             public StateNode(IState state)

@@ -13,7 +13,7 @@ namespace Emericoude.StateMachines.Tests
         [SerializeField] private TimedStateMono firstMonoState;
         [SerializeField] private TimedStateMono secondMonoState;
         
-        private StateMachine stateMachine;
+        [SerializeField] private StateMachine stateMachine;
         private StateMachine stateMachineUsingSerializedStates;
         private StateMachine hierarchicalStateMachine;
 
