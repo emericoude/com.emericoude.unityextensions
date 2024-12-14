@@ -17,11 +17,14 @@ namespace Emericoude.Gameplay.PawnController
         /// <summary> The owning controller. </summary>
         public Controller Controller { get; protected set; }
         
-        //TODO: vet this system
-        public InputActionMap ActionMap => actionMap;
-        
-        [Header("Settings")] 
-        [SerializeField] private InputActionMap actionMap;
+        internal InputActionAsset InputActionAsset => this.inputActionAsset;
+        internal string DefaultActionMap => this.defaultActionMap;
+
+        [Header("Settings")]
+        [Tooltip("Used by a PlayerController whose 'InputActionAssetPriority' is set to 'Pawn'. If assigned to this pawn, we will instead use this action asset and default map.")]
+        [SerializeField] private InputActionAsset inputActionAsset;
+        [Tooltip("Used by a PlayerController whose 'InputActionAssetPriority' is set to 'Pawn'. If assigned to this pawn, we will instead use this action asset and default map.")]
+        [SerializeField] private string defaultActionMap;
 
         /// <summary>
         /// Registers a <c>Controller</c> taking control of this pawn. <para/>
@@ -48,7 +51,7 @@ namespace Emericoude.Gameplay.PawnController
             this.OnUnpossessed?.Invoke(previousController);
         }
         
-        //TODO: vet this system
         public virtual void SetupInputActions(PlayerInput playerInput) { }
+        public virtual void ClearInputActions(PlayerInput playerInput) { }
     }
 }

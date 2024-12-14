@@ -6,7 +6,7 @@ namespace Emericoude.Gameplay.PawnController
     [SelectionBase, RequireComponent(typeof(PlayerInput))] 
     public class PlayerController : Controller
     {
-        enum InputMappingPriority
+        private enum InputActionAssetPriority
         {
             [Tooltip("The player manages input mapping.")]
             Player = 0,
@@ -22,15 +22,22 @@ namespace Emericoude.Gameplay.PawnController
         [Tooltip("The player's 'Player Input' component.")]
         [SerializeField] private PlayerInput playerInput;
         [Tooltip("Whether to prioritize input mapping management in the player or from pawns.")]
-        [SerializeField] private InputMappingPriority mappingPriority = InputMappingPriority.Player;
+        [SerializeField] private InputActionAssetPriority actionAssetPriority = InputActionAssetPriority.Player;
 
-        public PlayerInput Inputs => playerInput;
+        public PlayerInput Inputs => this.playerInput;
+
+        private InputActionAsset defaultPlayerActionAsset;
+
+        private void Awake()
+        {
+            this.defaultPlayerActionAsset = this.playerInput.actions;
+        }
 
         protected virtual void Start()
         {
-            if (defaultPawn != null)
+            if (this.defaultPawn != null)
             {
-                PossessPawn(defaultPawn);
+                this.PossessPawn(this.defaultPawn);
             }
         }
 
@@ -38,16 +45,25 @@ namespace Emericoude.Gameplay.PawnController
         {
             base.PossessPawn(pawn);
 
-            if (pawn.ActionMap != null)
+            if (this.actionAssetPriority == InputActionAssetPriority.Pawn && pawn.InputActionAsset != null)
             {
-                if (mappingPriority == InputMappingPriority.Pawn)
-                {
-                    playerInput.currentActionMap = pawn.ActionMap;
-                }
+                this.playerInput.actions = pawn.InputActionAsset;
+                this.playerInput.SwitchCurrentActionMap(pawn.DefaultActionMap);
             }
             
             this.SetupInputBindings();
             pawn.SetupInputActions(this.playerInput);
+        }
+        
+        public override void UnpossessCurrentPawn()
+        {
+            base.UnpossessCurrentPawn();
+            
+            if (this.actionAssetPriority == InputActionAssetPriority.Pawn && this.playerInput.actions != this.defaultPlayerActionAsset)
+            {
+                this.playerInput.actions = this.defaultPlayerActionAsset;
+                this.playerInput.SwitchCurrentActionMap(this.playerInput.defaultActionMap);
+            }
         }
 
         protected virtual void SetupInputBindings() { }

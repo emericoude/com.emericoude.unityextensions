@@ -44,8 +44,8 @@ namespace Emericoude.Gameplay.PawnController
             var previousPawn = this.Pawn;
             this.Pawn.UnregisterPossessingController();
             this.Pawn = null;
-            
-            OnUnpossessPawn?.Invoke(previousPawn);
+
+            this.OnUnpossessPawn?.Invoke(previousPawn);
         }
     }
 }
