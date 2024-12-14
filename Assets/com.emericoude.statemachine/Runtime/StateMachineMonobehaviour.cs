@@ -4,13 +4,29 @@ using UnityEngine;
 
 namespace Emericoude.StateMachines
 {
-    public abstract class StateMachineMonoBehaviour : MonoBehaviour, IState
+    public abstract class StateMachineMonoBehaviour : StateMonoBehaviour
     {
         public StateMachine StateMachine { get; } = new();
-        public virtual void OnInit() => this.StateMachine.OnInit();
-        public virtual void OnEnter() => this.StateMachine.OnEnter();
-        public virtual void OnUpdate() => this.StateMachine.OnUpdate();
-        public virtual void OnFixedUpdate() => this.StateMachine.OnFixedUpdate();
-        public virtual void OnExit() => this.StateMachine.OnExit();
+
+        public override void OnInit()
+        {
+            this.StateMachine.OnInit();
+            this.enabled = this.IsActive;
+        }
+
+        public override void OnEnter()
+        {
+            this.SetActiveAndEnabled(true);
+            this.StateMachine.OnEnter();
+        }
+        
+        public override void OnUpdate() => this.StateMachine.OnUpdate();
+        public override void OnFixedUpdate() => this.StateMachine.OnFixedUpdate();
+
+        public override void OnExit()
+        {
+            this.StateMachine.OnExit();
+            this.SetActiveAndEnabled(false);
+        }
     }
 }
