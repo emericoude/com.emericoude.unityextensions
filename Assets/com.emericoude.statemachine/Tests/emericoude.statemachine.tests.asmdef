@@ -2,7 +2,8 @@
     "name": "emericoude.statemachine.tests",
     "rootNamespace": "Emericoude.StateMachines.Tests",
     "references": [
-        "GUID:fe0759937037c15449df0b70d41a857b"
+        "GUID:fe0759937037c15449df0b70d41a857b",
+        "GUID:138d2d27ffdc72340b421282d1704db2"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Emericoude.Attributes;
 
 namespace Emericoude.StateMachines
 {
@@ -8,7 +7,6 @@ namespace Emericoude.StateMachines
     /// At the current time, this tool is built mainly to be managed in code. The manager of the state machine should
     /// create the state machine and its states and its transitions. Although it is possible to make states which
     /// are MonoBehaviours for example. </summary>
-    [Serializable]
     public class StateMachine : IState
     {
         public delegate void OnStateChangedDelegate(IState from, IState to);
@@ -16,11 +14,9 @@ namespace Emericoude.StateMachines
         /// <summary> Invoked when a state change occurs. </summary>
         public event OnStateChangedDelegate OnStateChanged;
         
-        [DrawInDebugInfoBox]
-        private StateNode current;
-        
         private readonly Dictionary<Type, StateNode> nodes = new();
         private readonly HashSet<ITransition> fromAnyTransitions = new();
+        private StateNode current;
 
         public StateMachine() { }
         
@@ -150,12 +146,9 @@ namespace Emericoude.StateMachines
         }
         
         /// <summary> A wrapper containing a state and its transitions. </summary>
-        [Serializable]
         private class StateNode
         {
-            [DrawInDebugInfoBox]
             public IState State { get; }
-            [DrawInDebugInfoBox]
             public HashSet<ITransition> Transitions { get; }
 
             public StateNode(IState state)

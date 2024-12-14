@@ -1,4 +1,5 @@
 using Sirenix.OdinInspector;
+using Emericoude.Attributes;
 using UnityEngine;
 
 namespace Emericoude.StateMachines.Tests
@@ -13,8 +14,11 @@ namespace Emericoude.StateMachines.Tests
         [SerializeField] private TimedStateMono firstMonoState;
         [SerializeField] private TimedStateMono secondMonoState;
         
-        [SerializeField] private StateMachine stateMachine;
+        private StateMachine stateMachine;
         private StateMachine stateMachineUsingSerializedStates;
+        
+        [DrawFieldOnly, SerializeField] 
+        [BoxGroup("State Machine"), HideLabel]
         private StateMachine hierarchicalStateMachine;
 
         private bool wasSwapInvokedThisFrame = false;
@@ -73,17 +77,17 @@ namespace Emericoude.StateMachines.Tests
 
         private void Update()
         {
-            this.stateMachine?.OnUpdate();
-            this.stateMachineUsingSerializedStates?.OnUpdate();
-            this.hierarchicalStateMachine?.OnUpdate();
+            if (this.testFiniteSFM) this.stateMachine?.OnUpdate();
+            if (this.testFiniteSFMSerialized) this.stateMachineUsingSerializedStates?.OnUpdate();
+            if (this.testHierarchicalSFM) this.hierarchicalStateMachine?.OnUpdate();
             this.wasSwapInvokedThisFrame = false;
         }
 
         private void FixedUpdate()
         {
-            this.stateMachine?.OnFixedUpdate();
-            this.stateMachineUsingSerializedStates?.OnFixedUpdate();
-            this.hierarchicalStateMachine?.OnFixedUpdate();
+            if (this.testFiniteSFM) this.stateMachine?.OnFixedUpdate();
+            if (this.testFiniteSFMSerialized) this.stateMachineUsingSerializedStates?.OnFixedUpdate();
+            if (this.testHierarchicalSFM) this.hierarchicalStateMachine?.OnFixedUpdate();
         }
 
         private void OnStateChanged(IState from, IState to)
