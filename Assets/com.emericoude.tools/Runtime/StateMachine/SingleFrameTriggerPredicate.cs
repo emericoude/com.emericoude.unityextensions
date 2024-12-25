@@ -3,7 +3,9 @@ using Cysharp.Threading.Tasks;
 
 namespace Emericoude.StateMachine
 {
+    #if CYSHARP_UNITASK
     /// <summary> A trigger that will unset itself on the next frame, if it is evaluated as true. </summary>
+    /// <remarks> REQUIRES UNITASK. </remarks>
     public class SingleFrameTriggerPredicate : IPredicate, ITrigger
     {
         public bool IsTriggered { get; private set; }
@@ -30,4 +32,5 @@ namespace Emericoude.StateMachine
             this.ResetTrigger();
         }
     }
+    #endif
 }

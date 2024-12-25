@@ -32,6 +32,11 @@
             "name": "com.unity.inputsystem",
             "expression": "",
             "define": "INPUT_SYSTEM"
+        },
+        {
+            "name": "com.cysharp.unitask",
+            "expression": "",
+            "define": "CYSHARP_UNITASK"
         }
     ],
     "noEngineReferences": false

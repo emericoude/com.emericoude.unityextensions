@@ -1,15 +1,12 @@
 {
     "name": "com.emericoude.tools",
     "displayName": "Emeric's Tools for Unity",
-    "version": "3.0.5",
+    "version": "3.0.6",
     "unity": "2022.3",
     "description": "Emeric's tools, helpers and components for Unity. Now all packaged in one (previously emericoude.unityextensions).",
     "author": {
         "name": "Emeric Coude",
         "email": "emericmax9@hotmail.com",
         "url": "https://github.com/emericoude"
-    },
-    "dependencies": {
-        "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask#2.5.10"
     }
 }
