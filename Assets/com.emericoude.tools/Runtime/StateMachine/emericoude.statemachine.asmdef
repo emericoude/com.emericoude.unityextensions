@@ -2,7 +2,8 @@
     "name": "emericoude.statemachine",
     "rootNamespace": "Emericoude.StateMachine",
     "references": [
-        "GUID:138d2d27ffdc72340b421282d1704db2"
+        "GUID:138d2d27ffdc72340b421282d1704db2",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
