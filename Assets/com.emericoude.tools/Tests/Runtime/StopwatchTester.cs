@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Emericoude.Tests
 {
-	public class StopwatchTester : MonoBehaviour
+	public abstract class StopwatchTester : MonoBehaviour
 	{
 		public bool runOnstart = false;
 		public int iterationCount = 100000;
@@ -21,7 +21,10 @@ namespace Emericoude.Tests
 		{
 			Stopwatch timer = Stopwatch.StartNew();
 
-			//write test here
+			for (int i = 0; i < this.iterationCount; i++)
+			{
+				TestOne();
+			}
 
 			timer.Stop();
 			UnityEngine.Debug.Log("Time taken for the operation (1): " + timer.ElapsedMilliseconds + " milliseconds");
@@ -32,7 +35,10 @@ namespace Emericoude.Tests
 		{
 			Stopwatch timer = Stopwatch.StartNew();
 
-			//write test here
+			for (int i = 0; i < this.iterationCount; i++)
+			{
+				TestTwo();
+			}
 		
 			timer.Stop();
 			UnityEngine.Debug.Log("Time taken for the operation (2): " + timer.ElapsedMilliseconds + " milliseconds");
@@ -43,10 +49,17 @@ namespace Emericoude.Tests
 		{
 			Stopwatch timer = Stopwatch.StartNew();
 
-			//write test here
-		
+			for (int i = 0; i < this.iterationCount; i++)
+			{
+				TestThree();
+			}
+			
 			timer.Stop();
 			UnityEngine.Debug.Log("Time taken for the operation (3): " + timer.ElapsedMilliseconds + " milliseconds");
 		}
+		
+		public abstract void TestOne();
+		public abstract void TestTwo();
+		public abstract void TestThree();
 	}
 }
