@@ -1,0 +1,18 @@
+{
+    "name": "emericoude.tests",
+    "rootNamespace": "Emericoude.Tests",
+    "references": [
+        "GUID:fe0759937037c15449df0b70d41a857b",
+        "GUID:138d2d27ffdc72340b421282d1704db2",
+        "GUID:6d140fe0283fc5545abcf2bf6185911b"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

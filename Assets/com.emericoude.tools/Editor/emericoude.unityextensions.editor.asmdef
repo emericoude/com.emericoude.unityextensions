@@ -1,0 +1,18 @@
+{
+    "name": "emericoude.unityextensions.editor",
+    "rootNamespace": "Emericoude.Editor",
+    "references": [
+        "GUID:138d2d27ffdc72340b421282d1704db2",
+        "GUID:6d140fe0283fc5545abcf2bf6185911b",
+        "GUID:75469ad4d38634e559750d17036d5f7c"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
