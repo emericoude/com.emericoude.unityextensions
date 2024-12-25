@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using Cysharp.Threading.Tasks;
-
-namespace Emericoude.StateMachine
+﻿namespace Emericoude.StateMachine
 {
     #if CYSHARP_UNITASK
+    using Cysharp.Threading.Tasks;
+    
     /// <summary> A trigger that will unset itself on the next frame, if it is evaluated as true. </summary>
     /// <remarks> REQUIRES UNITASK. </remarks>
     public class SingleFrameTriggerPredicate : IPredicate, ITrigger

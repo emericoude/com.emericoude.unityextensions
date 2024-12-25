@@ -6,10 +6,12 @@ namespace Emericoude.Tests
 {
     public class TriggerPredicateTests : MonoBehaviour
     {
+#if CYSHARP_UNITTASK
         [SerializeField] private float triggerDelay = 2f;
         private float timer;
         
         private SingleUseTriggerPredicate singleUseTriggerPredicate = new();
+        
         private SingleFrameTriggerPredicate singleFrameTriggerPredicate = new();
 
         private void Awake()
@@ -32,5 +34,6 @@ namespace Emericoude.Tests
             Debug.Log($"Evaluate 1: frame: {singleFrameTriggerPredicate.Evaluate()}, single: {singleUseTriggerPredicate.Evaluate()}");
             Debug.Log($"Evaluate 2: frame: {singleFrameTriggerPredicate.Evaluate()}, single: {singleUseTriggerPredicate.Evaluate()}");
         }
+#endif
     }
 }
