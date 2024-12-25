@@ -1,6 +1,9 @@
 using Emericoude.Framework;
 
-public class TestSingleton : PersistentSingleton<TestSingleton>
+namespace Emericoude.Tests
 {
+    public class TestSingleton : PersistentSingleton<TestSingleton>
+    {
     
+    }
 }

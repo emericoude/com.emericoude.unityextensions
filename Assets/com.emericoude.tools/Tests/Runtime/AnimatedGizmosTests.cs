@@ -4,39 +4,43 @@ using Emericoude.Attributes;
 using Emericoude.Helpers;
 using UnityEngine;
 
-public class AnimatedGizmosTests : MonoBehaviour
+namespace Emericoude.Tests
 {
-	[Header("Curve field")]
-	[BetterCurveField]
-	[SerializeField] AnimationCurve Curve;
-
-	[Header("Sphere Cast")]
-	public List<SphereCastParameters> sphereCastParameters = new List<SphereCastParameters>();
-
-	private void OnEnable ()
+	public class AnimatedGizmosTests : MonoBehaviour
 	{
-		AnimatedGizmos.Enabled = true;
-	}
+		[Header("Curve field")]
+		[BetterCurveField]
+		[SerializeField] AnimationCurve Curve;
 
-	private void OnDisable ()
-	{
-		AnimatedGizmos.Enabled = false;
-	}
+		[Header("Sphere Cast")]
+		public List<SphereCastParameters> sphereCastParameters = new List<SphereCastParameters>();
 
-	private void OnDrawGizmos ()
-	{
-		foreach (var sphereCastParam in this.sphereCastParameters)
+		private void OnEnable ()
 		{
-			if (sphereCastParam.wired) GizmosHelpers.DrawWireSphereCast(transform.position, transform.localScale.LargestComponent(), sphereCastParam.direction, out RaycastHit hit, sphereCastParam.maxDistance);
-			else GizmosHelpers.DrawSphereCast(transform.position, transform.localScale.LargestComponent(), sphereCastParam.direction, out RaycastHit hit, sphereCastParam.maxDistance);
+			AnimatedGizmos.Enabled = true;
+		}
+
+		private void OnDisable ()
+		{
+			AnimatedGizmos.Enabled = false;
+		}
+
+		private void OnDrawGizmos ()
+		{
+			foreach (var sphereCastParam in this.sphereCastParameters)
+			{
+				if (sphereCastParam.wired) GizmosHelpers.DrawWireSphereCast(transform.position, transform.localScale.LargestComponent(), sphereCastParam.direction, out RaycastHit hit, sphereCastParam.maxDistance);
+				else GizmosHelpers.DrawSphereCast(transform.position, transform.localScale.LargestComponent(), sphereCastParam.direction, out RaycastHit hit, sphereCastParam.maxDistance);
+			}
 		}
 	}
+
+	[Serializable]
+	public class SphereCastParameters
+	{
+		public bool wired = false;
+		public Vector3 direction = Vector3.forward;
+		public float maxDistance = 100.0f;
+	}
 }
 
-[Serializable]
-public class SphereCastParameters
-{
-	public bool wired = false;
-	public Vector3 direction = Vector3.forward;
-	public float maxDistance = 100.0f;
-}

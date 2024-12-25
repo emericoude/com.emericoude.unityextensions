@@ -1,8 +1,9 @@
-using Sirenix.OdinInspector;
 using Emericoude.Attributes;
+using Emericoude.StateMachine;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Emericoude.StateMachine.Tests
+namespace Emericoude.Tests
 {
     [RequireComponent(typeof(FirstStateMonoTest), typeof(SecondStateMonoTest))]
     public class StateMachineTest : MonoBehaviour
@@ -14,12 +15,12 @@ namespace Emericoude.StateMachine.Tests
         [SerializeField] private TimedStateMono firstMonoState;
         [SerializeField] private TimedStateMono secondMonoState;
         
-        private StateMachine stateMachine;
-        private StateMachine stateMachineUsingSerializedStates;
+        private StateMachine.StateMachine stateMachine;
+        private StateMachine.StateMachine stateMachineUsingSerializedStates;
         
         [DrawFieldOnly, SerializeField] 
         [BoxGroup("State Machine"), HideLabel]
-        private StateMachine hierarchicalStateMachine;
+        private StateMachine.StateMachine hierarchicalStateMachine;
 
         private bool wasSwapInvokedThisFrame = false;
 
@@ -27,7 +28,7 @@ namespace Emericoude.StateMachine.Tests
         {
             if (this.testFiniteSFM)
             {
-                this.stateMachine = new StateMachine();
+                this.stateMachine = new StateMachine.StateMachine();
                 this.stateMachine.OnStateChanged += this.OnStateChanged;
                 var firstTimedState = new FirstStateTest(this.stateDuration);
                 var secondTimedState = new SecondStateTest(this.stateDuration);
@@ -38,7 +39,7 @@ namespace Emericoude.StateMachine.Tests
             
             if (this.testFiniteSFMSerialized)
             {
-                this.stateMachineUsingSerializedStates = new StateMachine();
+                this.stateMachineUsingSerializedStates = new StateMachine.StateMachine();
                 this.stateMachineUsingSerializedStates.OnStateChanged += this.OnStateChanged;
                 this.stateMachineUsingSerializedStates.AddTransition(this.firstMonoState, this.secondMonoState, new FuncPredicate(() => this.firstMonoState.IsTimerExpired()));
                 this.stateMachineUsingSerializedStates.AddTransition(this.secondMonoState, this.firstMonoState, new FuncPredicate(() => this.secondMonoState.IsTimerExpired()));
@@ -47,7 +48,7 @@ namespace Emericoude.StateMachine.Tests
             
             if (this.testHierarchicalSFM)
             {
-                this.hierarchicalStateMachine = new StateMachine();
+                this.hierarchicalStateMachine = new StateMachine.StateMachine();
                 
                 var firstParentState = new FirstParentState();
                 var firstParentChildOne = new FirstStateTest(this.stateDuration);

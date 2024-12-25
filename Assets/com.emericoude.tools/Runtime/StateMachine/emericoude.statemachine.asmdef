@@ -1,6 +1,6 @@
 {
     "name": "emericoude.statemachine",
-    "rootNamespace": "Emericoude.StateMachines",
+    "rootNamespace": "Emericoude.StateMachine",
     "references": [
         "GUID:138d2d27ffdc72340b421282d1704db2"
     ],

@@ -1,4 +1,4 @@
-﻿namespace Emericoude.StateMachine.Tests
+﻿namespace Emericoude.Tests
 {
     public class FirstStateMonoTest : TimedStateMono
     {

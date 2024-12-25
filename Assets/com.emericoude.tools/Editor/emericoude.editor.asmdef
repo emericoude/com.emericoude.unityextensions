@@ -1,5 +1,5 @@
 {
-    "name": "emericoude.unityextensions.editor",
+    "name": "emericoude.editor",
     "rootNamespace": "Emericoude.Editor",
     "references": [
         "GUID:138d2d27ffdc72340b421282d1704db2",

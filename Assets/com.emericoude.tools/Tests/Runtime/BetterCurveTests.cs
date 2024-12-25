@@ -1,13 +1,16 @@
 using Emericoude.Attributes;
 using UnityEngine;
 
-public class BetterCurveTests : MonoBehaviour
+namespace Emericoude.Tests
 {
-    public AnimationCurve defaultCurve;
+    public class BetterCurveTests : MonoBehaviour
+    {
+        public AnimationCurve defaultCurve;
 
-    [BetterCurveField]
-    public AnimationCurve improvedCurve;
+        [BetterCurveField]
+        public AnimationCurve improvedCurve;
 
-    [BetterCurveField( "Time", "Force")] 
-    public AnimationCurve improvedCurvePlus;
+        [BetterCurveField( "Time", "Force")] 
+        public AnimationCurve improvedCurvePlus;
+    }
 }

@@ -1,6 +1,6 @@
-﻿namespace Emericoude.StateMachine.Tests
+﻿namespace Emericoude.Tests
 {
-    public class SecondParentState : StateMachine
+    public class SecondParentState : StateMachine.StateMachine
     {
         
     }

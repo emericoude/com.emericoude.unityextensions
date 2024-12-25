@@ -1,49 +1,52 @@
 using System.Diagnostics;
 using UnityEngine;
 
-public class StopwatchTester : MonoBehaviour
+namespace Emericoude.Tests
 {
-	public bool runOnstart = false;
-	public int iterationCount = 100000;
-
-	void Start ()
+	public class StopwatchTester : MonoBehaviour
 	{
-		if (!runOnstart) return;
-		PerformIteration_One();
-		PerformIteration_Two();
-		PerformIteration_Three();
-	}
+		public bool runOnstart = false;
+		public int iterationCount = 100000;
 
-	[ContextMenu("Perform iteration 1")]
-	public void PerformIteration_One ()
-	{
-		Stopwatch timer = Stopwatch.StartNew();
+		void Start ()
+		{
+			if (!runOnstart) return;
+			PerformIteration_One();
+			PerformIteration_Two();
+			PerformIteration_Three();
+		}
 
-		//write test here
+		[ContextMenu("Perform iteration 1")]
+		public void PerformIteration_One ()
+		{
+			Stopwatch timer = Stopwatch.StartNew();
 
-		timer.Stop();
-		UnityEngine.Debug.Log("Time taken for the operation (1): " + timer.ElapsedMilliseconds + " milliseconds");
-	}
+			//write test here
 
-	[ContextMenu("Perform iteration 2")]
-	public void PerformIteration_Two ()
-	{
-		Stopwatch timer = Stopwatch.StartNew();
+			timer.Stop();
+			UnityEngine.Debug.Log("Time taken for the operation (1): " + timer.ElapsedMilliseconds + " milliseconds");
+		}
 
-		//write test here
+		[ContextMenu("Perform iteration 2")]
+		public void PerformIteration_Two ()
+		{
+			Stopwatch timer = Stopwatch.StartNew();
+
+			//write test here
 		
-		timer.Stop();
-		UnityEngine.Debug.Log("Time taken for the operation (2): " + timer.ElapsedMilliseconds + " milliseconds");
-	}
+			timer.Stop();
+			UnityEngine.Debug.Log("Time taken for the operation (2): " + timer.ElapsedMilliseconds + " milliseconds");
+		}
 	
-	[ContextMenu("Perform iteration 3")]
-	public void PerformIteration_Three ()
-	{
-		Stopwatch timer = Stopwatch.StartNew();
+		[ContextMenu("Perform iteration 3")]
+		public void PerformIteration_Three ()
+		{
+			Stopwatch timer = Stopwatch.StartNew();
 
-		//write test here
+			//write test here
 		
-		timer.Stop();
-		UnityEngine.Debug.Log("Time taken for the operation (3): " + timer.ElapsedMilliseconds + " milliseconds");
+			timer.Stop();
+			UnityEngine.Debug.Log("Time taken for the operation (3): " + timer.ElapsedMilliseconds + " milliseconds");
+		}
 	}
 }

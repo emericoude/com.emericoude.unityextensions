@@ -3,16 +3,19 @@ using Emericoude.Collections;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-public class LootTableTests : MonoBehaviour
+namespace Emericoude.Tests
 {
-    [Serializable, HideLabel]
-    public struct TestStruct
+    public class LootTableTests : MonoBehaviour
     {
-        [TextArea]
-        public string text;
-        [Range(0, 1f)]
-        public float number;
-    }
+        [Serializable, HideLabel]
+        public struct TestStruct
+        {
+            [TextArea]
+            public string text;
+            [Range(0, 1f)]
+            public float number;
+        }
     
-    public LootTable<TestStruct> lootTableTest = new LootTable<TestStruct>();
+        public LootTable<TestStruct> lootTableTest = new LootTable<TestStruct>();
+    }
 }

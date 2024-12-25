@@ -1,6 +1,7 @@
+using Emericoude.Pawns;
 using UnityEngine;
 
-namespace Emericoude.Pawns.Tests
+namespace Emericoude.Tests
 {
     public class TestPawn : Pawn
     {

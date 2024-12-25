@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Emericoude.StateMachine;
+using UnityEngine;
 
-namespace Emericoude.StateMachine.Tests
+namespace Emericoude.Tests
 {
     public class TimedStateMono : MonoBehaviour, IState
     {
