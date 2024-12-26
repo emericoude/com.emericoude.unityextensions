@@ -4,6 +4,8 @@ using Emericoude.StateMachine;
 
 namespace Emericoude.CustomEditors
 {
+    //TODO: make a custom drawer for state machine instead.
+    
     [CustomEditor(typeof(StateMachineMonoBehaviour), true)]
     public class StateMachineMonoBehaviourEditor : UnityEditor.Editor
     {
@@ -42,29 +44,16 @@ namespace Emericoude.CustomEditors
                 {
                     var fromState = node.Key.Name;
                     var toState = transition.To.GetType().Name;
-                    var isConditionMet = transition.Condition.Evaluate();
-                    var isFromStateCurrent = node.Key == currentState.State.GetType();
-                    var isToStateCurrent = transition.To.GetType() == currentState.State.GetType();
-                    var fromStateColorRich = isFromStateCurrent ? "green" : "white";
-                    var toStateColorRich = isToStateCurrent ? "green" : "white";
+                    var fromStateColorRich =  node.Key == currentState.State.GetType() ? "green" : "white";
+                    var toStateColorRich = transition.To.GetType() == currentState.State.GetType() ? "green" : "white";
                     
                     EditorGUILayout.LabelField($"<color={fromStateColorRich}>{fromState}</color> " +
-                                               $"-> <color={toStateColorRich}>{toState}</color>  " +
-                                               $":  <b>{isConditionMet}</b>", 
+                                               $"-> <color={toStateColorRich}>{toState}</color>",
                                                 transitionStyle);
                 }
             }
             
             EditorGUILayout.EndVertical();
-
-            if (Application.isPlaying)
-            {
-                //Force a repaint
-                Repaint();
-                
-                //Force queue a player loop update to refresh the inspector
-                EditorApplication.QueuePlayerLoopUpdate();
-            }
         }
     }
 }
