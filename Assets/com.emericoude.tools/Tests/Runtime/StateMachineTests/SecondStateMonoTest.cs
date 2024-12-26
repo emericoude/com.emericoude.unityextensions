@@ -1,9 +1,10 @@
-﻿namespace Emericoude.Tests
+﻿using UnityEngine;
+
+namespace Emericoude.Tests
 {
     public class SecondStateMonoTest : TimedStateMono
     {
-        public SecondStateMonoTest(float duration) : base(duration)
-        {
-        }
+        [TextArea]
+        [SerializeField] private string dummy;
     }
 }

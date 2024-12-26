@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace Emericoude.StateMachine
+﻿namespace Emericoude.StateMachine
 {
     public abstract class StateMachineMonoBehaviour : StateMonoBehaviour
     {

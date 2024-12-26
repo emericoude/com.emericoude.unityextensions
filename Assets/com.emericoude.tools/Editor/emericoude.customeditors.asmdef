@@ -1,10 +1,11 @@
 {
-    "name": "emericoude.editor",
-    "rootNamespace": "Emericoude.Editor",
+    "name": "emericoude.customeditors",
+    "rootNamespace": "Emericoude.CustomEditors",
     "references": [
         "GUID:138d2d27ffdc72340b421282d1704db2",
         "GUID:6d140fe0283fc5545abcf2bf6185911b",
-        "GUID:75469ad4d38634e559750d17036d5f7c"
+        "GUID:75469ad4d38634e559750d17036d5f7c",
+        "GUID:fe0759937037c15449df0b70d41a857b"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

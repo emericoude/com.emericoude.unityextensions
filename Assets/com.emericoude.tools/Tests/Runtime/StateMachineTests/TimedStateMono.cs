@@ -1,40 +1,31 @@
 ﻿using Emericoude.StateMachine;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Emericoude.Tests
 {
-    public class TimedStateMono : MonoBehaviour, IState
+    public class TimedStateMono : StateMonoBehaviour
     {
         public bool IsTimerExpired() => this.timer <= 0f;
         
-        public float Duration;
+        [SerializeField] private float duration = 2f;
         private float timer;
 
-        public TimedStateMono(float duration)
+        public override void OnEnter()
         {
-            this.Duration = duration;
+            base.OnEnter();
+            this.timer = duration;
         }
 
-        public void OnInit()
-        {
-        }
-
-        public void OnEnter()
-        {
-            this.timer = this.Duration;
-        }
-
-        public void OnUpdate()
+        public override void OnUpdate()
         {
             this.timer -= Time.deltaTime;
         }
 
-        public void OnFixedUpdate()
+        public override void OnExit()
         {
-        }
-
-        public void OnExit()
-        {
+            base.OnExit();
+            this.timer = duration;
         }
     }
 }

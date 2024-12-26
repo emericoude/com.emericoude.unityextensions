@@ -145,22 +145,8 @@ namespace Emericoude.StateMachine
             return node;
         }
         
-        /// <summary> A wrapper containing a state and its transitions. </summary>
-        private class StateNode
-        {
-            public IState State { get; }
-            public HashSet<ITransition> Transitions { get; }
-
-            public StateNode(IState state)
-            {
-                this.State = state;
-                this.Transitions = new HashSet<ITransition>();
-            }
-
-            public void AddTransition(IState to, IPredicate condition)
-            {
-                this.Transitions.Add(new Transition(to, condition));
-            }
-        }
+        public Dictionary<Type, StateNode> GetNodes() => this.nodes;
+        public HashSet<ITransition> GetFromAnyTransitions() => this.fromAnyTransitions;
+        public StateNode GetActiveNode() => this.current;
     }
 }

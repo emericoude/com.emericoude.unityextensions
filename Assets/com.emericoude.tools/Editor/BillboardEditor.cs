@@ -2,7 +2,7 @@ using Emericoude.UI;
 using UnityEditor;
 using UnityEngine;
 
-namespace Emericoude.EditorExtensions
+namespace Emericoude.CustomEditors
 {
     [CustomEditor(typeof(Billboard))]
     public class BillboardEditor : Editor

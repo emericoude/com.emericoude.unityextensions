@@ -4,7 +4,7 @@ using Emericoude.Helpers;
 using UnityEditor;	
 using UnityEngine;
 
-namespace Emericoude.EditorExtensions
+namespace Emericoude.CustomEditors
 {
 	[CustomPropertyDrawer(typeof(BetterCurveFieldAttribute))]
 	public class BetterCurveDrawer : PropertyDrawer

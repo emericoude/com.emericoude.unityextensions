@@ -1,11 +1,11 @@
 ﻿using UnityEditor;
-using UnityEngine;
 using UnityEngine.InputSystem;
+using Emericoude.Pawns;
 
-namespace Emericoude.Pawns.Editor
+namespace Emericoude.CustomEditors
 {
     [CustomEditor(typeof(Pawn), true)]
-    public class PawnEditor : UnityEditor.Editor
+    public class PawnEditor : Editor
     {
         public override void OnInspectorGUI()
         {
