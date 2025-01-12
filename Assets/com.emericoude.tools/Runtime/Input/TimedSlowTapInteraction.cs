@@ -3,10 +3,10 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
 
-#if UNITY_EDITOR
+#if ODIN_INSPECTOR
 using Sirenix.OdinInspector;
 #endif
-#if ODIN_INSPECTOR
+#if UNITY_EDITOR
 using UnityEditor;
 #endif
 

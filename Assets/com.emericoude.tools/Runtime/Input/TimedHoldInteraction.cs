@@ -3,10 +3,11 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
 
-#if UNITY_EDITOR
+#if ODIN_INSPECTOR
 using Sirenix.OdinInspector;
 #endif
-#if ODIN_INSPECTOR
+
+#if UNITY_EDITOR
 using UnityEditor;
 #endif
 
@@ -18,9 +19,9 @@ namespace Emericoude.Inputs
     /// - Performed: When and after the <see cref="EntryDuration"/> has been reached. <br/>
     /// - Canceled: If the input was released, or the <see cref="ExitDuration"/> has been reached.
     /// </summary>
-#if UNITY_EDITOR
+    #if UNITY_EDITOR
     [InitializeOnLoad]
-#endif
+    #endif
     [DisplayName("Hold With Maximum Duration")]
     public class TimedHoldInteraction : IInputInteraction
     {
