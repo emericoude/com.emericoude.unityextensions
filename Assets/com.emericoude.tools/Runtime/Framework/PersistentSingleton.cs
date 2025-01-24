@@ -9,7 +9,7 @@ namespace Emericoude.Framework
         protected override bool SingletonInitialization()
         {
             if (!base.SingletonInitialization()) return false;
-            
+            this.transform.SetParent(null);
             DontDestroyOnLoad(this);
             return true;
         }
