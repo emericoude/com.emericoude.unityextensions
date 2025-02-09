@@ -49,5 +49,20 @@ namespace Emericoude.Helpers
 		{
 			return (a.DistanceSqr(b) <= tolerance);
 		}
+		
+		/// <summary> Rotates a point in space around a pivot. </summary>
+		/// <returns> The point rotated in space around the pivot by the given angles. </returns>
+		public static Vector3 RotateAroundPivot(this Vector3 point, Vector3 pivot, Vector3 eulerAngles)
+		{
+			return RotateAroundPivot(point, pivot, Quaternion.Euler(eulerAngles));
+		}
+
+		/// <summary> Rotates a point in space around a pivot. </summary>
+		/// <returns> The point rotated in space around the pivot by the given rotation. </returns>
+		public static Vector3 RotateAroundPivot(this Vector3 point, Vector3 pivot, Quaternion rotation)
+		{
+			Vector3 direction = point - pivot;
+			return pivot + rotation * direction;
+		}
     }
 }
