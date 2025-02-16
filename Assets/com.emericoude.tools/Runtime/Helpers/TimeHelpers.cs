@@ -6,8 +6,10 @@ namespace Emericoude.Helpers
 	{
 		DeltaTime,
 		DeltaTimeUnscaled,
+		DeltaTimeUnscaledExceptPause,
 		FixedDeltaTime,
-		FixedDeltaTimeUnscaled
+		FixedDeltaTimeUnscaled,
+		FixedDeltaTimeUnscaledExceptPause
 	}
 
 	public static class TimeHelpers
@@ -17,9 +19,11 @@ namespace Emericoude.Helpers
 			return deltaTimeScale switch
 			{
 				DeltaTimeScale.DeltaTime => Time.deltaTime,
-				DeltaTimeScale.DeltaTimeUnscaled => Time.unscaledDeltaTime,
+				DeltaTimeScale.DeltaTimeUnscaled =>  Time.unscaledDeltaTime,
+				DeltaTimeScale.DeltaTimeUnscaledExceptPause => Time.timeScale == 0 ? 0 : Time.unscaledDeltaTime,
 				DeltaTimeScale.FixedDeltaTime => Time.fixedDeltaTime,
 				DeltaTimeScale.FixedDeltaTimeUnscaled => Time.fixedUnscaledDeltaTime,
+				DeltaTimeScale.FixedDeltaTimeUnscaledExceptPause => Time.timeScale == 0 ? 0 : Time.fixedUnscaledDeltaTime,
 				_ => Time.deltaTime
 			};
 		}
