@@ -62,9 +62,15 @@ namespace Emericoude
             }
         }
 
+        private void OnDestroy()
+        {
+            Time.timeScale = 1.0f;
+            Time.fixedDeltaTime = this.defaultFixedDeltaTime;
+        }
+
         private void ResolveTimeEffects() {
             if (this.noNameTimeEffects.Count == 0 && this.namedTimeEffects.Count == 0) {
-                Time.timeScale = 1;
+                Time.timeScale = 1.0f;
                 return;
             }
 
