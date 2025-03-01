@@ -25,7 +25,7 @@ namespace Emericoude
         public TimeEffect(float timeScale, AnimationCurve curve, DeltaTimeScale deltaTime = DeltaTimeScale.DeltaTimeUnscaledExceptPause, int priority = 0) {
             this.priority = priority;
             this.duration = -1;
-            this.infinite = false;
+            this.infinite = true;
             this.timeScale = timeScale;
             this.deltaTime = deltaTime;
             this.curve = curve;
@@ -34,7 +34,7 @@ namespace Emericoude
         /// <summary> Use this constructor for effects you want to stop automatically. </summary>
         public TimeEffect(float duration, float timeScale, AnimationCurve curve, DeltaTimeScale deltaTime = DeltaTimeScale.DeltaTimeUnscaledExceptPause, int priority = 0) {
             this.priority = priority;
-            this.duration = -1;
+            this.duration = duration;
             this.infinite = false;
             this.timeScale = timeScale;
             this.deltaTime = deltaTime;
