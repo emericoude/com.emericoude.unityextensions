@@ -145,6 +145,7 @@ namespace Emericoude.StateMachine
             return node;
         }
         
+        public IState TryGetState<T>() where T : IState => this.nodes.TryGetValue(typeof(T), out var node) ? node.State : null;
         public Dictionary<Type, StateNode> GetNodes() => this.nodes;
         public HashSet<ITransition> GetFromAnyTransitions() => this.fromAnyTransitions;
         public StateNode GetActiveNode() => this.current;
