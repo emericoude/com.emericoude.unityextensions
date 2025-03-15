@@ -18,6 +18,13 @@ namespace Emericoude.Helpers
 			return Mathf.Min(vector.x, vector.y, vector.z);
 		}
 
+		/// <summary>Finds the average of all three components.</summary>
+		/// <returns>The average of <paramref name="vector"/>'s X, Y and Z components.</returns>
+		public static float AverageComponents(this Vector3 vector)
+		{
+			return (vector.x + vector.y + vector.z) / 3.0f;
+		}
+
 		/// <summary> Returns a vector where all values have the absolute of 1.</summary>
 		public static Vector3 Abs (this Vector3 vector)
 		{
