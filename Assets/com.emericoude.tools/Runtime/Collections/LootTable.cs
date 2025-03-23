@@ -34,13 +34,13 @@ namespace Emericoude.Collections
         /// <returns> A random item from the loot table based on weighted drop chance. </returns>
         public T GetRandomItemDrop()
         {
-            var totalDropChance = loot.Select(item => item.dropChance).Sum();
-            var randomDropValue = Random.Range(0f, totalDropChance);
-            var dropValue = 0f;
-            foreach (var droppable in loot)
+            float totalDropChance = this.loot.Select(item => item.dropChance).Sum();
+            float randomDropValue = Random.Range(0f, totalDropChance);
+            float dropValue = 0f;
+            foreach (var droppable in this.loot)
             {
                 dropValue += droppable.dropChance;
-                if (randomDropValue < dropValue)
+                if (randomDropValue <= dropValue)
                 {
                     return droppable.item;
                 }
@@ -57,11 +57,9 @@ namespace Emericoude.Collections
         public List<T> GetRandomItemListDrop()
         {
             var itemListDrop = new List<T>();
-            var totalDropChance = loot.Select(item => item.dropChance).Sum();
-            foreach (var droppable in loot)
+            foreach (var droppable in this.loot)
             {
-                var randomDropChanceValue = Random.Range(0f, totalDropChance);
-                if (droppable.dropChance < randomDropChanceValue)
+                if (Random.Range(0f, 100f) <= droppable.dropChance)
                 {
                     itemListDrop.Add(droppable.item);
                 }
@@ -72,27 +70,27 @@ namespace Emericoude.Collections
         
         #region Enumerator
         
-        public int Count => loot.Count;
+        public int Count => this.loot.Count;
         
         public IEnumerator<T> GetEnumerator()
         {
-            return loot.Select(droppable => droppable.item).GetEnumerator();
+            return this.loot.Select(droppable => droppable.item).GetEnumerator();
         }
         
         IEnumerator IEnumerable.GetEnumerator () {
-            return GetEnumerator();
+            return this.GetEnumerator();
         }
         
         public T this[int index] {
             get {
-                if (index >= 0 && index < loot.Count) {
-                    return loot[index].item;
+                if (index >= 0 && index < this.loot.Count) {
+                    return this.loot[index].item;
                 }
                 throw new IndexOutOfRangeException("Index is out of range for LootTable.");
             }
             set {
-                if (index >= 0 && index < loot.Count) {
-                    loot[index] = new Loot { item = value, dropChance = 0f };
+                if (index >= 0 && index < this.loot.Count) {
+                    this.loot[index] = new Loot { item = value, dropChance = 0f };
                 } else {
                     throw new IndexOutOfRangeException("Index is out of range for LootTable.");
                 }
@@ -101,11 +99,11 @@ namespace Emericoude.Collections
 
         public void Add(T item, float dropChance)
         {
-            loot.Add(new Loot() { item = item, dropChance = dropChance });
+            this.loot.Add(new Loot() { item = item, dropChance = dropChance });
         }
         
         public void RemoveAt(int index) {
-            loot.RemoveAt(index);
+            this.loot.RemoveAt(index);
         }
         
         #endregion

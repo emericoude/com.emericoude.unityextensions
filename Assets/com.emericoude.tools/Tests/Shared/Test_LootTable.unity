@@ -151,17 +151,17 @@ MonoBehaviour:
   lootTableTest:
     loot:
     - item:
-        text: 
+        text: 1
         number: 0
-      dropChance: 0
+      dropChance: 100
     - item:
-        text: 
+        text: 2
         number: 0
-      dropChance: 0
+      dropChance: 50
     - item:
-        text: 
+        text: 3
         number: 0
-      dropChance: 0
+      dropChance: 30
 --- !u!4 &45988881
 Transform:
   m_ObjectHideFlags: 0
