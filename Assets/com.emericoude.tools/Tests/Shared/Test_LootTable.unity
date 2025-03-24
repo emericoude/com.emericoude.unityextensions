@@ -151,17 +151,21 @@ MonoBehaviour:
   lootTableTest:
     loot:
     - item:
-        text: 1
-        number: 0
-      dropChance: 100
+        name: D4
+      dropChance: 26
     - item:
-        text: 2
-        number: 0
-      dropChance: 50
+        name: D6
+      dropChance: 32
     - item:
-        text: 3
-        number: 0
-      dropChance: 30
+        name: D10
+      dropChance: 26
+    - item:
+        name: D8
+      dropChance: 8
+    - item:
+        name: D20
+      dropChance: 8
+  iterations: 10000000
 --- !u!4 &45988881
 Transform:
   m_ObjectHideFlags: 0

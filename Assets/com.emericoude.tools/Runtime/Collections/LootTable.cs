@@ -19,13 +19,12 @@ namespace Emericoude.Collections
         {
             #if ODIN_INSPECTOR
             [HorizontalGroup("loot-header", width: 0.85f)]
-            public T item;
-            [HorizontalGroup("loot-header", width: 0.15f), HideLabel, SuffixLabel("%", true)] 
-            public float dropChance;
-            #else 
-            public float dropChance;
-            public T item;
             #endif
+            public T item;
+            #if ODIN_INSPECTOR
+            [HorizontalGroup("loot-header", width: 0.15f), HideLabel, SuffixLabel("%", true)] 
+            #endif
+            public float dropChance;
         }
         
         public List<Loot> loot = new List<Loot>();
