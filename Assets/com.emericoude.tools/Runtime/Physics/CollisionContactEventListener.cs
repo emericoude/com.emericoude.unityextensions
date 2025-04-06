@@ -1,4 +1,3 @@
-using Emericoude.Physics;
 using UnityEngine;
 
 namespace Emericoude.Physics

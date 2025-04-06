@@ -1,5 +1,3 @@
-using System.Linq;
-using Emericoude.Framework;
 using Emericoude.Physics;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -18,7 +16,7 @@ namespace Emericoude.Feedback
         protected override void OnCollisionContact(Collision collision)
         {
             var effectInstance = LazyVisualEffectPool.Instance.GetOrCreateEffect(this.visualEffectPrefab, true);
-            effectInstance.transform.position = collision.contacts.Last().point;
+            effectInstance.transform.position = collision.contacts[^1].point;
         }
     }
 }

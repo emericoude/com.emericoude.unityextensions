@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Emericoude.Helpers;
+﻿using Emericoude.Helpers;
 using UnityEngine;
 
 /// <summary>

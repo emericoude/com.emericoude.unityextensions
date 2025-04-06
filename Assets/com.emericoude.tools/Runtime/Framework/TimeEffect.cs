@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using Emericoude.Attributes;
 using Emericoude.Helpers;
 using UnityEngine;
@@ -58,7 +57,7 @@ namespace Emericoude
         public void MarkForRemoval(AnimationCurve exitCurve) {
             this.curve = exitCurve;
             this.Timer = 0;
-            this.duration = exitCurve.keys.Last().time;
+            this.duration = exitCurve.keys.GetLastKeyframeOrDefault().time;
             this.infinite = false;
             this.timeScale = this.GetTimeScaleAnimated();
         }

@@ -1,10 +1,22 @@
-using System.Linq;
 using UnityEngine;
+#if CYSHARP_ZLINQ
+using ZLinq;
+#endif
 
 namespace Emericoude.Helpers
 {
 	public static class CurveHelpers
 	{
+		public static Keyframe GetLastKeyframeOrDefault(this Keyframe[] keyframes)
+		{
+			#if CYSHARP_ZLINQ
+			return keyframes.AsValueEnumerable().LastOrDefault();
+			#else
+			if (keyframes.Length <= 0) return (Keyframe)default;
+			return keyframes[^1];
+			#endif
+		}
+		
 		/// <summary> Moves <paramref name="time"/> along towards the <paramref name="curve"/>'s end using <paramref name="deltaTime"/>. </summary>
 		/// <param name="curve"> The curve used for evaluation. </param>
 		/// <param name="time"> The curve's current time passed in reference. For you, this should likely be a variable in your script. </param>
@@ -12,7 +24,7 @@ namespace Emericoude.Helpers
 		/// <returns> A value between 0 and 1, representing where <paramref name="time"/> stands in the <paramref name="curve"/>, using <see cref="AnimationCurve.Evaluate(float)"/>. </returns>
 		public static float AutoEvaluate(this AnimationCurve curve, ref float time, DeltaTimeScale deltaTime = DeltaTimeScale.DeltaTime)
 		{
-			float maxTime = curve.keys.LastOrDefault().time;
+			float maxTime = curve.keys.GetLastKeyframeOrDefault().time;
 			time = Mathf.MoveTowards(time, maxTime, deltaTime.GetDeltaTime());
 			return curve.Evaluate(time);
 		}
@@ -26,7 +38,7 @@ namespace Emericoude.Helpers
 		public static float AutoEvaluateTowards (this AnimationCurve curve, ref float time, float targetTime, DeltaTimeScale deltaTime = DeltaTimeScale.DeltaTime)
 		{
 			float minTime = curve.keys[0].time;
-			float maxTime = curve.keys.LastOrDefault().time;
+			float maxTime = curve.keys.GetLastKeyframeOrDefault().time;
 
 			targetTime = Mathf.Clamp(targetTime, minTime, maxTime);
 			time = Mathf.MoveTowards(time, targetTime, deltaTime.GetDeltaTime());
@@ -44,7 +56,7 @@ namespace Emericoude.Helpers
 		public static float AutoEvaluateTowardsRelative (this AnimationCurve curve, ref float time, float targetTimeRelative, DeltaTimeScale deltaTime = DeltaTimeScale.DeltaTime)
 		{
 			float minTime = curve.keys[0].time;
-			float maxTime = curve.keys.LastOrDefault().time;
+			float maxTime = curve.keys.GetLastKeyframeOrDefault().time;
 
 			targetTimeRelative = Mathf.Lerp(minTime, maxTime, targetTimeRelative);
 			time = Mathf.MoveTowards(time, targetTimeRelative, deltaTime.GetDeltaTime());
@@ -60,7 +72,7 @@ namespace Emericoude.Helpers
 		public static float AutoEvaluatePingPong(this AnimationCurve curve, ref float time, ref bool forward, DeltaTimeScale deltaTime = DeltaTimeScale.DeltaTime)
 		{
 			float minTime = curve.keys[0].time;
-			float maxTime = curve.keys.LastOrDefault().time;
+			float maxTime = curve.keys.GetLastKeyframeOrDefault().time;
 			float targetTime = forward ? maxTime : minTime;
 
 			if (Mathf.Approximately(time, targetTime))

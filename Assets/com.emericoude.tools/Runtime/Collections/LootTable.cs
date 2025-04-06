@@ -1,7 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+
+#if CYSHARP_ZLINQ
+using ZLinq;
+#else
 using System.Linq;
+#endif
 
 #if ODIN_INSPECTOR
 using Sirenix.OdinInspector;
@@ -33,7 +38,7 @@ namespace Emericoude.Collections
         /// <returns> A random item from the loot table based on weighted drop chance. </returns>
         public T GetRandomItemDrop()
         {
-            float totalDropChance = this.loot.Select(item => item.dropChance).Sum();
+            float totalDropChance = this.loot.AsValueEnumerable().Select(item => item.dropChance).Sum();
             float randomDropValue = Random.Range(0f, totalDropChance);
             float dropValue = 0f;
             foreach (var droppable in this.loot)
@@ -73,7 +78,11 @@ namespace Emericoude.Collections
         
         public IEnumerator<T> GetEnumerator()
         {
+            #if CYSHARP_ZLINQ
+            return this.loot.AsValueEnumerable().Select(droppable => droppable.item).AsEnumerable().GetEnumerator();
+            #else
             return this.loot.Select(droppable => droppable.item).GetEnumerator();
+            #endif
         }
         
         IEnumerator IEnumerable.GetEnumerator () {

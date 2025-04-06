@@ -1,8 +1,10 @@
 using System.Collections.Generic;
-using System.Linq;
 using Emericoude.Framework;
-using Sirenix.OdinInspector;
 using UnityEngine;
+
+#if ODIN_INSPECTOR
+using Sirenix.OdinInspector;
+#endif
 
 namespace Emericoude
 {
@@ -27,7 +29,7 @@ namespace Emericoude
         private float defaultFixedDeltaTime;
         private readonly List<TimeEffect> noNameTimeEffects = new();
         private readonly Dictionary<string, TimeEffect> namedTimeEffects = new();
-        private List<TimeEffect> GetAllEffects() => this.noNameTimeEffects.Concat(this.namedTimeEffects.Values).ToList();
+        private TimeEffect highestPriorityEffect;
 
         private void Start()
         {
@@ -73,28 +75,32 @@ namespace Emericoude
                 Time.timeScale = 1.0f;
                 return;
             }
-
-            TimeEffect highestPriorityEffect = null;
-            var allEffects = this.GetAllEffects();
-            foreach (var effect in allEffects) {
-                if (highestPriorityEffect == null) {
-                    highestPriorityEffect = effect;
-                    continue;
-                }
-                
-                if (effect.Priority > highestPriorityEffect.Priority) {
-                    highestPriorityEffect = effect;
-                    continue;
-                }
-                
-                if (effect.GetTimeScaleAnimated() < highestPriorityEffect.GetTimeScaleAnimated()) {
-                    highestPriorityEffect = effect;
-                }
-            }
             
-            Time.timeScale = highestPriorityEffect.GetTimeScaleAnimated();
+            TryAssignHighestPriorityEffectFrom(ref this.highestPriorityEffect, this.noNameTimeEffects);
+            TryAssignHighestPriorityEffectFrom(ref this.highestPriorityEffect, this.namedTimeEffects.Values);
+            
+            Time.timeScale = this.highestPriorityEffect.GetTimeScaleAnimated();
             if (AdjustFixedDeltaTimeOnSlowDown) {
                 Time.fixedDeltaTime = this.defaultFixedDeltaTime * Time.timeScale;
+            }
+        }
+
+        private static void TryAssignHighestPriorityEffectFrom(ref TimeEffect highestPriorityEffectRef, IEnumerable<TimeEffect> from)
+        {
+            foreach (var effect in from) {
+                if (highestPriorityEffectRef == null) {
+                    highestPriorityEffectRef = effect;
+                    continue;
+                }
+                
+                if (effect.Priority > highestPriorityEffectRef.Priority) {
+                    highestPriorityEffectRef = effect;
+                    continue;
+                }
+                
+                if (effect.GetTimeScaleAnimated() < highestPriorityEffectRef.GetTimeScaleAnimated()) {
+                    highestPriorityEffectRef = effect;
+                }
             }
         }
 

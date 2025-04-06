@@ -1,4 +1,3 @@
-using System.Linq;
 using Emericoude.Attributes;
 using Emericoude.Helpers;
 using UnityEditor;	
@@ -44,7 +43,7 @@ namespace Emericoude.CustomEditors
 			var backingCurve = this.CreateBackingCurve(property);
 			
 			//scale
-			Keyframe lastKeyframe = backingCurve.keys.Last();
+			Keyframe lastKeyframe = backingCurve.keys.GetLastKeyframeOrDefault();
 			var scaleFloatFields = new float[] { lastKeyframe.time, lastKeyframe.value };
 			var scaleGuiContents = new GUIContent[]
 			{
