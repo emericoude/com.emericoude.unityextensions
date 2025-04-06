@@ -37,6 +37,11 @@
             "name": "com.cysharp.unitask",
             "expression": "",
             "define": "CYSHARP_UNITASK"
+        },
+        {
+            "name": "com.cysharp.zlinq",
+            "expression": "",
+            "define": "CYSHARP_ZLINQ"
         }
     ],
     "noEngineReferences": false
