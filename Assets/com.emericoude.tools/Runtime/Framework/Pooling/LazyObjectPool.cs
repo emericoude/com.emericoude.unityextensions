@@ -10,13 +10,13 @@ namespace Emericoude.Framework
     /// <typeparam name="TSingleton"> The type of your singleton. </typeparam>
     /// <typeparam name="TKey"> The type to be used for keys. <see cref="GetObjectKey"/> should retrieve the same key for a template and an instance. </typeparam>
     /// <typeparam name="TObject"> The type of object you want to pool. </typeparam>
-    /// <remarks> Use <see cref="ClearPool(TObject)"/> once in a while when you no longer need a specific group. </remarks>
+    /// <remarks> Use <see cref="FlushPool"/> once in a while when you no longer need a specific group. </remarks>
     public abstract class LazyObjectPool<TSingleton, TKey, TObject> : LazySingleton<TSingleton> 
         where TSingleton : LazySingleton<TSingleton>
         where TObject : Object 
     {
         /// <summary> The object pool dictionary. </summary>
-        protected readonly Dictionary<TKey, ObjectPool<TObject>> ObjectPools = new();
+        protected readonly Dictionary<TKey, ObjectPool<TObject>> Pools = new();
         
         /// <summary> The template dictionary. </summary>
         protected readonly Dictionary<TKey, TObject> Templates = new();
@@ -25,71 +25,55 @@ namespace Emericoude.Framework
         /// We can instead use this as the argument whenever we do a .Get(), but instead require to create a new object in the pool. </summary>
         protected TKey CurrentKey;
 
-        /// <summary> Disposes of all the pools and their objects. Effectively empties out this component. </summary>
-        public void ClearPools()
-        {
-            foreach (var pool in this.ObjectPools.Values)
-            {
-                pool.Dispose();
-            }
-            
-            this.ObjectPools.Clear();
-            this.Templates.Clear();
-            this.CurrentKey = default;
-        }
-
-        /// <summary> Clears the pool associated with the specified template.
-        /// Use this to save on memory once you know you won't need this pool anymore. </summary>
-        public void ClearPool(TObject template) => this.ClearPool(this.GetObjectKey(template));
-        
-        /// <summary> Clears the pool associated with the specified key.
-        /// Use this to save on memory once you know you won't need this pool anymore. </summary>
-        public void ClearPool(TKey key)
-        {
-            if (this.ObjectPools.TryGetValue(key, out var pool))
-            {
-                pool.Dispose();
-            }
-            
-            this.ObjectPools.Remove(key);
-            this.Templates.Remove(key);
-        }
-        
-        /// <returns> If the key is valid, a pooled or new object from this list; otherwise null. </returns>
-        /// <remarks> See <see cref="GetObjectKey(TObject)"/> for more info on how to get keys. </remarks>
-        public TObject GetOrCreate(TKey key)
-        {
-            if (!this.ObjectPools.ContainsKey(key))
-            {
-                Debug.LogError("No such key in pool.");
-                return null;
-            }
-
-            this.CurrentKey = key;
-            return this.ObjectPools[key].Get();
-        }
-
         /// <returns> Gets an object from the pool, if the pool for this template doesn't exist, creates one. </returns>
-        public TObject GetOrCreate(TObject template)
+        public TObject GetOrCreateObjectFromPool(TObject template)
         {
-            var key = this.GetObjectKey(template);
-            if (!this.ObjectPools.TryGetValue(key, out var pool))
-            {
-                pool = this.CreatePool();
-                this.ObjectPools.Add(key, pool);
-                this.Templates.Add(key, template);
-            }
+            this.CurrentKey = this.GetObjectKey(template);
+            return this.GetOrCreatePool(template).Get();
+        }
 
-            this.CurrentKey = key;
-            return pool.Get();
+        protected virtual ObjectPool<TObject> GetOrCreatePool(TObject template)
+        {
+            if (this.Pools.TryGetValue(this.CurrentKey, out var pool)) return pool;
+            
+            this.Pools.Add(this.CurrentKey, this.CreatePool());
+            this.Templates.Add(this.CurrentKey, template);
+
+            return this.Pools[this.CurrentKey];
         }
 
         /// <summary> Releases an object from its pool. </summary>
-        public void Release(TObject objectInstance) => this.ObjectPools[this.GetObjectKey(objectInstance)].Release(objectInstance);
+        public void Release(TObject objectInstance) => this.Pools[this.GetObjectKey(objectInstance)].Release(objectInstance);
         
         /// <returns> A key used for grouping pools of similar things. </returns>
         /// <remarks> This should ideally return the same key for a template or an instance of it. </remarks>
         public abstract TKey GetObjectKey(TObject template);
+        
+        /// <summary> Destroys itself. Since its lazy, it will be re-instantiated when needed. </summary>
+        public virtual void FlushAllPools()
+        {
+            Destroy(this.gameObject);
+        }
+
+        /// <summary> Clears the pool associated with the specified template.
+        /// Use this to save on memory once you know you won't need this pool anymore. </summary>
+        public virtual void FlushPool(TObject template)
+        {
+            this.FlushPool(this.GetObjectKey(template));
+        }
+        
+        /// <summary> Clears the pool associated with the specified key.
+        /// Use this to save on memory once you know you won't need this pool anymore. </summary>
+        public virtual void FlushPool(TKey key)
+        {
+            if (this.Pools.TryGetValue(key, out var pool))
+            {
+                pool.Dispose();
+            }
+            
+            this.Pools.Remove(key);
+            this.Templates.Remove(key);
+        }
         
         /// <returns> A new object pool. </returns>
         /// <seealso cref="CreatePoolObject"/>
@@ -105,16 +89,13 @@ namespace Emericoude.Framework
                 this.OnDestroyPoolObject
             );
         }
-        
+
         /// <summary> Object Pool's CreateFunc. This is used to construct an object pool. By default, this will instantiate the object as a child of this' transform. </summary>
         /// <returns> A new, ready-to-use pool object. </returns>
         /// <seealso cref="OnGetPoolObject"/>
         /// <seealso cref="OnReleasePoolObject"/>
         /// <seealso cref="OnDestroyPoolObject"/>
-        protected virtual TObject CreatePoolObject()
-        {
-            return Instantiate(this.Templates[this.CurrentKey], this.transform);
-        }
+        protected abstract TObject CreatePoolObject();
         
         /// <returns> Object Pool's ActionOnGet. This is used to construct an object pool. </returns>
         /// <remarks> Use this to make sure the object is ready-to-use. </remarks>
@@ -134,9 +115,6 @@ namespace Emericoude.Framework
         /// <seealso cref="CreatePoolObject"/>
         /// <seealso cref="OnGetPoolObject"/>
         /// <seealso cref="OnReleasePoolObject"/>
-        protected virtual void OnDestroyPoolObject(TObject poolObject)
-        {
-            Destroy(poolObject);
-        }
+        protected abstract void OnDestroyPoolObject(TObject poolObject);
     }
 }

@@ -128,27 +128,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 115264261}
-  - component: {fileID: 115264260}
+  - component: {fileID: 115264262}
   m_Layer: 0
-  m_Name: LazyObjectPool
+  m_Name: Pooling Tests
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &115264260
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 115264259}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f71859918b0175f44b5c6ce70f78bec2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefabTemplate: {fileID: 927179958827305706, guid: 1a48e5fb6332cdb44bba8e8786bff507, type: 3}
 --- !u!4 &115264261
 Transform:
   m_ObjectHideFlags: 0
@@ -164,6 +151,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &115264262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 115264259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81a9972dbc7377b48bef042b56e3ce1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pooledParticleSystemPrefab: {fileID: 946336357169278836, guid: c70100bbeb716b341acf155b1249cdf7, type: 3}
 --- !u!1 &711377099
 GameObject:
   m_ObjectHideFlags: 0
