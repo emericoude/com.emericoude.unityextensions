@@ -21,7 +21,7 @@ namespace Emericoude.Framework
             None = 0,
             AudioSource = 1,
             ParticleSystem = 2,
-            VisualEffect = 3,
+            VisualEffect = 4,
         }
         
         [Tooltip("If true, we will check if the components are ready every 'Tick Rate' in seconds. If false, we will evaluate every single frame.")]
