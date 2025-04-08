@@ -2,10 +2,6 @@ using System.Collections.Generic;
 using Emericoude.Framework;
 using UnityEngine;
 
-#if ODIN_INSPECTOR
-using Sirenix.OdinInspector;
-#endif
-
 namespace Emericoude
 {
     /// <summary>
@@ -13,7 +9,7 @@ namespace Emericoude
     /// It will automatically tick effects, and resolve which timeScale value via a priority system (highest value wins, then lowest (aninmated) timeScale wins).
     /// </summary>
     #if ODIN_INSPECTOR
-    [InfoBox("Handles time effects. Use this to slow down, speed up, or freeze time in your game.")]
+    [Sirenix.OdinInspector.InfoBox("Handles time effects. Use this to slow down, speed up, or freeze time in your game.")]
     #endif
     public class TimeManager : LazySingleton<TimeManager> {
         /*
@@ -23,13 +19,13 @@ namespace Emericoude
          *   - Freeze frames
          *   - Slow motion
          */
-        
+
+        public const float DEFAULT_TIME_SCALE = 1.0f;
         public static bool AdjustFixedDeltaTimeOnSlowDown = true;
 
         private float defaultFixedDeltaTime;
         private readonly List<TimeEffect> noNameTimeEffects = new();
         private readonly Dictionary<string, TimeEffect> namedTimeEffects = new();
-        private TimeEffect highestPriorityEffect;
 
         private void Start()
         {
@@ -66,20 +62,21 @@ namespace Emericoude
 
         private void OnDestroy()
         {
-            Time.timeScale = 1.0f;
+            Time.timeScale = DEFAULT_TIME_SCALE;
             Time.fixedDeltaTime = this.defaultFixedDeltaTime;
         }
 
         private void ResolveTimeEffects() {
             if (this.noNameTimeEffects.Count == 0 && this.namedTimeEffects.Count == 0) {
-                Time.timeScale = 1.0f;
+                Time.timeScale = DEFAULT_TIME_SCALE;
                 return;
             }
+
+            TimeEffect highestPriorityEffect = null;
+            TryAssignHighestPriorityEffectFrom(ref highestPriorityEffect, this.noNameTimeEffects);
+            TryAssignHighestPriorityEffectFrom(ref highestPriorityEffect, this.namedTimeEffects.Values);
             
-            TryAssignHighestPriorityEffectFrom(ref this.highestPriorityEffect, this.noNameTimeEffects);
-            TryAssignHighestPriorityEffectFrom(ref this.highestPriorityEffect, this.namedTimeEffects.Values);
-            
-            Time.timeScale = this.highestPriorityEffect.GetTimeScaleAnimated();
+            Time.timeScale = highestPriorityEffect.GetTimeScaleAnimated();
             if (AdjustFixedDeltaTimeOnSlowDown) {
                 Time.fixedDeltaTime = this.defaultFixedDeltaTime * Time.timeScale;
             }
