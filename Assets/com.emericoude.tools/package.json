@@ -1,7 +1,7 @@
 {
     "name": "com.emericoude.tools",
     "displayName": "Emeric's Tools for Unity",
-    "version": "3.2.1",
+    "version": "3.2.2",
     "unity": "2022.3",
     "description": "Emeric's tools, helpers and components for Unity. Now all packaged in one (previously emericoude.unityextensions).",
     "author": {

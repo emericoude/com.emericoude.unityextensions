@@ -93,17 +93,17 @@ namespace Emericoude.Framework
         {
             if (this.automaticallyAddHoldersFor == CommonPoolHolders.None) return;
             
-            if (this.automaticallyAddHoldersFor.HasFlag(CommonPoolHolders.AudioSource))
+            if (this.automaticallyAddHoldersFor.HasFlag(CommonPoolHolders.AudioSource) && this.TryGetComponent(out AudioSource audioSource))
             {
                 this.gameObject.GetOrAddComponent<AudioSourcePooledGameObjectHolder>();
             }
 
-            if (this.automaticallyAddHoldersFor.HasFlag(CommonPoolHolders.ParticleSystem))
+            if (this.automaticallyAddHoldersFor.HasFlag(CommonPoolHolders.ParticleSystem) && this.TryGetComponent(out ParticleSystem ps))
             {
                 this.gameObject.GetOrAddComponent<ParticleSystem>();
             }
 
-            if (this.automaticallyAddHoldersFor.HasFlag(CommonPoolHolders.VisualEffect))
+            if (this.automaticallyAddHoldersFor.HasFlag(CommonPoolHolders.VisualEffect) && this.TryGetComponent(out VisualEffect visualEffect))
             {
                 this.gameObject.GetOrAddComponent<VisualEffect>();
             }
