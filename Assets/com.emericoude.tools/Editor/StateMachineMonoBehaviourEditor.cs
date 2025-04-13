@@ -24,7 +24,7 @@ namespace Emericoude.CustomEditors
             var stateMachine = stateMachineMonoBehaviour.StateMachine;
 
             EditorGUILayout.Space();
-            EditorGUILayout.LabelField("State Machine Transitions", EditorStyles.boldLabel);
+            EditorGUILayout.LabelField("State Machine Transitions", UnityEditor.EditorStyles.boldLabel);
 
             if (!Application.isPlaying)
             {

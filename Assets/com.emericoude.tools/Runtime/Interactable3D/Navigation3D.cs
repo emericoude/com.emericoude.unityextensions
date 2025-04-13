@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 namespace Emericoude
 {
     //TODO: IEquatable<Navigation3D>
+    //TODO: Support cross-nav between screen-space and this by doing world to viewport raycasts
     [Serializable]
     public struct Navigation3D
     {

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8625363641860881592}
   - component: {fileID: 8625700215261635653}
   - component: {fileID: 8783483043284994802}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: SelectionHighlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 1988276400480977235}
   - component: {fileID: 2575269469812568262}
   - component: {fileID: 7768000596061936530}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Button3D_Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -191,7 +191,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -336,7 +336,19 @@ MonoBehaviour:
         m_CallState: 2
   onClicked:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7768000596061936530}
+        m_TargetAssemblyTypeName: Emericoude.Tests.DebugFromUnityEvent, emericoude.tests
+        m_MethodName: Log
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: CLICKED OR SUBMITTED
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &7768000596061936530
 MonoBehaviour:
   m_ObjectHideFlags: 0

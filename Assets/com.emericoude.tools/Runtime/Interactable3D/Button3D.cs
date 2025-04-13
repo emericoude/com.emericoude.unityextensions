@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 
 namespace Emericoude
 {
-    public class Button3D : Navigatable3D,
+    public class Button3D : Navigable3D,
         IPointerClickHandler, ISubmitHandler
     {
         public UnityEvent onClicked = new();

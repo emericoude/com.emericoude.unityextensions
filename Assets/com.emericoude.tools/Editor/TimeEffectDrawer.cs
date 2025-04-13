@@ -27,7 +27,7 @@ namespace Emericoude.CustomEditors
             position.x += 16;
             position.width -= 32;
             
-            this.foldout = EditorGUI.BeginFoldoutHeaderGroup(position, this.foldout, labelContent, EditorStyles.foldout);
+            this.foldout = EditorGUI.BeginFoldoutHeaderGroup(position, this.foldout, labelContent, UnityEditor.EditorStyles.foldout);
             
             if (this.foldout)
             {

@@ -14,10 +14,9 @@ using static Emericoude.Navigation3D;
 namespace Emericoude
 {
     /// <summary>
-    /// Sort of the equivalent to Unity's <see cref="Selectable"/>, but for 3D objects. It uses the same underlying systems (EventSystem).
+    /// Sort of the equivalent to Unity's <see cref="Selectable"/>, but for 3D objects. It uses the same underlying systems (EventSystem & uGUI).
     /// </summary>
-    /// [
-    public abstract class Navigatable3D : MonoBehaviour, 
+    public abstract class Navigable3D : MonoBehaviour, 
         IMoveHandler,
         IPointerEnterHandler, IPointerExitHandler,
         ISelectHandler, IDeselectHandler
@@ -41,8 +40,30 @@ namespace Emericoude
         }
         
         public Navigation3D navigation = Navigation3D.DefaultNavigation;
-        public new Collider collider;
-        public new Camera camera;
+        private new Collider collider;
+        
+        [SerializeField] private new Camera camera;
+        public Camera Camera
+        {
+            get => this.camera;
+            set
+            {
+                this.camera = value;
+                #if UNITY_EDITOR || UNITY_DEVELOPMENT //mute warnings in non-development builds
+                if (this.camera == null)
+                {
+                    Debug.LogWarning("Assigning a null camera, consider disabling interaction.", this);
+                }
+                else
+                {
+                    if (!this.camera.TryGetComponent(out PhysicsRaycaster physicsRaycaster))
+                    {
+                        Debug.LogWarning("Camera does not have a Physics Raycaster. Navigation 3D will not work with pointers.");
+                    }
+                }
+                #endif
+            }
+        }
 
         public UnityEvent onSelect = new();
         public UnityEvent onDeselect  = new();
@@ -57,8 +78,6 @@ namespace Emericoude
 #if UNITY_EDITOR
         protected virtual void Reset()
         {
-            //TODO: Auto-add event system to the scene if there are none?
-            
             if (this.collider == null && !this.TryGetComponent(out this.collider))
             {
                 this.collider = (Collider)Undo.AddComponent(this.gameObject, typeof(BoxCollider));
@@ -71,7 +90,7 @@ namespace Emericoude
         {
             if (this.collider == null && !this.TryGetComponent(out this.collider))
             {
-                Debug.LogWarning($"Missing collider on {this.gameObject.name}. Selectable will be disabled.", this);
+                Debug.LogWarning($"Missing collider on {this.gameObject.name}. {this.GetType()} component will be disabled.", this);
                 this.interactable = false;
                 this.enabled = false;
             }
@@ -79,8 +98,8 @@ namespace Emericoude
 
         protected virtual void Start()
         {
-            if (this.camera == null) this.camera = Camera.main;
             this.navigationHits = new RaycastHit[this.navigation.SphereCastMaximumHits];
+            if (this.camera == null) this.Camera = Camera.main;
         }
 
         protected virtual void OnDisable()
@@ -99,25 +118,21 @@ namespace Emericoude
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            Debug.Log("OnPointerEnter");
             this.EnterHover();
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            Debug.Log("OnPointerExit");
             this.ExitHover();
         }
 
         public void OnSelect(BaseEventData eventData)
         {
-            Debug.Log("OnSelect");
             this.Select();
         }
 
         public void OnDeselect(BaseEventData eventData)
         {
-            Debug.Log("OnDeselect");
             this.Deselect();
         }
         
@@ -127,7 +142,7 @@ namespace Emericoude
             if (!this.Interactable) return;
             if (EventSystem.current == null) return;
             
-            if (!EventSystem.current.alreadySelecting)
+            if (!EventSystem.current.alreadySelecting && EventSystem.current.currentSelectedGameObject != this.gameObject)
             {
                 EventSystem.current.SetSelectedGameObject(this.gameObject, eventData);
             }
@@ -223,7 +238,7 @@ namespace Emericoude
                 float distance = Vector3.Distance(this.collider.bounds.center, hit.collider.bounds.center);
                 if (distance > nearestDistance) continue;
 
-                if (!hit.collider.TryGetComponent(out Navigatable3D selectable3D)) continue;
+                if (!hit.collider.TryGetComponent(out Navigable3D selectable3D)) continue;
                 if (!selectable3D.interactable) continue;
                 nearestSelectable = selectable3D.gameObject;
                 nearestDistance = distance;
