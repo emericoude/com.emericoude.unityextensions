@@ -1,3 +1,4 @@
+using Emericoude.Framework;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -45,6 +46,13 @@ namespace Emericoude.Helpers
 			}
 
 			return go == null ? new GameObject() : Object.Instantiate(go, position, rotation, parent);
+		}
+
+		/// <summary> Tries to get a component, and if there is none, adds it. </summary>
+		/// <returns> The found or added component. </returns>
+		public static T GetOrAddComponent<T>(this GameObject gameObject) where T : Component
+		{
+			return gameObject.TryGetComponent(out T component) ? component : gameObject.AddComponent<T>();
 		}
 	}
 }

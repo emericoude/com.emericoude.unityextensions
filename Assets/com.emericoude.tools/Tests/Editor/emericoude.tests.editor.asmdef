@@ -1,0 +1,18 @@
+{
+    "name": "emericoude.tests.editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:e2c1fc534d201e047986b71cf11153fe"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
