@@ -35,7 +35,7 @@ namespace Emericoude.CustomEditors
                 this.settingsContainer.AddPropertyField(property.FindPropertyRelative("NavigationAxisMode"));
 
                 this.automaticSettingsContainer = this.settingsContainer.AddEmptyVisualElement();
-                this.automaticSettingsContainer.AddToggleField(property.FindPropertyRelative("AutomateSphereCastCalculationFromColliderBounds"), this.HandleCalcAutomationValueChange);
+                this.automaticSettingsContainer.AddToggleField(property.FindPropertyRelative("AutoSetupSphereCast"), this.HandleCalcAutomationValueChange);
 
                 this.sphereCastSettingsContainer = this.automaticSettingsContainer.AddEmptyVisualElement();
                 this.sphereCastSettingsContainer.AddPropertyField(property.FindPropertyRelative("SphereCastRadius"));

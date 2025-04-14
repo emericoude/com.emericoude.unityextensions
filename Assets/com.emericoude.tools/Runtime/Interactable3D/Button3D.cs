@@ -1,4 +1,5 @@
-﻿using UnityEngine.Events;
+﻿using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
 namespace Emericoude
@@ -6,6 +7,7 @@ namespace Emericoude
     public class Button3D : Navigable3D,
         IPointerClickHandler, ISubmitHandler
     {
+        [Tooltip("Event triggered when the button is clicked (or submitted).")]
         public UnityEvent onClicked = new();
         
         public void OnPointerClick(PointerEventData eventData)

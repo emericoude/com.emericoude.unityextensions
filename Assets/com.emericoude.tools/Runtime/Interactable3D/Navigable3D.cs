@@ -21,7 +21,7 @@ namespace Emericoude
         IPointerEnterHandler, IPointerExitHandler,
         ISelectHandler, IDeselectHandler
     {
-        [Tooltip("Whether this element is interactable.")]
+        [Tooltip("Whether this element is interactable. If false, navigation will be disabled.")]
         [SerializeField] private bool interactable = true;
         public bool Interactable
         {
@@ -42,6 +42,7 @@ namespace Emericoude
         public Navigation3D navigation = Navigation3D.DefaultNavigation;
         private new Collider collider;
         
+        [Tooltip("The camera used for navigation. The Main Camera will be used if null.")]
         [SerializeField] private new Camera camera;
         public Camera Camera
         {
@@ -65,9 +66,13 @@ namespace Emericoude
             }
         }
 
+        [Tooltip("Event triggered when the object is selected (pointers will not trigger this).")]
         public UnityEvent onSelect = new();
+        [Tooltip("Event triggered when the object is deselected (pointers will not trigger this).")]
         public UnityEvent onDeselect  = new();
+        [Tooltip("Event triggered when the collider is hovered by a pointer.")]
         public UnityEvent onHoverEnter = new();
+        [Tooltip("Event triggered when the collider is exiting a hover by a pointer.")]
         public UnityEvent onHoverExit = new();
 
         public bool IsHovered { get; private set; } = false;
@@ -212,7 +217,7 @@ namespace Emericoude
             Vector3 inputDirectionTransformed = this.GetNavigationDirectionTransformed(inputDirection);
             Debug.DrawRay(this.collider.bounds.center, inputDirectionTransformed * 2.0f, Color.red, 1f, true);
 
-            if (this.navigation.AutomateSphereCastCalculationFromColliderBounds)
+            if (this.navigation.AutoSetupSphereCast)
             {
                 this.navigation.SphereCastRadius = this.collider.bounds.extents.AverageComponents();
                 this.navigation.SphereCastMaximumDistance = this.collider.bounds.size.LargestComponent() * 2.0f; //the x2 is super arbitrary

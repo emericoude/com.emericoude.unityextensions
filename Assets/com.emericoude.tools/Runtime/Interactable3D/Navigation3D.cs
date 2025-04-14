@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 
 namespace Emericoude
 {
@@ -25,14 +26,21 @@ namespace Emericoude
             CameraSpace = 2
         }
 
+        [Tooltip("The navigation mode for directional control scheme (e.g. controller). Automatic uses sphere casting.")]
         public Mode NavigationMode;
+        [Tooltip("The way we calculate what should be considered up/right/left/down. Generally, camera or local spaces are recommended.")]
         public AxisMode NavigationAxisMode;
 
         //Automatic nav settings
-        public bool AutomateSphereCastCalculationFromColliderBounds;
+        [Tooltip("If true, this component will automatically setup the sphere cast settings used for navigation according to the button's collider bounds.")]
+        public bool AutoSetupSphereCast;
+        [Tooltip("The radius of the sphere cast.")]
         public float SphereCastRadius;
+        [Tooltip("The maximum distance of the sphere cast.")]
         public float SphereCastMaximumDistance;
+        [Tooltip("The maximum hit points of the sphere cast. User power of two if you can. The lower the better for performance, but might miss hits.")]
         public int SphereCastMaximumHits;
+        [Tooltip("The layer of the sphere cast.")]
         public LayerMask SphereCastLayer;
 
         //Explicit nav
@@ -48,7 +56,7 @@ namespace Emericoude
                 {
                     NavigationMode = Mode.Automatic,
                     NavigationAxisMode = AxisMode.CameraSpace,
-                    AutomateSphereCastCalculationFromColliderBounds = true,
+                    AutoSetupSphereCast = true,
                     SphereCastLayer = ~0,
                     SphereCastMaximumHits = 16,
                 };
