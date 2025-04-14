@@ -74,6 +74,7 @@ namespace Emericoude.CustomEditors
             foldout.ApplyCustomDrawerRootStyle();
             foldout.style.unityTextAlign = new StyleEnum<TextAnchor>(TextAnchor.MiddleCenter);
             foldout.Q<VisualElement>("unity-checkmark").visible = false;
+            foldout.Q<VisualElement>("unity-content").style.marginLeft = 0f;
             foldout.Q<Label>().style.paddingBottom = 4;
 
             if (onValueChanged != null)
