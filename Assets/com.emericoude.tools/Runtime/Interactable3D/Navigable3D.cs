@@ -18,7 +18,7 @@ namespace Emericoude
     /// <summary>
     /// Sort of the equivalent to Unity's <see cref="Selectable"/>, but for 3D objects. It uses the same underlying systems (EventSystem & uGUI).
     /// </summary>
-    public abstract class Navigable3D : MonoBehaviour, 
+    public class Navigable3D : MonoBehaviour, 
         IMoveHandler,
         IPointerEnterHandler, IPointerExitHandler,
         ISelectHandler, IDeselectHandler
