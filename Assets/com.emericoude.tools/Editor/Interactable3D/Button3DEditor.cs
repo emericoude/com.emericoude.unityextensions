@@ -9,7 +9,7 @@ namespace Emericoude.CustomEditors
         public override VisualElement CreateInspectorGUI()
         {
             var visualElement = (Navigable3DVisualElement)base.CreateInspectorGUI();
-            visualElement.unityEventsContainer.AddPropertyField(this.serializedObject.FindProperty("onClicked"));
+            visualElement.EventsContainer.AddPropertyField(this.serializedObject.FindProperty("onClicked"));
             return visualElement;
         }
     }

@@ -13,6 +13,8 @@ using static Emericoude.Navigation3D;
 
 namespace Emericoude
 {
+    //TODO: Make a custom Physics Raycaster to handle trigger more aptly.
+    
     /// <summary>
     /// Sort of the equivalent to Unity's <see cref="Selectable"/>, but for 3D objects. It uses the same underlying systems (EventSystem & uGUI).
     /// </summary>
@@ -59,7 +61,8 @@ namespace Emericoude
                 {
                     if (!this.camera.TryGetComponent(out PhysicsRaycaster physicsRaycaster))
                     {
-                        Debug.LogWarning("Camera does not have a Physics Raycaster. Navigation 3D will not work with pointers.");
+                        Debug.LogWarning("Camera does not have a Physics Raycaster. Navigation 3D will not work with pointers. " +
+                                         "Note that you will need to enable Queries Hit Trigger if you plan to use the default Physics Raycaster with trigger colliders.");
                     }
                 }
                 #endif

@@ -32,12 +32,12 @@ namespace Emericoude.CustomEditors
 
         protected sealed class Navigable3DVisualElement : VisualElement
         {
-            public VisualElement unityEventsContainer;
-            public Navigable3DEditor editor;
+            public readonly VisualElement EventsContainer;
+            public readonly Navigable3DEditor TargetEditor;
 
-            public Navigable3DVisualElement(Navigable3DEditor editor, SerializedObject serializedObject)
+            public Navigable3DVisualElement(Navigable3DEditor targetEditor, SerializedObject serializedObject)
             {
-                this.editor = editor;
+                this.TargetEditor = targetEditor;
                 this.ApplyCustomEditorRootStyle();
 
                 var interactableProperty = serializedObject.FindProperty("interactable");
@@ -54,16 +54,16 @@ namespace Emericoude.CustomEditors
                 var onHoverExitProperty = serializedObject.FindProperty("onHoverExit");
 
                 //TODO: remember foldout value
-                this.unityEventsContainer = this.AddEditorFoldoutContainer("Events", "", editor.eventFoldoutOpen, this.OnEventFoldoutValueChanged);
-                this.unityEventsContainer.AddPropertyField(onSelectProperty);
-                this.unityEventsContainer.AddPropertyField(onDeselectProperty);
-                this.unityEventsContainer.AddPropertyField(onHoverEnterProperty);
-                this.unityEventsContainer.AddPropertyField(onHoverExitProperty);
+                this.EventsContainer = this.AddEditorFoldoutContainer(targetEditor.eventFoldoutOpen, "Events", "", this.OnEventFoldoutValueChanged);
+                this.EventsContainer.AddPropertyField(onSelectProperty);
+                this.EventsContainer.AddPropertyField(onDeselectProperty);
+                this.EventsContainer.AddPropertyField(onHoverEnterProperty);
+                this.EventsContainer.AddPropertyField(onHoverExitProperty);
             }
 
             private void OnEventFoldoutValueChanged(ChangeEvent<bool> changed)
             {
-                this.editor.eventFoldoutOpen = changed.newValue;
+                this.TargetEditor.eventFoldoutOpen = changed.newValue;
             }
         }
     }

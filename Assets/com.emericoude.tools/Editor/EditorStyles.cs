@@ -62,13 +62,13 @@ namespace Emericoude.CustomEditors
             return enumField;
         }
         
-        public static Foldout AddEditorFoldoutContainer(this VisualElement visualElement, string label = "", string tooltip = "", bool defaultValue = true, EventCallback<ChangeEvent<bool>> onValueChanged = null)
+        public static Foldout AddEditorFoldoutContainer(this VisualElement visualElement, bool defaultFoldoutValue, string label = "", string tooltip = "", EventCallback<ChangeEvent<bool>> onValueChanged = null)
         {
             var foldout = new Foldout
             {
                 text = $"<b>{label}</b> <i>(Click to Expand)</i>",
                 tooltip = tooltip,
-                value = defaultValue
+                value = defaultFoldoutValue
             };
             
             foldout.ApplyCustomDrawerRootStyle();
@@ -76,10 +76,10 @@ namespace Emericoude.CustomEditors
             foldout.Q<VisualElement>("unity-checkmark").visible = false;
             foldout.Q<VisualElement>("unity-content").style.marginLeft = 0f;
             foldout.Q<Label>().style.paddingBottom = 4;
-
+            
             if (onValueChanged != null)
             {
-                foldout.RegisterValueChangedCallback(onValueChanged);
+                foldout.Q<Toggle>().RegisterValueChangedCallback<bool>(onValueChanged);
             }
 
             visualElement.Add(foldout);
