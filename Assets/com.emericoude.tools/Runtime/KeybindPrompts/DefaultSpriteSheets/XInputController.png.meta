@@ -1,0 +1,579 @@
+fileFormatVersion: 2
+guid: 0d58541e93d898840a736e8132e92bd0
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: XInputController_0
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 268
+        width: 236
+        height: 235
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f95982f115bd604694d034befed9a62
+      internalID: -987271098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: XInputController_1
+      rect:
+        serializedVersion: 2
+        x: 267
+        y: 268
+        width: 235
+        height: 235
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8174d70d0daeb443adf5402b5499d88
+      internalID: -1762690185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: XInputController_2
+      rect:
+        serializedVersion: 2
+        x: 523
+        y: 268
+        width: 235
+        height: 235
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0cbf3290dabdb8e468e89b4c0e3da2fa
+      internalID: 1511227427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: XInputController_3
+      rect:
+        serializedVersion: 2
+        x: 778
+        y: 268
+        width: 236
+        height: 235
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b43876ffb4a2a1e4cb91266186d4fb05
+      internalID: -614143616
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: XInputController_4
+      rect:
+        serializedVersion: 2
+        x: 1028
+        y: 259
+        width: 249
+        height: 251
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3c9787a41abe8f4c87d7b02006d6edd
+      internalID: 6224007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: XInputController_5
+      rect:
+        serializedVersion: 2
+        x: 1283
+        y: 259
+        width: 250
+        height: 251
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f07cd8b7bc12f044bf045b2efb00f99
+      internalID: -1085007552
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: XInputController_8
+      rect:
+        serializedVersion: 2
+        x: 2052
+        y: 259
+        width: 250
+        height: 251
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab8a3d810449ad6438c89a4dfd51931d
+      internalID: 649939754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: XInputController_9
+      rect:
+        serializedVersion: 2
+        x: 2308
+        y: 259
+        width: 249
+        height: 251
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47ad678e621464441aaee11f6cec94ec
+      internalID: 2034798201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: XInputController_10
+      rect:
+        serializedVersion: 2
+        x: 1541
+        y: 258
+        width: 247
+        height: 253
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78450a8842a81e547a2fa692611a6fd5
+      internalID: -1802911150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: XInputController_11
+      rect:
+        serializedVersion: 2
+        x: 1797
+        y: 259
+        width: 247
+        height: 252
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f51fb5f4cbee1f34785e308b0d11f64c
+      internalID: 223641860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: XInputController_12
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 3
+        width: 250
+        height: 251
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab672d9452fcb904b849eeb83cea4278
+      internalID: -1047236317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: XInputController_13
+      rect:
+        serializedVersion: 2
+        x: 259
+        y: 3
+        width: 250
+        height: 251
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0c13996d6eee704cb2d4c0a51dfedab
+      internalID: 1550713405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: XInputController_14
+      rect:
+        serializedVersion: 2
+        x: 516
+        y: 3
+        width: 250
+        height: 251
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2181cb0d00a10649b807e7490cd5e2a
+      internalID: 1000125821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: XInputController_15
+      rect:
+        serializedVersion: 2
+        x: 794
+        y: 12
+        width: 204
+        height: 233
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae72878eb97948d4785ea7585ba87039
+      internalID: 1656659471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: XInputController_16
+      rect:
+        serializedVersion: 2
+        x: 1051
+        y: 12
+        width: 203
+        height: 233
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45a93a1660077be498618fa706695020
+      internalID: -1009052329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: XInputController_17
+      rect:
+        serializedVersion: 2
+        x: 1292
+        y: 41
+        width: 234
+        height: 177
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53fbcf9b0b4fd164889041e58361e199
+      internalID: 1567521913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: XInputController_18
+      rect:
+        serializedVersion: 2
+        x: 1548
+        y: 41
+        width: 234
+        height: 177
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ec313154037c734fb256793bc511316
+      internalID: 714378071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: XInputController_19
+      rect:
+        serializedVersion: 2
+        x: 1814
+        y: 23
+        width: 213
+        height: 211
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bcb8c0e2231c7db4cb453b849a4ba60e
+      internalID: 1724908424
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: XInputController_20
+      rect:
+        serializedVersion: 2
+        x: 2071
+        y: 23
+        width: 211
+        height: 211
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 397f8325451d2ed43ac12cf867ee3335
+      internalID: 1862327394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: XInputController_21
+      rect:
+        serializedVersion: 2
+        x: 2308
+        y: 48
+        width: 249
+        height: 162
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 821b9e6063db0674fb14d56c11ce0b7a
+      internalID: -1192723372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 3de2f5d37441a554ba1bbf40c48b352f
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      XInputController_0: -987271098
+      XInputController_1: -1762690185
+      XInputController_10: -1802911150
+      XInputController_11: 223641860
+      XInputController_12: -1047236317
+      XInputController_13: 1550713405
+      XInputController_14: 1000125821
+      XInputController_15: 1656659471
+      XInputController_16: -1009052329
+      XInputController_17: 1567521913
+      XInputController_18: 714378071
+      XInputController_19: 1724908424
+      XInputController_2: 1511227427
+      XInputController_20: 1862327394
+      XInputController_21: -1192723372
+      XInputController_3: -614143616
+      XInputController_4: 6224007
+      XInputController_5: -1085007552
+      XInputController_6: 2090489295
+      XInputController_7: -1047797097
+      XInputController_8: 649939754
+      XInputController_9: 2034798201
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

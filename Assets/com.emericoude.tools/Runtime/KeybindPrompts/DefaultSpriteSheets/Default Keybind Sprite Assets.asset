@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e9147a13417cf04a8dffcd236f51063, type: 3}
+  m_Name: Default Keybind Sprite Assets
+  m_EditorClassIdentifier: 
+  spriteAssetsSerialized:
+  - deviceType:
+      rid: 7995585187649421312
+    spriteAsset: {fileID: 11400000, guid: cbf4a88b69f45574497e3a250002cd12, type: 2}
+  - deviceType:
+      rid: 7995585187649421582
+    spriteAsset: {fileID: 11400000, guid: cbf4a88b69f45574497e3a250002cd12, type: 2}
+  - deviceType:
+      rid: 7995585187649421314
+    spriteAsset: {fileID: 11400000, guid: 7bd941467525ea14e88e3462b405ec27, type: 2}
+  - deviceType:
+      rid: 7995585187649421579
+    spriteAsset: {fileID: 11400000, guid: e190c0ddc9967454cadd8909c5041395, type: 2}
+  - deviceType:
+      rid: 7995585187649421581
+    spriteAsset: {fileID: 11400000, guid: 5716317be20e1954a96d84883ed21bde, type: 2}
+  - deviceType:
+      rid: 7995585187649421580
+    spriteAsset: {fileID: 11400000, guid: 7bd941467525ea14e88e3462b405ec27, type: 2}
+  characterNamingMode: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 7995585187649421312
+      type: {class: Keyboard, ns: UnityEngine.InputSystem, asm: Unity.InputSystem}
+      data: 
+    - rid: 7995585187649421314
+      type: {class: XInputController, ns: UnityEngine.InputSystem.XInput, asm: Unity.InputSystem}
+      data: 
+    - rid: 7995585187649421579
+      type: {class: DualShockGamepad, ns: UnityEngine.InputSystem.DualShock, asm: Unity.InputSystem}
+      data: 
+    - rid: 7995585187649421580
+      type: {class: Gamepad, ns: UnityEngine.InputSystem, asm: Unity.InputSystem}
+      data: 
+    - rid: 7995585187649421581
+      type: {class: SwitchProControllerHID, ns: UnityEngine.InputSystem.Switch, asm: Unity.InputSystem}
+      data: 
+    - rid: 7995585187649421582
+      type: {class: Mouse, ns: UnityEngine.InputSystem, asm: Unity.InputSystem}
+      data: 

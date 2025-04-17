@@ -1,0 +1,859 @@
+fileFormatVersion: 2
+guid: 6dfa12c1701066a41893bac28ec3b6aa
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: SteamDeck_0
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 309
+        width: 82
+        height: 82
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba5c91cc11444db4295c5b0cbef68612
+      internalID: -1017257521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteamDeck_1
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 309
+        width: 82
+        height: 82
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dfa1991294d7e7a49945156bf9b6535c
+      internalID: -1740773462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteamDeck_2
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 324
+        width: 98
+        height: 52
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb774fca99f8b6244902cf54543566f2
+      internalID: 1866265143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteamDeck_3
+      rect:
+        serializedVersion: 2
+        x: 303
+        y: 303
+        width: 94
+        height: 93
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0e6fdd56ddef16409d107947bd199d5
+      internalID: 429161735
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteamDeck_4
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 303
+        width: 94
+        height: 93
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e35d7e5b9206984d929dff348807efd
+      internalID: 425309748
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteamDeck_5
+      rect:
+        serializedVersion: 2
+        x: 503
+        y: 303
+        width: 94
+        height: 93
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b374025a4b520c1488333f1ab295d77b
+      internalID: -1742991056
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteamDeck_6
+      rect:
+        serializedVersion: 2
+        x: 603
+        y: 303
+        width: 94
+        height: 93
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06c81e4b2e4499b4f87432d05f8532a1
+      internalID: 174841828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteamDeck_7
+      rect:
+        serializedVersion: 2
+        x: 703
+        y: 303
+        width: 94
+        height: 93
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1149597dbf8536a4588993ad9dce8b98
+      internalID: -91259978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteamDeck_8
+      rect:
+        serializedVersion: 2
+        x: 806
+        y: 310
+        width: 89
+        height: 80
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca654ea33748b584f9d13d785c6b0b29
+      internalID: -781899991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteamDeck_11
+      rect:
+        serializedVersion: 2
+        x: 904
+        y: 320
+        width: 92
+        height: 60
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c224a3665b78bf548858636acf8e3774
+      internalID: 1901534373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteamDeck_14
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 214
+        width: 92
+        height: 70
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17e2594920643b74d82980150ea52297
+      internalID: -1668405050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteamDeck_15
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 206
+        width: 74
+        height: 85
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30d26f8ee9b355f4aac1ea28e90483a9
+      internalID: -1244413027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteamDeck_16
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 208
+        width: 84
+        height: 83
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60deb0919d3ce1045835dccdd97d38b8
+      internalID: -624753077
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteamDeck_17
+      rect:
+        serializedVersion: 2
+        x: 308
+        y: 208
+        width: 84
+        height: 83
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 561dbc8443ff0574c98c8097f8c661bf
+      internalID: 382181158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteamDeck_18
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 205
+        width: 90
+        height: 89
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 88882112cf16869468be682639db8391
+      internalID: -754571511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteamDeck_20
+      rect:
+        serializedVersion: 2
+        x: 607
+        y: 209
+        width: 86
+        height: 81
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da40d0abd0de3394099a54a4fb4b9995
+      internalID: -1909394389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteamDeck_21
+      rect:
+        serializedVersion: 2
+        x: 814
+        y: 214
+        width: 72
+        height: 72
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e24bdeb8f9afd344787bc62c5033e164
+      internalID: 357967759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteamDeck_22
+      rect:
+        serializedVersion: 2
+        x: 914
+        y: 214
+        width: 72
+        height: 72
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b0a04fa90d66bbe4da90f1f3ea4a3e73
+      internalID: -2126967096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteamDeck_23
+      rect:
+        serializedVersion: 2
+        x: 506
+        y: 205
+        width: 88
+        height: 90
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab1c24f319f73ea448b97468f82dbc3b
+      internalID: 379730600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteamDeck_24
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 220
+        width: 92
+        height: 60
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e94aeb0701e11d4aacf96fbb27c8b2c
+      internalID: -1948190084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteamDeck_25
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 114
+        width: 72
+        height: 72
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2593cbaf6a266f41aad5e137874fb76
+      internalID: -2137511036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteamDeck_26
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 114
+        width: 92
+        height: 70
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 417ca307043145d4cb0042827a5b6018
+      internalID: -1490146929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteamDeck_27
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 106
+        width: 74
+        height: 85
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d53abce888f7eec48829fa6155f76801
+      internalID: 900996260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteamDeck_28
+      rect:
+        serializedVersion: 2
+        x: 308
+        y: 108
+        width: 84
+        height: 83
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc4b75b895d078b408035e450225deef
+      internalID: -227359834
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteamDeck_29
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 108
+        width: 84
+        height: 83
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 839b240dd6e62504382d3c96636189f5
+      internalID: 1880349372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteamDeck_30
+      rect:
+        serializedVersion: 2
+        x: 505
+        y: 105
+        width: 90
+        height: 89
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b52c107b71d17234eab0daae149fa5f2
+      internalID: -1612145329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteamDeck_32
+      rect:
+        serializedVersion: 2
+        x: 707
+        y: 109
+        width: 86
+        height: 81
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74597c8a8483ed743ba67c91bb5e1a98
+      internalID: 1502553743
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteamDeck_33
+      rect:
+        serializedVersion: 2
+        x: 606
+        y: 105
+        width: 88
+        height: 90
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71abc29ebc44b344e86af0948a81c655
+      internalID: -2110239426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteamDeck_34
+      rect:
+        serializedVersion: 2
+        x: 804
+        y: 120
+        width: 92
+        height: 60
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4db0be34fedb096499f23dbfe7d879f2
+      internalID: 996667328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteamDeck_35
+      rect:
+        serializedVersion: 2
+        x: 901
+        y: 124
+        width: 98
+        height: 52
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ac2cae0d9482b945a7bede69549a6d1
+      internalID: 341011976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteamDeck_36
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 9
+        width: 82
+        height: 82
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 467a8ef6083aeb54eb9605690584e045
+      internalID: -1421409118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteamDeck_37
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 9
+        width: 82
+        height: 82
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87a5c9010abf902418459b30139b0a18
+      internalID: -232495692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 34b6485fa53a32249a103fcf914ce3b4
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      SteamDeck_0: -1017257521
+      SteamDeck_1: -1740773462
+      SteamDeck_10: 1372811237
+      SteamDeck_11: 1901534373
+      SteamDeck_12: -1244222622
+      SteamDeck_13: -687056694
+      SteamDeck_14: -1668405050
+      SteamDeck_15: -1244413027
+      SteamDeck_16: -624753077
+      SteamDeck_17: 382181158
+      SteamDeck_18: -754571511
+      SteamDeck_19: 708082196
+      SteamDeck_2: 1866265143
+      SteamDeck_20: -1909394389
+      SteamDeck_21: 357967759
+      SteamDeck_22: -2126967096
+      SteamDeck_23: 379730600
+      SteamDeck_24: -1948190084
+      SteamDeck_25: -2137511036
+      SteamDeck_26: -1490146929
+      SteamDeck_27: 900996260
+      SteamDeck_28: -227359834
+      SteamDeck_29: 1880349372
+      SteamDeck_3: 429161735
+      SteamDeck_30: -1612145329
+      SteamDeck_31: 2049547817
+      SteamDeck_32: 1502553743
+      SteamDeck_33: -2110239426
+      SteamDeck_34: 996667328
+      SteamDeck_35: 341011976
+      SteamDeck_36: -1421409118
+      SteamDeck_37: -232495692
+      SteamDeck_4: 425309748
+      SteamDeck_5: -1742991056
+      SteamDeck_6: 174841828
+      SteamDeck_7: -91259978
+      SteamDeck_8: -781899991
+      SteamDeck_9: 1788216325
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

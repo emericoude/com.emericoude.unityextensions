@@ -1,0 +1,694 @@
+fileFormatVersion: 2
+guid: afc775bf4ee7ca24a8b3ad516bd372df
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: switch_0
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 521
+        width: 235
+        height: 235
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5dc8baade25be604aa7af101248275bc
+      internalID: -1377886649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: switch_1
+      rect:
+        serializedVersion: 2
+        x: 267
+        y: 521
+        width: 235
+        height: 235
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a3cada170e39e414e8d8059a87e76730
+      internalID: -1884368532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: switch_2
+      rect:
+        serializedVersion: 2
+        x: 523
+        y: 521
+        width: 234
+        height: 235
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b5fb9203d8bf264693fdacb3c4bdb0a
+      internalID: -394092871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: switch_3
+      rect:
+        serializedVersion: 2
+        x: 778
+        y: 521
+        width: 235
+        height: 235
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ecb339f318e771f49a3271fc7a031550
+      internalID: 423974813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: switch_4
+      rect:
+        serializedVersion: 2
+        x: 1034
+        y: 521
+        width: 235
+        height: 235
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4852e4143a0ec534096d5a5c75c0df69
+      internalID: 2073583912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: switch_5
+      rect:
+        serializedVersion: 2
+        x: 1291
+        y: 521
+        width: 235
+        height: 235
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce88bc40589a36e49b57bb65c082ec99
+      internalID: -1483907744
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: switch_6
+      rect:
+        serializedVersion: 2
+        x: 1547
+        y: 521
+        width: 235
+        height: 235
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bdf7fcd1a2ee8d84b80e1c4f7af642d8
+      internalID: -686885291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: switch_7
+      rect:
+        serializedVersion: 2
+        x: 1803
+        y: 521
+        width: 234
+        height: 235
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b367fd48b1063bb4ca35507fd1b065a6
+      internalID: -1831411899
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: switch_8
+      rect:
+        serializedVersion: 2
+        x: 2073
+        y: 536
+        width: 206
+        height: 205
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8eb832c4f73946342a22168d333eb2d4
+      internalID: 1202015206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: switch_9
+      rect:
+        serializedVersion: 2
+        x: 2328
+        y: 536
+        width: 208
+        height: 205
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39f0dc90b2d517b45b69bacfbb1107af
+      internalID: -1139173634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: switch_12
+      rect:
+        serializedVersion: 2
+        x: 524
+        y: 267
+        width: 232
+        height: 231
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c22888322837407449fd186d101e27ca
+      internalID: -1162421109
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: switch_13
+      rect:
+        serializedVersion: 2
+        x: 781
+        y: 267
+        width: 231
+        height: 231
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d401084e5fbcaf146a53759bf15b8bf2
+      internalID: 1001258973
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: switch_14
+      rect:
+        serializedVersion: 2
+        x: 1037
+        y: 267
+        width: 230
+        height: 231
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b19e324f7c76fe64bb4caff28ecb0e0e
+      internalID: -1299210801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: switch_15
+      rect:
+        serializedVersion: 2
+        x: 1293
+        y: 267
+        width: 230
+        height: 231
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b0f792b7bb4b20458117930a9b42289
+      internalID: 235711573
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: switch_16
+      rect:
+        serializedVersion: 2
+        x: 1548
+        y: 267
+        width: 231
+        height: 231
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 99c394aa9a7099048ad37de15fa9a7bd
+      internalID: 946766513
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: switch_17
+      rect:
+        serializedVersion: 2
+        x: 1824
+        y: 290
+        width: 192
+        height: 186
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5207749a846a39a4497a978414d75c12
+      internalID: -63316020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: switch_18
+      rect:
+        serializedVersion: 2
+        x: 2081
+        y: 290
+        width: 191
+        height: 186
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb7937a0f96cccc449d48e186664cda6
+      internalID: -1263227429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: switch_19
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 256
+        width: 248
+        height: 253
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63cd11aa70af2cf46acd4a002cf44f53
+      internalID: -643907291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: switch_20
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 256
+        width: 246
+        height: 253
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80090cc60d3dd944385aae1ee646357e
+      internalID: -284872463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: switch_21
+      rect:
+        serializedVersion: 2
+        x: 2337
+        y: 303
+        width: 190
+        height: 159
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58f8cbf70ee89534ab05bef2191703de
+      internalID: 1684389434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: switch_22
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 47
+        width: 190
+        height: 160
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c38daf83e9f7664ea5c11789588fbed
+      internalID: -2051254463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: switch_23
+      rect:
+        serializedVersion: 2
+        x: 297
+        y: 39
+        width: 175
+        height: 175
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 444f4db27ca7848438e13961d47b6c65
+      internalID: 1245295177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: switch_24
+      rect:
+        serializedVersion: 2
+        x: 568
+        y: 56
+        width: 144
+        height: 142
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b48d26cc422ab54687a562e4e1948b7
+      internalID: 297422226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: switch_25
+      rect:
+        serializedVersion: 2
+        x: 823
+        y: 99
+        width: 145
+        height: 55
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82d3bf9943b53a64a819b66432201416
+      internalID: -1179806227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: switch_26
+      rect:
+        serializedVersion: 2
+        x: 1079
+        y: 54
+        width: 145
+        height: 145
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 912480d3d0d126d449efb00462d22c99
+      internalID: -2134905430
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: f24d7c666ac96d043aa113e4cbd9a54f
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      switch_0: -1377886649
+      switch_1: -1884368532
+      switch_10: -1061873265
+      switch_11: 1460353466
+      switch_12: -1162421109
+      switch_13: 1001258973
+      switch_14: -1299210801
+      switch_15: 235711573
+      switch_16: 946766513
+      switch_17: -63316020
+      switch_18: -1263227429
+      switch_19: -643907291
+      switch_2: -394092871
+      switch_20: -284872463
+      switch_21: 1684389434
+      switch_22: -2051254463
+      switch_23: 1245295177
+      switch_24: 297422226
+      switch_25: -1179806227
+      switch_26: -2134905430
+      switch_3: 423974813
+      switch_4: 2073583912
+      switch_5: -1483907744
+      switch_6: -686885291
+      switch_7: -1831411899
+      switch_8: 1202015206
+      switch_9: -1139173634
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

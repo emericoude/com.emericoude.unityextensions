@@ -1,0 +1,631 @@
+fileFormatVersion: 2
+guid: 3b17d48740134414c954b07492136406
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: DualShockController_0
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 522
+        width: 232
+        height: 234
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d22da1f9215d784d9bbd1e3852525e3
+      internalID: 2128814122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DualShockController_1
+      rect:
+        serializedVersion: 2
+        x: 268
+        y: 522
+        width: 233
+        height: 234
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 88bbe715a7e4649468dee8e04540ddfa
+      internalID: 1093214632
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DualShockController_2
+      rect:
+        serializedVersion: 2
+        x: 523
+        y: 522
+        width: 234
+        height: 234
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30304f32fabcd06479bf2c92ba63208e
+      internalID: 1949434072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DualShockController_3
+      rect:
+        serializedVersion: 2
+        x: 779
+        y: 522
+        width: 233
+        height: 234
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72f0ae7dfb8418c47b4dadae62c0c41d
+      internalID: 2021536193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DualShockController_4
+      rect:
+        serializedVersion: 2
+        x: 1028
+        y: 517
+        width: 249
+        height: 249
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1b7a1a70d835b644bbe61a51a66b106
+      internalID: 203629177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DualShockController_5
+      rect:
+        serializedVersion: 2
+        x: 1283
+        y: 517
+        width: 249
+        height: 249
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25355cf13db2dd04fba6e76852b9f3f3
+      internalID: 20041975
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DualShockController_8
+      rect:
+        serializedVersion: 2
+        x: 2052
+        y: 517
+        width: 249
+        height: 249
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72235debfc782064fa4d377bb2772d8b
+      internalID: 685191332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DualShockController_9
+      rect:
+        serializedVersion: 2
+        x: 2308
+        y: 517
+        width: 249
+        height: 249
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 874a0e738543c234b893e585975e7a24
+      internalID: -1142139978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DualShockController_10
+      rect:
+        serializedVersion: 2
+        x: 1542
+        y: 516
+        width: 245
+        height: 251
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c03d8c834014264baefcbe46640126a
+      internalID: -2139129744
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DualShockController_11
+      rect:
+        serializedVersion: 2
+        x: 1798
+        y: 516
+        width: 244
+        height: 251
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: efe48f6b25c5be246bb206aea8e8cd00
+      internalID: 1511972320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DualShockController_12
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 262
+        width: 249
+        height: 248
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea7c9073efed0ad449aa3f0132944ea4
+      internalID: 441435855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DualShockController_13
+      rect:
+        serializedVersion: 2
+        x: 259
+        y: 262
+        width: 249
+        height: 248
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45b2f71abc31e85438c552d76e4a1e7f
+      internalID: 1629656742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DualShockController_14
+      rect:
+        serializedVersion: 2
+        x: 516
+        y: 262
+        width: 248
+        height: 249
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae22c61ee55ae184bb92c42f42c40761
+      internalID: -1364437393
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DualShockController_15
+      rect:
+        serializedVersion: 2
+        x: 794
+        y: 271
+        width: 203
+        height: 230
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c60dde54ab5ecac4684c4965d6c752da
+      internalID: 336915333
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DualShockController_16
+      rect:
+        serializedVersion: 2
+        x: 1051
+        y: 271
+        width: 202
+        height: 230
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 087d2f145cb42714783ba45f8a5477f4
+      internalID: -470917018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DualShockController_17
+      rect:
+        serializedVersion: 2
+        x: 1293
+        y: 298
+        width: 230
+        height: 175
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e197f8b7120b4646aef15c85d41a984
+      internalID: -1278627278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DualShockController_18
+      rect:
+        serializedVersion: 2
+        x: 1548
+        y: 298
+        width: 231
+        height: 175
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 73cd60f5939b0104597db6ebaa44d25b
+      internalID: 200909561
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DualShockController_19
+      rect:
+        serializedVersion: 2
+        x: 1849
+        y: 288
+        width: 142
+        height: 194
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0263155165768484eb0d036c9fa3e53c
+      internalID: 1306255417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DualShockController_20
+      rect:
+        serializedVersion: 2
+        x: 2106
+        y: 288
+        width: 141
+        height: 194
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3952181972fc69f478d24c370be13f4c
+      internalID: -630132453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DualShockController_24
+      rect:
+        serializedVersion: 2
+        x: 2368
+        y: 265
+        width: 128
+        height: 240
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e0024e044d32fd4095638680eb088f5
+      internalID: -950588131
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DualShockController_28
+      rect:
+        serializedVersion: 2
+        x: 269
+        y: 63
+        width: 229
+        height: 129
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63dd7965821d4604d9fef944c8aef363
+      internalID: 880087083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DualShockController_29
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 8
+        width: 128
+        height: 241
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d20d3491a54c8a4a9b3e219fceac89b
+      internalID: -2141401093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 2e5fec5939d0c004d8712d7e5f15e067
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      DualShockController_0: 2128814122
+      DualShockController_1: 1093214632
+      DualShockController_10: -2139129744
+      DualShockController_11: 1511972320
+      DualShockController_12: 441435855
+      DualShockController_13: 1629656742
+      DualShockController_14: -1364437393
+      DualShockController_15: 336915333
+      DualShockController_16: -470917018
+      DualShockController_17: -1278627278
+      DualShockController_18: 200909561
+      DualShockController_19: 1306255417
+      DualShockController_2: 1949434072
+      DualShockController_20: -630132453
+      DualShockController_21: -1353523056
+      DualShockController_22: 2036207862
+      DualShockController_23: 370739024
+      DualShockController_24: -950588131
+      DualShockController_25: -1519081458
+      DualShockController_26: -841911637
+      DualShockController_27: -1552757031
+      DualShockController_28: 880087083
+      DualShockController_29: -2141401093
+      DualShockController_3: 2021536193
+      DualShockController_4: 203629177
+      DualShockController_5: 20041975
+      DualShockController_6: -1092355210
+      DualShockController_7: -970277292
+      DualShockController_8: 685191332
+      DualShockController_9: -1142139978
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
