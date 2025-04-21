@@ -107,7 +107,11 @@ namespace Emericoude
             }
             
             //fallback in case no matching bindings were found
-            if (bindingIndexes.Count == 0) return action.GetBindingDisplayString(); 
+            if (bindingIndexes.Count == 0)
+            {
+                Debug.LogWarning($"Could not find a binding of control {activeControl} in the {action.name} action. Make sure your input asset contains a valid control scheme/binding associated with the action.", this);
+                return action.GetBindingDisplayString(); 
+            }
             
             Type inputDeviceType = activeControl.device.GetType();
             if (!isComposite) return this.GetBindingRichTextOrDisplayString(action, inputDeviceType, bindingIndexes[0]);
@@ -134,7 +138,7 @@ namespace Emericoude
                 spriteAsset = spriteAssetsByType.AsValueEnumerable().FirstOrDefault(kvp => inputDeviceType.IsSubclassOf(kvp.Key)).Value;
                 if (spriteAsset == null) //if we are still null, return a text-based fallback
                 {
-                    Debug.LogWarning($"Could not find a sprite asset for the device type (or parent type): {inputDeviceType}.", this);
+                    Debug.LogWarning($"Could not find a sprite asset for the device type (or for any parent device types): {inputDeviceType}.", this);
                     return displayStringFallback;
                 }
             }
