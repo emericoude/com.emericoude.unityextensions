@@ -85,32 +85,65 @@ namespace Emericoude
         {
             List<int> bindingIndexes = new List<int>();
             bool isComposite = false;
-            for (int i = 0; i < action.bindings.Count; i++)
+
+            bool tryFindBindingIndexesForControl(InputControl control)
             {
-                if (!InputControlPath.Matches(action.bindings[i].effectivePath, activeControl)) continue;
-                if (action.bindings[i].isPartOfComposite)
+                for (int i = 0; i < action.bindings.Count; i++)
                 {
-                    isComposite = true;
-                    if (compositeHandlingMethods == CompositeHandlingMethods.UseCompositeName)
+                    if (!InputControlPath.Matches(action.bindings[i].effectivePath, control)) continue;
+                    if (action.bindings[i].isPartOfComposite)
                     {
-                        bindingIndexes.Add(i - 1);
-                        break; //we only need the composite's name
-                    }
+                        isComposite = true;
+                        if (compositeHandlingMethods == CompositeHandlingMethods.UseCompositeName)
+                        {
+                            bindingIndexes.Add(i - 1);
+                            break; //we only need the composite's name
+                        }
                     
-                    bindingIndexes.Add(i);
+                        bindingIndexes.Add(i);
+                    }
+                    else
+                    {
+                        bindingIndexes.Add(i);
+                        break; //we are not a composite, we know we don't need to keep going
+                    }
                 }
-                else
-                {
-                    bindingIndexes.Add(i);
-                    break; //we are not a composite, we know we don't need to keep going
-                }
+                
+                return bindingIndexes.Count > 0;
             }
+
+            bool hasFoundMatchingBindingIndexes = tryFindBindingIndexesForControl(activeControl);
             
             //fallback in case no matching bindings were found
-            if (bindingIndexes.Count == 0)
+            if (!hasFoundMatchingBindingIndexes)
             {
-                Debug.LogWarning($"Could not find a binding of control {activeControl} in the {action.name} action. Make sure your input asset contains a valid control scheme/binding associated with the action.", this);
-                return action.GetBindingDisplayString(); 
+                //start by checking if we have a matching control scheme, and if so, check other devices in the control scheme
+                var matchingControlScheme = InputControlScheme.FindControlSchemeForDevice(activeControl.device, action.actionMap.controlSchemes);
+                if (matchingControlScheme != null && matchingControlScheme.Value.deviceRequirements.Count > 1)
+                {
+                    int indexOfCurrentDevice = matchingControlScheme.Value.deviceRequirements.IndexOf(r => r.controlPath == activeControl.device.path);
+                    for (int i = 0; i < matchingControlScheme.Value.deviceRequirements.Count; i++)
+                    {
+                        if (indexOfCurrentDevice == i) continue;
+                        var matchingControls = InputSystem.FindControls(matchingControlScheme.Value.deviceRequirements[i].controlPath);
+                        foreach (var control in matchingControls)
+                        {
+                            if (tryFindBindingIndexesForControl(control))
+                            {
+                                hasFoundMatchingBindingIndexes = true;
+                                break;
+                            }
+                        }
+
+                        if (hasFoundMatchingBindingIndexes) break;
+                    }
+                }
+
+                if (!hasFoundMatchingBindingIndexes)
+                {
+                    Debug.LogWarning($"Could not find a binding of control {activeControl} in the {action.name} action. Make sure your input asset contains a valid control scheme/binding associated with the action.", this);
+                    return action.GetBindingDisplayString(); 
+                }
             }
             
             Type inputDeviceType = activeControl.device.GetType();
