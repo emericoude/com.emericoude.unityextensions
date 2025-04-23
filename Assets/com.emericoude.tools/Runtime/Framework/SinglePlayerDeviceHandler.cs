@@ -5,29 +5,40 @@ using ZLinq;
 
 namespace Emericoude.Framework
 {
+    /// <summary>
+    /// A simple utility to fetch the last device or control scheme used by the current user.
+    /// TODO: This is kind of specific and doesn't have a strong identity yet.
+    /// </summary>
     public class SinglePlayerDeviceHandler : LazySingleton<SinglePlayerDeviceHandler>
     {
-        public Action<InputDevice> OnActiveDeviceChanged;
+        public Action<InputDevice> OnDeviceChanged;
+        public Action<InputControlScheme> OnControlSchemeChanged;
 
+        private InputDevice activeDevice;
         public InputDevice ActiveDevice
         {
-            get => _activeDevice;
+            get => activeDevice ??= GetLastDeviceUsed();
             private set
             {
-                if (_activeDevice == value) return;
-                _activeDevice = value;
-                OnActiveDeviceChanged?.Invoke(_activeDevice);
+                if (activeDevice == value) return;
+                activeDevice = value;
+                OnDeviceChanged?.Invoke(activeDevice);
             }
         }
-        
-        public InputControlScheme? ActiveControlScheme { get; private set; }
-        
-        private InputDevice _activeDevice;
 
-        protected void Awake()
+        private InputControlScheme? activeControlScheme;
+        public InputControlScheme? ActiveControlScheme
         {
-            this.ActiveDevice = GetLastDeviceUsed();
-            this.ActiveControlScheme = InputUser.all[0].controlScheme;
+            get => activeControlScheme ??= InputUser.all[0].controlScheme;
+            private set
+            {
+                if (activeControlScheme == value) return;
+                activeControlScheme = value;
+                if (activeControlScheme != null)
+                {
+                    OnControlSchemeChanged?.Invoke(activeControlScheme.Value);
+                }
+            }
         }
 
         private void OnEnable()
