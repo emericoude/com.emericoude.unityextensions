@@ -244,10 +244,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInputComponent: {fileID: 536491595}
-  keybindSpriteAssets: {fileID: 11400000, guid: b1d923bab57fa684490d2e019e5f359e, type: 2}
+  spriteAssetList: {fileID: 11400000, guid: def9b30d7401e5845bc9ac4962effc1d, type: 2}
   textMeshProUGUI: {fileID: 1413263312}
   image: {fileID: 2029949357}
-  checkType: 2
+  checkType: 0
 --- !u!114 &536491595
 MonoBehaviour:
   m_ObjectHideFlags: 0
