@@ -1,4 +1,5 @@
-﻿using Emericoude.StateMachine;
+﻿using System;
+using Emericoude.StateMachine;
 using UnityEngine;
 
 namespace Emericoude.Tests
@@ -19,7 +20,7 @@ namespace Emericoude.Tests
         {
         }
 
-        public void OnEnter()
+        public void OnEnter(EventArgs args = null)
         {
             this.timer = this.Duration;
         }

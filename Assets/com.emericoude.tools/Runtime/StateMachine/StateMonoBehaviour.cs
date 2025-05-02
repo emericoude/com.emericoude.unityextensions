@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Emericoude.StateMachine
 {
@@ -11,7 +12,7 @@ namespace Emericoude.StateMachine
             this.enabled = this.IsActive;
         }
 
-        public virtual void OnEnter()
+        public virtual void OnEnter(EventArgs args = null)
         {
             this.SetActiveAndEnabled(true);
         }

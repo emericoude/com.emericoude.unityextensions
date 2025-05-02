@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Emericoude.StateMachine
 {
@@ -14,9 +15,9 @@ namespace Emericoude.StateMachine
             this.Transitions = new HashSet<ITransition>();
         }
 
-        public void AddTransition(IState to, IPredicate condition)
+        public void AddTransition(IState to, IPredicate condition, Func<EventArgs> funcArgs = null)
         {
-            this.Transitions.Add(new Transition(to, condition));
+            this.Transitions.Add(new Transition(to, condition, funcArgs));
         }
     }
 }

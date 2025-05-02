@@ -1,3 +1,5 @@
+using System;
+
 namespace Emericoude.StateMachine
 {
     public interface IState
@@ -6,7 +8,7 @@ namespace Emericoude.StateMachine
         public void OnInit();
         
         /// <summary> Called whenever the state is entered. </summary>
-        public void OnEnter();
+        public void OnEnter(EventArgs args = null);
         /// <summary> Called whenever the state is exited. </summary>
         public void OnExit();
         

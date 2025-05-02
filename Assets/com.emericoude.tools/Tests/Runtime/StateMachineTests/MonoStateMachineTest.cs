@@ -12,8 +12,8 @@ namespace Emericoude.Tests
         
         private void Awake()
         {
-            this.StateMachine.AddTransition(this.firstMonoState, this.secondMonoState, new FuncPredicate(() => this.firstMonoState.IsTimerExpired()));
-            this.StateMachine.AddTransition(this.secondMonoState, this.firstMonoState, new FuncPredicate(() => this.secondMonoState.IsTimerExpired()));
+            this.StateMachine.AddTransition(this.firstMonoState, this.secondMonoState, new FuncPredicate(() => this.firstMonoState.IsTimerExpired()), this.firstMonoState.GetRandomNumber);
+            this.StateMachine.AddTransition(this.secondMonoState, this.firstMonoState, new FuncPredicate(() => this.secondMonoState.IsTimerExpired()), this.firstMonoState.GetRandomNumber);
             this.StateMachine.SetState(this.firstMonoState);
             this.SetActiveAndEnabled(true);
         }

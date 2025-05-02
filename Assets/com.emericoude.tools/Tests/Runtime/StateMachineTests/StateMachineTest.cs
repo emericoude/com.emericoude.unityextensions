@@ -41,8 +41,8 @@ namespace Emericoude.Tests
             {
                 this.stateMachineUsingSerializedStates = new StateMachine.StateMachine();
                 this.stateMachineUsingSerializedStates.OnStateChanged += this.OnStateChanged;
-                this.stateMachineUsingSerializedStates.AddTransition(this.firstMonoState, this.secondMonoState, new FuncPredicate(() => this.firstMonoState.IsTimerExpired()));
-                this.stateMachineUsingSerializedStates.AddTransition(this.secondMonoState, this.firstMonoState, new FuncPredicate(() => this.secondMonoState.IsTimerExpired()));
+                this.stateMachineUsingSerializedStates.AddTransition(this.firstMonoState, this.secondMonoState, new FuncPredicate(() => this.firstMonoState.IsTimerExpired()), this.firstMonoState.GetRandomNumber);
+                this.stateMachineUsingSerializedStates.AddTransition(this.secondMonoState, this.firstMonoState, new FuncPredicate(() => this.secondMonoState.IsTimerExpired()), this.secondMonoState.GetRandomNumber);
                 this.stateMachineUsingSerializedStates.SetState(this.firstMonoState);
             }
             

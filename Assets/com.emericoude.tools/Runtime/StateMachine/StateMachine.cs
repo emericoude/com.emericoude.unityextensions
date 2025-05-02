@@ -33,16 +33,16 @@ namespace Emericoude.StateMachine
             }
         }
 
-        public virtual void OnEnter()
+        public virtual void OnEnter(EventArgs args = null)
         {
-            this.current.State?.OnEnter();
+            this.current.State?.OnEnter(args);
         }
 
         public virtual void OnUpdate()
         {
             if (this.TryEvaluateTransitions(out var transition))
             {
-                this.ChangeState(transition.To);
+                this.ChangeState(transition.To, transition.FuncArgs?.Invoke());
             }
             
             this.current.State?.OnUpdate();
@@ -74,7 +74,7 @@ namespace Emericoude.StateMachine
 
         /// <summary> Transitions from the current state to a new one. This invokes OnExit for the previous,
         /// OnEnter for the new, and the OnStateChanged event. </summary>
-        public void ChangeState(IState to)
+        public void ChangeState(IState to, EventArgs args = null)
         {
             if (to == this.current.State) return;
 
@@ -82,7 +82,7 @@ namespace Emericoude.StateMachine
             var nextState = this.nodes[to.GetType()].State;
             
             previousState.OnExit();
-            nextState.OnEnter();
+            nextState.OnEnter(args);
 
             this.current = this.nodes[to.GetType()];
             this.OnStateChanged?.Invoke(previousState, nextState);
@@ -97,9 +97,9 @@ namespace Emericoude.StateMachine
 
         /// <summary> Add a transition from one state to another with a condition. This also registers states
         /// to the state machine if they aren't already. </summary>
-        public void AddTransition(IState from, IState to, IPredicate condition)
+        public void AddTransition(IState from, IState to, IPredicate condition, Func<EventArgs> funcArgs = null)
         {
-            this.GetOrAddNode(from).AddTransition(this.GetOrAddNode(to).State, condition);
+            this.GetOrAddNode(from).AddTransition(this.GetOrAddNode(to).State, condition, funcArgs);
         }
 
         /// <summary> Adds a "from any state" transition to a state with a condition. </summary>

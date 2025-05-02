@@ -1,4 +1,6 @@
-﻿namespace Emericoude.StateMachine
+﻿using System;
+
+namespace Emericoude.StateMachine
 {
     public abstract class StateMachineMonoBehaviour : StateMonoBehaviour
     {
@@ -10,10 +12,10 @@
             this.enabled = this.IsActive;
         }
 
-        public override void OnEnter()
+        public override void OnEnter(EventArgs args = null)
         {
             this.SetActiveAndEnabled(true);
-            this.StateMachine.OnEnter();
+            this.StateMachine.OnEnter(args);
         }
         
         public override void OnUpdate() => this.StateMachine.OnUpdate();
