@@ -50,6 +50,12 @@ namespace Emericoude.Helpers
 
 		/// <summary> Tries to get a component, and if there is none, adds it. </summary>
 		/// <returns> The found or added component. </returns>
+		public static T GetOrAddComponent<T>(this Component component) where T : Component {
+			return component.gameObject.GetOrAddComponent<T>();
+		}
+		
+		/// <summary> Tries to get a component, and if there is none, adds it. </summary>
+		/// <returns> The found or added component. </returns>
 		public static T GetOrAddComponent<T>(this GameObject gameObject) where T : Component
 		{
 			return gameObject.TryGetComponent(out T component) ? component : gameObject.AddComponent<T>();
