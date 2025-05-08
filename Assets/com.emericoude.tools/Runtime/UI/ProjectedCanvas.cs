@@ -7,7 +7,7 @@ using UnityEngine;
 
 using ZLinq;
 
-namespace Emericoude
+namespace Emericoude.UI.ProjectedCanvas
 {
     /// <summary>
     /// A canvas meant to be used for projection onto a mesh (using a Render Texture). Useful for something like an interactable monitor or a map.

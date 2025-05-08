@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace Emericoude
+namespace Emericoude.UI.ProjectedCanvas
 {
     /// <summary>
     /// A modified Graphic Raycaster. This basically takes a normal raycast, and passes it through

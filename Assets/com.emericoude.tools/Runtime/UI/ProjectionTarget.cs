@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Emericoude
+namespace Emericoude.UI.ProjectedCanvas
 {
     /// <summary>
     /// A target used by a ProjectedCanvas to be projected onto.
