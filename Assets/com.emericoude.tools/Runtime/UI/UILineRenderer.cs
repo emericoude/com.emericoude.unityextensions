@@ -142,7 +142,7 @@ namespace Emericoude.UI
 
                 List<float3> splinePoints = new List<float3>();
                 for (int i = 0; i < this.SplineResolution; i++) {
-                    splinePoints.Add(spline.EvaluatePosition(Mathf.InverseLerp(0, this.SplineResolution, i))); 
+                    splinePoints.Add(spline.EvaluatePosition(Mathf.InverseLerp(0, this.SplineResolution - 1, i))); 
                 }
                 pointsToDraw = splinePoints.AsValueEnumerable().Select(v3 => new Vector2(v3.x, v3.y)).ToArray();
             }
