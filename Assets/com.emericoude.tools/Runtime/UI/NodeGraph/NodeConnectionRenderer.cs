@@ -6,8 +6,6 @@ using Random = System.Random;
 
 namespace Emericoude.UI.NodeGraph
 {
-    //TODO: Perhaps a different component that can draw a line going through multiple nodes (that way the curve flows better)
-
     [RequireComponent(typeof(UILineRenderer))]
     [RequireComponent(typeof(NodeConnection))]
     public class NodeConnectionRenderer : MonoBehaviour
@@ -114,8 +112,6 @@ namespace Emericoude.UI.NodeGraph
                 this.Redraw();
             }
         }
-
-        //TODO: rect transform avoidance system?
 
         private void Reset() {
             this.m_Connection = this.GetComponent<NodeConnection>();

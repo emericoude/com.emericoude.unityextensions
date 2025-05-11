@@ -10,7 +10,6 @@ using ZLinq;
 
 namespace Emericoude.UI
 {
-    //TODO: CUSTOM EDITOR
     /// <summary>
     /// A line renderer for uGUI.
     /// </summary>
@@ -165,9 +164,7 @@ namespace Emericoude.UI
                 }
             }
             
-            //TODO: This doesn't really work that well with splines imo...
-            // I feel like we can do better math to have triangles fill joints without overlap
-            //TODO: not gonna lie, I'd prefer if corners could be rounded, though maybe then just use bezier...
+            //TODO: This doesn't work well at some angles (especially when using splines) as it will create overlapping triangles. Perhaps there is a different method to drawing the corners?
             //modify segments to fill corners if possible, and then add the to the vertex helper
             for (int i = 0; i < segments.Count; i++) {
                 if (i < segments.Count - 1 && this.m_CornerType != CornerType.None) {
@@ -224,7 +221,7 @@ namespace Emericoude.UI
             }
         }
 
-        //TODO: Caps look awful, need a way to add a resolution to them so they can be rounded...
+        //TODO: Caps look awful, we should draw them as an arc instead
         private UIVertex[] CreateLineCap(Vector2 start, Vector2 end, SegmentType type) {
             return type switch {
                 SegmentType.Start => this.CreateLineSegment(
