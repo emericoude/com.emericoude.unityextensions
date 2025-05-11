@@ -25,11 +25,7 @@ namespace Emericoude.CustomEditors
         private sealed class UILineRendererVisualElement : VisualElement
         {
             public readonly UILineRendererEditor TargetEditor;
-            
-            private VisualElement maskableGraphicContainer;
-            private VisualElement pointsContainer;
-            private VisualElement lineStyleContainer;
-            private VisualElement splineStyleContainer;
+            private readonly VisualElement splineStyleContainer;
 
             public UILineRendererVisualElement(UILineRendererEditor editor, SerializedObject serializedObject) : base() {
                 this.TargetEditor = editor;
@@ -42,20 +38,20 @@ namespace Emericoude.CustomEditors
                 var raycastPaddingProperty = serializedObject.FindProperty("m_RaycastPadding");
                 var maskableProperty = serializedObject.FindProperty("m_Maskable");
                 
-                this.maskableGraphicContainer = this.AddEditorFoldoutContainer(editor.graphicFoldoutOpen, "Maskable Graphic Settings", "", this.OnGraphicFoldoutValueChanged);
-                this.maskableGraphicContainer.AddPropertyField(materialProperty);
-                this.maskableGraphicContainer.AddPropertyField(colorProperty);
-                this.maskableGraphicContainer.AddToggleField(raycastTargetProperty);
-                this.maskableGraphicContainer.AddVector4Field(raycastPaddingProperty, "\u2190", "\u2193", "\u2192", "\u2191"); //left, bottom, right, top
-                this.maskableGraphicContainer.AddToggleField(maskableProperty);
+                VisualElement maskableGraphicContainer1 = this.AddEditorFoldoutContainer(editor.graphicFoldoutOpen, "Maskable Graphic Settings", "", this.OnGraphicFoldoutValueChanged);
+                maskableGraphicContainer1.AddPropertyField(materialProperty);
+                maskableGraphicContainer1.AddPropertyField(colorProperty);
+                maskableGraphicContainer1.AddToggleField(raycastTargetProperty);
+                maskableGraphicContainer1.AddVector4Field(raycastPaddingProperty, "\u2190", "\u2193", "\u2192", "\u2191"); //left, bottom, right, top
+                maskableGraphicContainer1.AddToggleField(maskableProperty);
                 #endregion
 
                 var useWorldSpaceProperty = serializedObject.FindProperty("m_UseWorldSpace");
                 var pointsProperty = serializedObject.FindProperty("m_Points");
                 
-                this.pointsContainer = this.AddEditorFoldoutContainer(editor.pointsFoldoutOpen, "Points", "", this.OnPointsFoldoutValueChanged);
-                this.pointsContainer.AddToggleField(useWorldSpaceProperty);
-                this.pointsContainer.AddPropertyField(pointsProperty);
+                VisualElement pointsContainer1 = this.AddEditorFoldoutContainer(editor.pointsFoldoutOpen, "Points", "", this.OnPointsFoldoutValueChanged);
+                pointsContainer1.AddToggleField(useWorldSpaceProperty);
+                pointsContainer1.AddPropertyField(pointsProperty);
                 
                 var spriteProperty = serializedObject.FindProperty("m_Sprite");
                 var lineThicknessProperty = serializedObject.FindProperty("m_LineThickness");
@@ -66,14 +62,14 @@ namespace Emericoude.CustomEditors
                 var splineResolutionProperty = serializedObject.FindProperty("m_SplineResolution");
                 var splineTangentModeProperty = serializedObject.FindProperty("m_SplineTangentMode");
                 
-                this.lineStyleContainer = this.AddEditorFoldoutContainer(this.TargetEditor.styleSettingsOpen, "Line Style", "", this.OnLineStyleFoldoutValueChanged);
-                this.lineStyleContainer.AddPropertyField(spriteProperty);
-                this.lineStyleContainer.AddPropertyField(lineThicknessProperty);
-                this.lineStyleContainer.AddEnumField(cornerTypeProperty);
-                this.lineStyleContainer.AddEnumField(lineCapsProperty);
+                VisualElement lineStyleContainer1 = this.AddEditorFoldoutContainer(this.TargetEditor.styleSettingsOpen, "Line Style", "", this.OnLineStyleFoldoutValueChanged);
+                lineStyleContainer1.AddPropertyField(spriteProperty);
+                lineStyleContainer1.AddPropertyField(lineThicknessProperty);
+                lineStyleContainer1.AddEnumField(cornerTypeProperty);
+                lineStyleContainer1.AddEnumField(lineCapsProperty);
 
-                this.lineStyleContainer.AddToggleField(drawWithSplineProperty, this.OnDrawWithSplineValueChanged);
-                this.splineStyleContainer = this.lineStyleContainer.AddEmptyVisualElement();
+                lineStyleContainer1.AddToggleField(drawWithSplineProperty, this.OnDrawWithSplineValueChanged);
+                this.splineStyleContainer = lineStyleContainer1.AddEmptyVisualElement();
                 this.splineStyleContainer.AddEnumField(splineTangentModeProperty);
                 this.splineStyleContainer.AddPropertyField(splineResolutionProperty);
                 this.splineStyleContainer.style.SetDisplay(drawWithSplineProperty.boolValue);

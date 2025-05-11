@@ -25,7 +25,14 @@ namespace Emericoude.UI.NodeGraph
         {
             Linear, //2 points (start, end)
             Elbow, //4 points (start, corner01, corner02, end)
+            //TODO: As spline passthrough, i.e. calculate a spline from previous to this to the next, then draw the segment of the spline
             Manual //whatever you want
+        }
+
+        public enum ElbowCenterMethods
+        {
+            ZeroIsStart,
+            ZeroIsNearestEndpoint
         }
 
         public enum EndpointPositioningMethod
@@ -43,21 +50,31 @@ namespace Emericoude.UI.NodeGraph
         [SerializeField] private UILineRenderer m_Line;
 
         [Tooltip("Doing iterations will make the connection look more natural, but will also make it take longer to draw. Generally, one or two is good enough.")]
-        [SerializeField] private int m_EndPointIterations = 1;
+        [SerializeField] private int m_StartAndEndPointIterations = 1;
         
-        [SerializeField] private PointsDrawingFormation m_PointsPositionStyle = PointsDrawingFormation.Linear;
-        public PointsDrawingFormation PointsPositionStyle {
-            get => this.m_PointsPositionStyle;
+        [SerializeField] private PointsDrawingFormation m_LineStyle = PointsDrawingFormation.Linear;
+        public PointsDrawingFormation LineDrawingStyle {
+            get => this.m_LineStyle;
             set {
-                if (this.m_PointsPositionStyle == value) return;
-                this.m_PointsPositionStyle = value;
+                if (this.m_LineStyle == value) return;
+                this.m_LineStyle = value;
                 this.Redraw();
             }
         }
         
-        [SerializeField] private EndpointPositioningMethod m_StartPositionMethod = EndpointPositioningMethod.RectCenter;
-        [SerializeField] private EndpointPositioningMethod m_EndPositionMethod = EndpointPositioningMethod.RectCenter;
+        [SerializeField] private EndpointPositioningMethod m_StartPointPosition = EndpointPositioningMethod.RectCenter;
+        [SerializeField] private EndpointPositioningMethod m_EndPointPosition = EndpointPositioningMethod.RectCenter;
 
+        [SerializeField] private ElbowCenterMethods m_ElbowCenterMethod = ElbowCenterMethods.ZeroIsStart;
+        public ElbowCenterMethods ElbowCenterMethod {
+            get => this.m_ElbowCenterMethod;
+            set {
+                if (this.m_ElbowCenterMethod == value) return;
+                this.m_ElbowCenterMethod = value;
+                this.Redraw();
+            }
+        }
+        
         [SerializeField, Range(0.05f, 0.95f)] private float m_ElbowCenter = 0.5f;
         public float ElbowCenter {
             get => this.m_ElbowCenter;
@@ -98,8 +115,6 @@ namespace Emericoude.UI.NodeGraph
             }
         }
 
-        //TODO: connect to edges
-        //TODO: start/end cap sprites
         //TODO: rect transform avoidance system?
 
         private void Reset() {
@@ -123,10 +138,12 @@ namespace Emericoude.UI.NodeGraph
         }
 
         private void OnDrawGizmos() {
+            if (this.m_Connection == null) return;
+            if (this.m_Connection.From == null || this.m_Connection.To == null) return;
             var points = this.GetPoints();
             Gizmos.color = Color.blue;
             foreach (var point in points) {
-                var pointToWorld = point;//this.transform.TransformPoint(point);
+                var pointToWorld = this.m_Line.UseWorldSpace ? point : this.transform.TransformPoint(point);
                 Gizmos.DrawSphere(pointToWorld, 5f);
             }
         }
@@ -158,7 +175,7 @@ namespace Emericoude.UI.NodeGraph
         }
 
         private Vector3[] GetPoints() {
-            return this.PointsPositionStyle switch {
+            return this.LineDrawingStyle switch {
                 PointsDrawingFormation.Linear => this.GetPoints_Linear(),
                 PointsDrawingFormation.Elbow => this.GetPoints_Elbow(),
                 PointsDrawingFormation.Manual => this.GetPoints_Manual(),
@@ -208,8 +225,8 @@ namespace Emericoude.UI.NodeGraph
                 Vector3 alignedStart = startDirection * start;
                 Vector3 alignedEnd = startDirection * end;
                 float alignedDirectionDistance = Vector3.Distance(alignedStart, alignedEnd);
-                Vector3 elbowCorner01 = start + ((Vector3)startDirection * (alignedDirectionDistance * this.ElbowCenter));
-                Vector3 elbowCorner02 = end + ((Vector3)endDirection * (alignedDirectionDistance * (1f - this.ElbowCenter)));
+                Vector3 elbowCorner01 = start + ((Vector3)startDirection * (alignedDirectionDistance * (this.ElbowCenter) ));
+                Vector3 elbowCorner02 = end + ((Vector3)endDirection * (alignedDirectionDistance * (this.ElbowCenterMethod == ElbowCenterMethods.ZeroIsStart ? (1f - this.ElbowCenter) : (this.ElbowCenter))));
                 return new[] { start, elbowCorner01, elbowCorner02, end };
             }
         }
@@ -219,16 +236,16 @@ namespace Emericoude.UI.NodeGraph
         }
 
         private (Vector3 start, Vector3 end) GetEndAndStartPointsThroughIteration() {
-            int iterations = this.m_EndPointIterations;
-            if (this.m_StartPositionMethod is EndpointPositioningMethod.RectCenter || this.m_EndPositionMethod is EndpointPositioningMethod.RectCenter) {
+            int iterations = this.m_StartAndEndPointIterations;
+            if (this.m_StartPointPosition is EndpointPositioningMethod.RectCenter || this.m_EndPointPosition is EndpointPositioningMethod.RectCenter) {
                 iterations = 1;
             }
 
             Vector3 startPoint = this.GetNodeCenterPointWorld(this.m_Connection.From);
             Vector3 endPoint = this.GetNodeCenterPointWorld(this.m_Connection.To);
             while (iterations > 0) {
-                startPoint = this.GetEndpointWorld(endPoint, this.m_Connection.From, this.m_Connection.To, this.m_StartPositionMethod);
-                endPoint = this.GetEndpointWorld(startPoint, this.m_Connection.To, this.m_Connection.From, this.m_EndPositionMethod);
+                startPoint = this.GetEndpointWorld(endPoint, this.m_Connection.From, this.m_Connection.To, this.m_StartPointPosition);
+                endPoint = this.GetEndpointWorld(startPoint, this.m_Connection.To, this.m_Connection.From, this.m_EndPointPosition);
                 iterations--;
             }
             

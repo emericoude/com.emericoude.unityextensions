@@ -83,11 +83,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Points: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 1d562d84c44ed5549a212c186e138d17, type: 3}
+  m_UseWorldSpace: 1
   m_LineThickness: 10
   m_CornerType: 2
   m_DrawWithSpline: 1
-  m_SplineResolution: 32
+  m_SplineResolution: 16
   m_SplineTangentMode: 0
   m_LineCaps: 0
 --- !u!114 &5203421174284493101
@@ -104,7 +105,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Connection: {fileID: 1033417773262895955}
   m_Line: {fileID: 2100677859266611702}
-  m_DrawingStyle: 0
-  drawOnStart: 1
-  redrawOnNodeMove: 1
-  redrawOnConnectionChange: 1
+  m_StartAndEndPointIterations: 1
+  m_LineStyle: 1
+  m_StartPointPosition: 5
+  m_EndPointPosition: 5
+  m_ElbowCenterMethod: 1
+  m_ElbowCenter: 0.25
+  m_FromElbowDirection: 0
+  m_ToElbowDirection: 0
+  m_PointsManual: []
