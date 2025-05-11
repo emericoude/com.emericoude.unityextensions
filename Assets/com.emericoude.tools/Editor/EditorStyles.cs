@@ -132,6 +132,30 @@ namespace Emericoude.CustomEditors
             visualElement.Add(propertyField);
             return propertyField;
         }
+
+        public static Vector4Field AddVector4Field(
+            this VisualElement visualElement, 
+            SerializedProperty property, 
+            string xLabel = "x",
+            string yLabel = "y",
+            string zLabel = "z",
+            string wLabel = "w",
+            EventCallback<ChangeEvent<Vector4>> onValueChanged = null) {
+            var vector4Field = new Vector4Field(property.displayName) {
+                tooltip = property.tooltip
+            };
+            vector4Field.BindProperty(property);
+            if (onValueChanged != null)
+            {
+                vector4Field.RegisterValueChangedCallback(onValueChanged);
+            }
+            vector4Field.Q<FloatField>("unity-x-input").label = xLabel;
+            vector4Field.Q<FloatField>("unity-y-input").label = yLabel;
+            vector4Field.Q<FloatField>("unity-z-input").label = zLabel;
+            vector4Field.Q<FloatField>("unity-w-input").label = wLabel;
+            visualElement.Add(vector4Field);
+            return vector4Field;
+        }
         
         #endregion
     }

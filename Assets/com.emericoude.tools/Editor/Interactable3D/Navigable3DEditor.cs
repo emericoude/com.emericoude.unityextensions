@@ -1,29 +1,15 @@
-﻿using System;
-using Emericoude.Helpers;
-using UnityEditor;
-using UnityEditor.UIElements;
+﻿    using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace Emericoude.CustomEditors
 {
     [CustomEditor(typeof(Navigable3D), true)]
-    public class Navigable3DEditor : Editor
+    public class Navigable3DEditor : SerializedEditor
     {
+        protected override string EditorPrefKey => EDITOR_PREF_KEY;
         private const string EDITOR_PREF_KEY = "EMERICOUDE_NAVIGABLE_3D_EDITOR";
         [SerializeField] private bool eventFoldoutOpen = false;
-
-        private void OnEnable()
-        {
-            string serializedData = EditorPrefs.GetString(EDITOR_PREF_KEY, JsonUtility.ToJson(this, false));
-            JsonUtility.FromJsonOverwrite(serializedData, this);
-        }
-
-        private void OnDisable()
-        {
-            string serializedData = JsonUtility.ToJson(this, false);
-            EditorPrefs.SetString(EDITOR_PREF_KEY, serializedData);
-        }
 
         public override VisualElement CreateInspectorGUI()
         {
