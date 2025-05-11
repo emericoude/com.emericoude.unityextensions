@@ -28,13 +28,24 @@ namespace Emericoude.UI
         
         private Vector2[] startUvs, middleUvs, endUvs;
         
-        [SerializeField] private Vector2[] m_Points;
+        [SerializeField] private Vector3[] m_Points;
+        
         [SerializeField] private Sprite m_Sprite;
         public Sprite Sprite {
             get => m_Sprite;
             set {
                 if (this.m_Sprite == value) return;
                 this.m_Sprite = value;
+                this.SetAllDirty();
+            }
+        }
+
+        [SerializeField] private bool m_UseWorldSpace = false;
+        public bool UseWorldSpace {
+            get => this.m_UseWorldSpace;
+            set {
+                if (this.m_UseWorldSpace == value) return;
+                this.m_UseWorldSpace = value;
                 this.SetAllDirty();
             }
         }
@@ -90,7 +101,7 @@ namespace Emericoude.UI
             }
         }
 
-        
+        //TODO: Cap sprites
         [SerializeField] private LineCapsPosition m_LineCaps = LineCapsPosition.None;
         public LineCapsPosition LineCaps {
             get => this.m_LineCaps;
@@ -105,7 +116,7 @@ namespace Emericoude.UI
             useLegacyMeshGeneration = false;
         }
 
-        public void SetPoints(Vector2[] points) {
+        public void SetPoints(Vector3[] points) {
             this.m_Points = points;
             this.SetAllDirty();
         }
@@ -115,10 +126,11 @@ namespace Emericoude.UI
             
             this.GenerateUVs();
             vh.Clear();
+
+            var pointsToDraw = this.UseWorldSpace
+                ? this.m_Points.AsValueEnumerable().Select(p => (Vector2)this.transform.InverseTransformPoint(p)).ToArray()
+                : this.m_Points.AsValueEnumerable().Select(p => (Vector2)p).ToArray();
             
-            var pointsToDraw = this.m_Points;
-            
-            //TODO: bezier & resolution modifier
             if (this.DrawWithSpline) {
                 Spline spline = new Spline(
                     pointsToDraw
@@ -134,8 +146,6 @@ namespace Emericoude.UI
                 }
                 pointsToDraw = splinePoints.AsValueEnumerable().Select(v3 => new Vector2(v3.x, v3.y)).ToArray();
             }
-
-            
             
             //create necessary segments
             var segments = new List<UIVertex[]>();
