@@ -71,5 +71,27 @@ namespace Emericoude.Helpers
 			Vector3 direction = point - pivot;
 			return pivot + rotation * direction;
 		}
+		
+		/// <summary> Returns the nearest point from the given point to a list of points. </summary>
+		/// <returns> The nearest vector2 to the given point. </returns>
+		public static Vector3 GetNearestPoint(this Vector3 from, Vector3[] to) {
+			float nearestDistance = float.PositiveInfinity;
+			Vector3 nearestPoint = Vector3.zero;
+			foreach (Vector3 point in to) {
+				float distance = (from - point).sqrMagnitude;
+				if (distance < nearestDistance) {
+					nearestDistance = distance;
+					nearestPoint = point;
+				}
+			}
+
+			return nearestPoint;
+		}
+		
+		public static Vector3 GetNearestPointOnSphereSurface(this Vector3 from, Vector3 to, float radius) {
+			float distance = Vector3.Distance(from, to) - radius;
+			Vector3 direction = (to - from).normalized;
+			return from + direction * distance;
+		}
     }
 }
