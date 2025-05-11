@@ -27,7 +27,12 @@ namespace Emericoude.UI.ProjectedCanvas
         public Canvas RenderTextureCanvas => this.renderTextureCanvas;
         public Camera RenderTextureCamera => this.RenderTextureCanvas.worldCamera;
         public Camera EventCamera {
-            get => this.m_EventCamera ??= Camera.main;
+            get {
+                if (this.m_EventCamera == null) {
+                    this.m_EventCamera = Camera.main;
+                }
+                return this.m_EventCamera;
+            }
             set => this.m_EventCamera = value;
         }
         
