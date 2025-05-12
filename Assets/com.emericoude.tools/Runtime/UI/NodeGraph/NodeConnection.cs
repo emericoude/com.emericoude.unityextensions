@@ -1,7 +1,10 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Emericoude.UI.NodeGraph
 {
+    //TODO: move this into Node, or make them a non-monoBehaviour
+    [Obsolete("Should move this into the nodes themselves...")]
     public class NodeConnection : MonoBehaviour
     {
         public delegate void NodeChangeEvent(Node oldNode, Node newNode);

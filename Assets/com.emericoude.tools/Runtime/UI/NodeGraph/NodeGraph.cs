@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace Emericoude.UI.NodeGraph
 {
-
     public class NodeGraph : MonoBehaviour
     {
         [SerializeField] private Transform m_NodeContainer;

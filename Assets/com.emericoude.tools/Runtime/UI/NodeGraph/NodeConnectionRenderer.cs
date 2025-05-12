@@ -6,6 +6,7 @@ using Random = System.Random;
 
 namespace Emericoude.UI.NodeGraph
 {
+    //BUG: Elbow does not work if an endpoint is set to center rect. Likely due to the direction calculation using the same point for from and to (i.e. the rect's center).
     [RequireComponent(typeof(UILineRenderer))]
     [RequireComponent(typeof(NodeConnection))]
     public class NodeConnectionRenderer : MonoBehaviour
