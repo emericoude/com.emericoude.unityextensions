@@ -6,6 +6,7 @@ using Random = System.Random;
 
 namespace Emericoude.UI.NodeGraph
 {
+    [Obsolete("Use UILineRendererController instead. This should be deleted.")]
     //BUG: Elbow does not work if an endpoint is set to center rect. Likely due to the direction calculation using the same point for from and to (i.e. the rect's center).
     [RequireComponent(typeof(UILineRenderer))]
     [RequireComponent(typeof(NodeConnection))]
@@ -134,6 +135,7 @@ namespace Emericoude.UI.NodeGraph
             if (this.m_Connection.From != null) this.m_Connection.From.OnNodeMoved -= this.OnNodeMoved;
         }
 
+        /*
         private void OnDrawGizmos() {
             if (this.m_Connection == null) return;
             if (this.m_Connection.From == null || this.m_Connection.To == null) return;
@@ -144,6 +146,7 @@ namespace Emericoude.UI.NodeGraph
                 Gizmos.DrawSphere(pointToWorld, 5f);
             }
         }
+        */
 
         private void Start() {
             this.Redraw();
