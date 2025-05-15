@@ -79,7 +79,7 @@ namespace Emericoude.UI
         }
         
         //TODO: option to reference a spline component or something of the sort?
-        
+        //TODO: resolution by distance option
         [SerializeField] private int m_SplineResolution = 32;
         public int SplineResolution {
             get => this.m_SplineResolution;

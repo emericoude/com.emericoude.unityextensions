@@ -1,16 +1,23 @@
 ﻿using System;
 using Emericoude.Helpers;
 using Emericoude.UI;
-using Emericoude.UI.NodeGraph;
 using UnityEditor;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace Emericoude.CustomEditors
 {
     [CustomEditor(typeof(UILineRendererController))]
-    public class UILineRendererControllerEditor : Editor
+    public class UILineRendererControllerEditor : SerializedEditor
     {
+        private const string EDITOR_PREF_KEY = "EMERICOUDE_UI_LINE_RENDERER_CONTROLLER_EDITOR";
+        protected override string EditorPrefKey => EDITOR_PREF_KEY;
+        
         //TODO: handles for some things could be useful (such as for visualizing corners, or moving manual points).
+
+        [SerializeField] private bool referenceContainerFoldout;
+        [SerializeField] private bool updateLoopContainerFoldout;
+        [SerializeField] private bool styleContainerFoldout;
         
         public override VisualElement CreateInspectorGUI() {
             return new UILineRendererControllerVisualElement(this, this.serializedObject);
@@ -20,13 +27,19 @@ namespace Emericoude.CustomEditors
         {
             private readonly VisualElement elbowContainer;
             private readonly VisualElement manualPointsContainer;
+            private readonly UILineRendererControllerEditor TargetEditor;
             
             public UILineRendererControllerVisualElement(UILineRendererControllerEditor editor, SerializedObject serializedObject) {
+                this.TargetEditor = editor;
                 this.ApplyCustomEditorRootStyle();
 
                 var lineRendererProperty = serializedObject.FindProperty("m_Line");
                 var fromProperty = serializedObject.FindProperty("m_From");
                 var toProperty = serializedObject.FindProperty("m_To");
+
+                var drawOnStartProperty = serializedObject.FindProperty("m_DrawOnStart");
+                var redrawOnMoveProperty = serializedObject.FindProperty("m_RedrawIfEndpointMoves");
+                var destroySelfOnNull = serializedObject.FindProperty("m_DestroySelfIfEndpointIsNull");
                 
                 var startPointPositionProperty = serializedObject.FindProperty("m_StartPositionMethod");
                 var endPointPositionProperty = serializedObject.FindProperty("m_EndPositionMethod");
@@ -40,36 +53,58 @@ namespace Emericoude.CustomEditors
                 
                 var pointsManualProperty = serializedObject.FindProperty("m_ManualPoints");
 
-                this.AddPropertyField(lineRendererProperty);
-                this.AddPropertyField(fromProperty);
-                this.AddPropertyField(toProperty);
+                var referenceContainer = this.AddEditorFoldoutContainer(editor.referenceContainerFoldout, "References", "", this.OnReferenceFoldoutValueChange);
+                referenceContainer.AddPropertyField(lineRendererProperty);
+                referenceContainer.AddPropertyField(fromProperty);
+                referenceContainer.AddPropertyField(toProperty);
 
-                this.AddEnumField(startPointPositionProperty);
-                this.AddEnumField(endPointPositionProperty);
-                this.AddPropertyField(endpointsIterationsProperty);
-                this.AddEnumField(lineStyleProperty, this.OnLineStyleChanged);
+                var updateLoopContainer = this.AddEditorFoldoutContainer(editor.updateLoopContainerFoldout, "Lifetime Settings", "", this.OnUpdateLoopContainerValueChange);
+                updateLoopContainer.AddToggleField(drawOnStartProperty);
+                updateLoopContainer.AddToggleField(redrawOnMoveProperty);
+                updateLoopContainer.AddToggleField(destroySelfOnNull);
 
-                this.elbowContainer = this.AddEmptyVisualElement();
+                var styleContainer = this.AddEditorFoldoutContainer(editor.styleContainerFoldout, "Style", "", this.OnStyleContainerValueChange);
+                styleContainer.AddEnumField(startPointPositionProperty);
+                styleContainer.AddEnumField(endPointPositionProperty);
+                styleContainer.AddPropertyField(endpointsIterationsProperty);
+                styleContainer.AddEnumField(lineStyleProperty, this.OnLineStyleChanged);
+
+                this.elbowContainer = styleContainer.AddEmptyVisualElement();
                 this.elbowContainer.AddEnumField(elbowCenterMethod);
                 this.elbowContainer.AddPropertyField(elbowCenterProperty);
                 this.elbowContainer.AddEnumField(fromElbowDirectionProperty);
                 this.elbowContainer.AddEnumField(toElbowDirectionProperty);
                 
-                this.manualPointsContainer = this.AddEmptyVisualElement();
+                this.manualPointsContainer = styleContainer.AddEmptyVisualElement();
                 this.manualPointsContainer.AddPropertyField(pointsManualProperty);
                 
-                var value = (NodeConnectionRenderer.PointsDrawingFormation)lineStyleProperty.enumValueIndex;
+                var value = (UILineRendererController.PointDrawingMethods)lineStyleProperty.enumValueIndex;
                 this.UpdateContainerVisibilityFromLineStyle(value);
             }
             
             private void OnLineStyleChanged(ChangeEvent<Enum> changeEvent) {
-                var value = (NodeConnectionRenderer.PointsDrawingFormation)changeEvent.newValue;
+                var value = (UILineRendererController.PointDrawingMethods)changeEvent.newValue;
                 this.UpdateContainerVisibilityFromLineStyle(value);
             }
 
-            private void UpdateContainerVisibilityFromLineStyle(NodeConnectionRenderer.PointsDrawingFormation value) {
-                this.manualPointsContainer.style.SetDisplay(value is NodeConnectionRenderer.PointsDrawingFormation.Manual);
-                this.elbowContainer.style.SetDisplay(value is NodeConnectionRenderer.PointsDrawingFormation.Elbow);
+            private void UpdateContainerVisibilityFromLineStyle(UILineRendererController.PointDrawingMethods value) {
+                this.manualPointsContainer.style.SetDisplay(value is UILineRendererController.PointDrawingMethods.Manual);
+                this.elbowContainer.style.SetDisplay(value is UILineRendererController.PointDrawingMethods.Elbow);
+            }
+
+            private void OnReferenceFoldoutValueChange(ChangeEvent<bool> changed)
+            {
+                this.TargetEditor.referenceContainerFoldout = changed.newValue;
+            }
+
+            private void OnUpdateLoopContainerValueChange(ChangeEvent<bool> changed)
+            {
+                this.TargetEditor.updateLoopContainerFoldout = changed.newValue;
+            }
+
+            private void OnStyleContainerValueChange(ChangeEvent<bool> changed)
+            {
+                this.TargetEditor.styleContainerFoldout = changed.newValue;
             }
         }
     }

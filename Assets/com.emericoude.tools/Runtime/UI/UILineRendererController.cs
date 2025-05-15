@@ -38,12 +38,37 @@ namespace Emericoude.UI
             ZeroIsNearestEndpoint
         }
 
+        public RectTransform FromRect
+        {
+            get => this.m_From;
+            set {
+                this.m_From = value;
+                this.fromPosition = this.m_From.localPosition;
+            }
+        }
+
+        public RectTransform ToRect {
+            get => this.m_To; 
+            set {
+                this.m_To = value;
+                this.toPosition = this.m_To.localPosition;
+            }
+        }
+
         [Tooltip("The line renderer component.")]
         [SerializeField] private UILineRenderer m_Line;
         [Tooltip("The rect transform used as the start point for the line.")]
         [SerializeField] private RectTransform m_From;
         [Tooltip("The rect transform used as the end point for the line.")]
         [SerializeField] private RectTransform m_To;
+
+        //TODO: THESE TWO SETTINGS
+        [Tooltip("Draw the line on start.")]
+        [SerializeField] private bool m_DrawOnStart = true;
+        [Tooltip("Redraw the line whenever the from or to rects move (locally). Evaluated during Late Update.")]
+        [SerializeField] private bool m_RedrawIfEndpointMoves = true;
+        [Tooltip("If the from rect or to rect is null, destroy self. Evaluated during Late Update.")]
+        [SerializeField] private bool m_DestroySelfIfEndpointIsNull = true;
         
         [Tooltip("Use this to increase accuracy at the expense of performance, though generally one or two will be fine.")]
         [SerializeField] private int m_EndpointsPositionIterations = 1;
@@ -68,7 +93,8 @@ namespace Emericoude.UI
         [Tooltip("The points you can set manually. Consider not using this component at all when using manual, as it will simply set your points into the UILineRenderer.")]
         [SerializeField] private Vector3[] m_ManualPoints;
         
-        //TODO: add public properties
+        private Vector3 fromPosition;
+        private Vector3 toPosition;
 
         private void Reset()
         {
@@ -77,7 +103,35 @@ namespace Emericoude.UI
 
         private void Start()
         {
-            this.RedrawPoints();
+            if (this.m_From != null) this.fromPosition = m_From.localPosition;
+            if (this.m_To != null) this.toPosition = m_To.localPosition;
+            
+            if (this.m_DrawOnStart)
+            {
+                this.RedrawPoints();
+            }
+        }
+
+        private void LateUpdate()
+        {
+            if (this.m_DestroySelfIfEndpointIsNull)
+            {
+                if (m_From == null || m_To == null)
+                {
+                    Destroy(this.gameObject);
+                    return;
+                }
+            }
+            
+            if (this.m_RedrawIfEndpointMoves)
+            {
+                if (this.fromPosition != this.m_From.localPosition || this.toPosition != this.m_To.localPosition)
+                {
+                    this.fromPosition = this.m_From.localPosition;
+                    this.fromPosition = this.m_To.localPosition;
+                    this.RedrawPoints();
+                }
+            }
         }
 
         public void RedrawPoints()
@@ -132,8 +186,8 @@ namespace Emericoude.UI
             };
 
             //backup, usually occurs when using center position as endpoint
-            if (startDirection == Vector2.zero) startDirection = ((Vector2)(start - this.m_To.position)).ToNearestOrthogonal();
-            if (endDirection == Vector2.zero) endDirection = ((Vector2)(end - this.m_From.position)).ToNearestOrthogonal();
+            if (startDirection == Vector2.zero) startDirection = ((Vector2)(end - start)).ToNearestOrthogonal();
+            if (endDirection == Vector2.zero) endDirection = ((Vector2)(start - end)).ToNearestOrthogonal();
             
             //we need only one corner while perpendicular
             if (startDirection.IsPerpendicularTo(endDirection)) {
@@ -187,7 +241,7 @@ namespace Emericoude.UI
         private Vector3 GetEndpointIterative(Vector3 opposingPoint, RectTransform from, RectTransform to, EndpointPositionMethods method)
         {
             Vector3 localPoint = method switch {
-                EndpointPositionMethods.Center => from.localPosition,
+                EndpointPositionMethods.Center => Vector3.zero,
                 EndpointPositionMethods.EdgeOrthogonal => from.GetNearestOrthogonalOnEdge(opposingPoint),
                 EndpointPositionMethods.Corners => from.GetNearestCorner(opposingPoint),
                 EndpointPositionMethods.EdgeOrthogonalOrCorners => from.GetNearestCornerOrOrthogonalOnEdge(opposingPoint),
