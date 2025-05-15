@@ -25,11 +25,25 @@ namespace Emericoude.UI.NodeGraph
 
         [SerializeField] private List<SerializedConnection> m_Connections;
 
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.cyan;
+            foreach (var nodeConnections in this.ConnectionsOut)
+            {
+                foreach (var connection in nodeConnections.Value)
+                {
+                    Debug.DrawLine(nodeConnections.Key.transform.position, connection.transform.position);
+                }
+            }
+        }
+
         internal void CacheNodesAndConnections()
         {
             this.Nodes = new List<Node>();
             this.m_ConnectionsOut = new Dictionary<Node, List<Node>>();
             foreach (var connection in this.m_Connections) {
+                if (connection.From == null) continue;
+                if (connection.To == null) continue;
                 if (!this.Nodes.Contains(connection.From)) this.Nodes.Add(connection.From);
                 if (!this.Nodes.Contains(connection.To)) this.Nodes.Add(connection.To);
                 this.AddConnection(connection.From, connection.To);
