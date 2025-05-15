@@ -45,22 +45,7 @@ namespace Emericoude.CustomEditors
         }
         
         #endregion
-        #region Add Field Helpers
-
-        public static EnumField AddEnumField(this VisualElement visualElement, SerializedProperty property, EventCallback<ChangeEvent<Enum>> onValueChanged = null)
-        {
-            var enumField = new EnumField(property.displayName)
-            {
-                tooltip = property.tooltip
-            };
-            enumField.BindProperty(property);
-            if (onValueChanged != null)
-            {
-                enumField.RegisterValueChangedCallback(onValueChanged);
-            }
-            visualElement.Add(enumField);
-            return enumField;
-        }
+        #region Custom Groups
         
         public static Foldout AddEditorFoldoutContainer(this VisualElement visualElement, bool defaultFoldoutValue, string label = "", string tooltip = "", EventCallback<ChangeEvent<bool>> onValueChanged = null)
         {
@@ -85,12 +70,38 @@ namespace Emericoude.CustomEditors
             visualElement.Add(foldout);
             return foldout;
         }
+        
+        #endregion
+        #region Add Field Helpers
+        
+        public static EnumField AddEnumField(this VisualElement visualElement, SerializedProperty property, EventCallback<ChangeEvent<Enum>> onValueChanged = null)
+        {
+            var enumField = new EnumField(property.displayName)
+            {
+                tooltip = property.tooltip,
+                style =
+                {
+                    unityTextAlign = new StyleEnum<TextAnchor>(TextAnchor.MiddleLeft)
+                }
+            };
+            enumField.BindProperty(property);
+            if (onValueChanged != null)
+            {
+                enumField.RegisterValueChangedCallback(onValueChanged);
+            }
+            visualElement.Add(enumField);
+            return enumField;
+        }
 
         public static Toggle AddToggleField(this VisualElement visualElement, SerializedProperty property, EventCallback<ChangeEvent<bool>> onValueChanged = null)
         {
             var toggleField = new Toggle(property.displayName)
             {
-                tooltip = property.tooltip
+                tooltip = property.tooltip,
+                style =
+                {
+                    unityTextAlign = new StyleEnum<TextAnchor>(TextAnchor.MiddleLeft)
+                }
             };
             toggleField.BindProperty(property);
             if (onValueChanged != null)
@@ -108,7 +119,11 @@ namespace Emericoude.CustomEditors
             {
                 tooltip = property.tooltip,
                 objectType = typeof(T),
-                allowSceneObjects = allowSceneObjects
+                allowSceneObjects = allowSceneObjects,
+                style =
+                {
+                    unityTextAlign = new StyleEnum<TextAnchor>(TextAnchor.MiddleLeft)
+                }
             };
             objectField.BindProperty(property);
             if (onValueChanged != null)
@@ -123,12 +138,17 @@ namespace Emericoude.CustomEditors
         {
             var propertyField = new PropertyField(property, property.displayName)
             {
-                tooltip = property.tooltip
+                tooltip = property.tooltip,
+                style =
+                {
+                    unityTextAlign = new StyleEnum<TextAnchor>(TextAnchor.MiddleLeft)
+                }
             };
             if (onValueChanged != null)
             {
                 propertyField.RegisterValueChangeCallback(onValueChanged);
             }
+            
             visualElement.Add(propertyField);
             return propertyField;
         }
@@ -142,7 +162,11 @@ namespace Emericoude.CustomEditors
             string wLabel = "w",
             EventCallback<ChangeEvent<Vector4>> onValueChanged = null) {
             var vector4Field = new Vector4Field(property.displayName) {
-                tooltip = property.tooltip
+                tooltip = property.tooltip,
+                style =
+                {
+                    unityTextAlign = new StyleEnum<TextAnchor>(TextAnchor.MiddleLeft)
+                }
             };
             vector4Field.BindProperty(property);
             if (onValueChanged != null)
