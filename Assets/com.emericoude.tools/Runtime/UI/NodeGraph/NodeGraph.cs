@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,89 +6,51 @@ namespace Emericoude.UI.NodeGraph
 {
     public class NodeGraph : MonoBehaviour
     {
-        [SerializeField] private Transform m_NodeContainer;
-        [SerializeField] private Transform m_ConnectionContainer;
-
-        [SerializeField] private Node m_StartingNode;
-        public Node StartingNode {
-            get => this.m_StartingNode;
-            set => this.m_StartingNode = value;
-        }
-
-        [SerializeField] private bool m_GrabNodesFromHierarchyOnStart = true;
-
-        private Node m_CurrentNode;
-        public Node CurrentNode {
-            get => this.m_CurrentNode;
-            set {
-                if (this.m_CurrentNode == value) return;
-                this.m_CurrentNode = value;
-                this.CacheCurrentNodeConnections();
-            }
+        [Serializable]
+        internal struct SerializedConnection
+        {
+            public Node From;
+            public Node To;
         }
         
-        public List<NodeConnection> CurrentConnectionsIn { get; private set; }
-        public List<NodeConnection> CurrentConnectionsOut { get; private set; }
-        
-        public List<Node> Nodes { get; private set; } = new();
+        public List<Node> Nodes { get; private set; }
 
-        private void Start() {
-            if (this.m_GrabNodesFromHierarchyOnStart) {
-                var childrenNode = this.GetComponentsInChildren<Node>();
-                foreach (var node in childrenNode) {
-                    this.RegisterNode(node);
-                }
+        private Dictionary<Node, List<Node>> m_ConnectionsOut;
+        public Dictionary<Node, List<Node>> ConnectionsOut {
+            get {
+                if (this.m_ConnectionsOut == null) this.CacheNodesAndConnections();
+                return this.m_ConnectionsOut;
             }
-            
-            this.CurrentNode = this.StartingNode;
         }
 
-        public void RegisterNode(Node node) {
-            if (this.m_NodeContainer != null) {
-                node.transform.SetParent(this.m_NodeContainer);
-            }
+        [SerializeField] private List<SerializedConnection> m_Connections;
 
-            if (this.m_ConnectionContainer != null) {
-                foreach (var connection in node.Connections) {
-                    connection.transform.SetParent(this.m_ConnectionContainer);
-                }
+        internal void CacheNodesAndConnections()
+        {
+            this.Nodes = new List<Node>();
+            this.m_ConnectionsOut = new Dictionary<Node, List<Node>>();
+            foreach (var connection in this.m_Connections) {
+                if (!this.Nodes.Contains(connection.From)) this.Nodes.Add(connection.From);
+                if (!this.Nodes.Contains(connection.To)) this.Nodes.Add(connection.To);
+                this.AddConnection(connection.From, connection.To);
             }
-
-            node.Graph = this;
-            node.OnConnectionAdded += this.OnNodeConnectionAdded;
-            this.Nodes.Add(node);
-        }
-        
-        public void DeregisterNode(Node node) {
-            node.Graph = null;
-            node.OnConnectionAdded -= this.OnNodeConnectionAdded;
-            this.Nodes.Remove(node);
         }
 
-        private void CacheCurrentNodeConnections() {
-            if (this.CurrentNode == null) {
-                this.CurrentConnectionsIn = null;
-                this.CurrentConnectionsOut = null;
+        public void AddConnection(Node from, Node to) {
+            if (this.ConnectionsOut.TryGetValue(from, out var connectingTo)) {
+                connectingTo.Add(to);
                 return;
             }
-            
-            this.CurrentConnectionsIn = this.CurrentNode.GetConnectionsIn();
-            this.CurrentConnectionsOut = this.CurrentNode.GetConnectionsOut();
+            this.ConnectionsOut.Add(from, new List<Node>() { to });
         }
 
-        private void OnNodeConnectionAdded(NodeConnection newConnection) {
-            if (newConnection.From == this.CurrentNode || newConnection.To == this.CurrentNode) {
-                this.CacheCurrentNodeConnections();
-            }
-            
-            if (this.m_ConnectionContainer != null) {
-                newConnection.transform.SetParent(this.m_ConnectionContainer);
-            }
-        }
-        
-        private void OnNodeConnectionRemoved(NodeConnection removedConnection) {
-            if (removedConnection.From == this.CurrentNode || removedConnection.To == this.CurrentNode) {
-                this.CacheCurrentNodeConnections();
+        public void RemoveConnection(Node from, Node to)
+        {
+            if (!this.ConnectionsOut.TryGetValue(from, out var connectingTo)) return;
+            connectingTo.Remove(to);
+            if (connectingTo.Count == 0)
+            {
+                this.ConnectionsOut.Remove(from);
             }
         }
     }

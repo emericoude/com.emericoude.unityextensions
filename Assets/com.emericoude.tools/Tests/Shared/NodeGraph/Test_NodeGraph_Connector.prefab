@@ -9,12 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6699386714708086164}
-  - component: {fileID: 1033417773262895955}
   - component: {fileID: 6557468478800568591}
   - component: {fileID: 2100677859266611702}
-  - component: {fileID: 5203421174284493101}
+  - component: {fileID: 5222468215794374588}
   m_Layer: 5
-  m_Name: Test_NodeGraph_Connection
+  m_Name: Test_NodeGraph_Connector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39,21 +38,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1033417773262895955
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9130453234511909647}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0d5ef5a1e0c449c87e118947a895606, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_From: {fileID: 0}
-  m_To: {fileID: 0}
-  m_IsBidirectional: 0
 --- !u!222 &6557468478800568591
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -91,7 +75,7 @@ MonoBehaviour:
   m_SplineResolution: 16
   m_SplineTangentMode: 0
   m_LineCaps: 0
---- !u!114 &5203421174284493101
+--- !u!114 &5222468215794374588
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -100,17 +84,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 9130453234511909647}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b72cee2f8a5640d5a9b7157bfd8fe4ea, type: 3}
+  m_Script: {fileID: 11500000, guid: 65b0688d333f43b8894643ab141605da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Connection: {fileID: 1033417773262895955}
   m_Line: {fileID: 2100677859266611702}
-  m_StartAndEndPointIterations: 1
-  m_LineStyle: 1
-  m_StartPointPosition: 5
-  m_EndPointPosition: 5
-  m_ElbowCenterMethod: 1
+  m_From: {fileID: 0}
+  m_To: {fileID: 0}
+  drawOnStart: 1
+  redrawIfEndpointMoves: 1
+  destroySelfIfEndpointIsNull: 1
+  m_EndpointsPositionIterations: 1
+  m_PointStyle: 1
+  m_StartPositionMethod: 0
+  m_EndPositionMethod: 0
+  m_ElbowPositionMethod: 1
   m_ElbowCenter: 0.25
-  m_FromElbowDirection: 0
-  m_ToElbowDirection: 0
-  m_PointsManual: []
+  m_ElbowFromDirection: 0
+  m_ElbowToDirection: 0
+  m_ManualPoints: []
