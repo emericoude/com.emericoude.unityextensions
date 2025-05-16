@@ -28,11 +28,21 @@ namespace Emericoude.UI.NodeGraph
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.cyan;
-            foreach (var nodeConnections in this.ConnectionsOut)
+            if (Application.isPlaying)
             {
-                foreach (var connection in nodeConnections.Value)
+                foreach (var nodeConnections in this.ConnectionsOut)
                 {
-                    Debug.DrawLine(nodeConnections.Key.transform.position, connection.transform.position);
+                    foreach (var connection in nodeConnections.Value)
+                    {
+                        Debug.DrawLine(nodeConnections.Key.transform.position, connection.transform.position);
+                    }
+                }
+            }
+            else
+            {
+                foreach (var connection in this.m_Connections)
+                {
+                    Debug.DrawLine(connection.From.transform.position, connection.To.transform.position);
                 }
             }
         }
