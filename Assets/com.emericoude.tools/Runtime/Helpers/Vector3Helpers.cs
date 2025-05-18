@@ -88,10 +88,34 @@ namespace Emericoude.Helpers
 			return nearestPoint;
 		}
 		
+		/// <returns> Basically, if there is a sphere around the to point, the nearest point on the surface of that sphere. </returns>
 		public static Vector3 GetNearestPointOnSphereSurface(this Vector3 from, Vector3 to, float radius) {
 			float distance = Vector3.Distance(from, to) - radius;
 			Vector3 direction = (to - from).normalized;
 			return from + direction * distance;
+		}
+		
+		//I renamed this to specifically "Triangle" barycentric, but I have no clue if that's accurate lol...
+		//sourced from https://discussions.unity.com/t/raycasthit-texturecoord-does-the-reverse-exist/36255/3
+		/// <returns> The barycentric point (i.e. center of mass) from the given inputs.  </returns>
+		public static Vector3 GetTriangleBarycentric (Vector2 v1,Vector2 v2,Vector2 v3,Vector2 p)
+		{
+			Vector3 B = new Vector3();
+			B.x = ((v2.y - v3.y)*(p.x-v3.x) + (v3.x - v2.x)*(p.y - v3.y)) /
+			      ((v2.y-v3.y)*(v1.x-v3.x) + (v3.x-v2.x)*(v1.y -v3.y));
+			B.y = ((v3.y - v1.y)*(p.x-v3.x) + (v1.x - v3.x)*(p.y - v3.y)) /
+			      ((v3.y-v1.y)*(v2.x-v3.x) + (v1.x-v3.x)*(v2.y -v3.y));
+			B.z = 1 - B.x - B.y;
+			return B;
+		}
+        
+		//sourced from https://discussions.unity.com/t/raycasthit-texturecoord-does-the-reverse-exist/36255/3
+		/// <returns> Whether the given barycentric point is inside a triangle. </returns>
+		public static bool IsBarycentricInTriangle(Vector3 barycentric)
+		{
+			return (barycentric.x >= 0.0f) && (barycentric.x <= 1.0f)
+			                               && (barycentric.y >= 0.0f) && (barycentric.y <= 1.0f)
+			                               && (barycentric.z >= 0.0f); //(barycentric.z <= 1.0f)
 		}
     }
 }

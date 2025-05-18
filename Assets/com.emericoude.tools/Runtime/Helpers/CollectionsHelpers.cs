@@ -35,5 +35,17 @@ namespace Emericoude.Helpers
 			return collection.ElementAtOrDefault(Random.Range(0, enumerableCount));
 			#endif
 		}
+		
+		/// <returns>Whether the index is valid within the array's range (i.e. bigger or equal to 0 and below the length).</returns>
+		public static bool IndexValid(this System.Array array, int index)
+		{
+			return index < array.Length && index >= 0;
+		}
+
+		/// <returns>Whether the index is valid within the list's range (i.e. bigger or equal to 0 and below the length).</returns>
+		public static bool IndexValid<T>(this List<T> list, int index)
+		{
+			return index < list.Count && index >= 0;
+		}
 	}
 }

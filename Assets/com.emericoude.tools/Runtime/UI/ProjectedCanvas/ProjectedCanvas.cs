@@ -90,5 +90,28 @@ namespace Emericoude.UI.ProjectedCanvas
         public void RemoveProjectionTarget(ProjectionTarget target) {
             this.projectionTargets.Remove(target);
         }
+
+        /// <summary> Takes in a world-space point (expects a point in the canvas), and fetches a point on a given mesh. </summary>
+        /// <param name="point"> The in-canvas world space point. For instance, a button.transform.position. </param>
+        /// <param name="meshPoint"> Out parameter. If true is returned, a point on the mesh, otherwise it is equal to point. </param>
+        /// <param name="projectionTargetIndex"> The projection target index, according to <see cref="projectionTargets"/> list. </param>
+        /// <param name="uvResultIndex"> A mesh can have a point in UV be used multiple times in the mesh, so this is to choose which of those points. 0 by default. </param>
+        /// <returns> True if we could find a valid point according to the given parameters; otherwise false. </returns>
+        public bool TryCanvasToMeshPoint(Vector3 point, out Vector3 meshPoint, int projectionTargetIndex, int uvResultIndex = 0)
+        {
+            meshPoint = point;
+            
+            //in our context, viewport is the same as UV space
+            Vector2 viewportPosition = this.RenderTextureCamera.WorldToViewportPoint(point);
+            
+            if (!this.projectionTargets.IndexValid(projectionTargetIndex)) return false;
+            ProjectionTarget target = this.projectionTargets[projectionTargetIndex];
+            
+            var results = target.Mesh.UVToWorldPoints(viewportPosition);
+            if (!results.IndexValid(uvResultIndex)) return false;
+            
+            meshPoint = target.transform.TransformPoint(results[uvResultIndex]);
+            return true;
+        }
     }
 }
