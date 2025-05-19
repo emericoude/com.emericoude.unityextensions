@@ -28,6 +28,7 @@ namespace Emericoude.UI.NodeGraph
         public List<Node> GetPossibleNavigations()
         {
             if (this.CurrentNode == null) return null;
+            if (!this.ConnectionsOut.ContainsKey(this.CurrentNode)) return null;
             return this.ConnectionsOut[this.CurrentNode];
         }
     }
