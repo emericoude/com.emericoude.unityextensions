@@ -28,7 +28,6 @@ namespace Emericoude.Helpers
                     result.Add(localP);
                 }
             }
-            Debug.Log(result.Count);
             return result.ToArray();
         }
     }
