@@ -76,8 +76,6 @@ namespace Emericoude.StateMachine
         /// OnEnter for the new, and the OnStateChanged event. </summary>
         public void ChangeState(IState to, EventArgs args = null)
         {
-            if (to == this.current.State) return;
-
             var previousState = this.current.State;
             var nextState = this.nodes[to.GetType()].State;
             
@@ -97,15 +95,28 @@ namespace Emericoude.StateMachine
 
         /// <summary> Add a transition from one state to another with a condition. This also registers states
         /// to the state machine if they aren't already. </summary>
-        public void AddTransition(IState from, IState to, IPredicate condition, Func<EventArgs> funcArgs = null)
+        /// <param name="from"> The state to come from. </param>
+        /// <param name="to"> The state to go to, if the condition is true. </param>
+        /// <param name="condition"> The condition to evaluate for transition. See <see cref="FuncPredicate"/> or <see cref="SingleFrameTriggerPredicate"/>. </param>
+        /// <param name="args"> Arguments for you to pass to the state when entering it. Implement a custom <see cref="EventArgs"/> to pass in information when entering. You can then do "if (args is MyArgs myArgs)" in OnEnter. </param>
+        public void AddTransition(IState from, IState to, IPredicate condition, Func<EventArgs> args = null)
         {
-            this.GetOrAddNode(from).AddTransition(this.GetOrAddNode(to).State, condition, funcArgs);
+            this.GetOrAddNode(from).AddTransition(this.GetOrAddNode(to).State, condition, args);
         }
 
         /// <summary> Adds a "from any state" transition to a state with a condition. </summary>
-        public void AddFromAnyTransition(IState to, IPredicate condition)
+        /// <param name="to"> The state to go to, if the condition is true. </param>
+        /// <param name="canTransitionToSelf"> If true, the to state can transition to itself using this transition. </param>
+        /// <param name="condition"> The condition to evaluate for transition. See <see cref="FuncPredicate"/> or <see cref="SingleFrameTriggerPredicate"/>. </param>
+        /// <param name="args"> Arguments for you to pass to the state when entering it. Implement a custom <see cref="EventArgs"/> to pass in information when entering. You can then do "if (args is MyArgs myArgs)" in OnEnter. </param>
+        public void AddFromAnyTransition(IState to, IPredicate condition, bool canTransitionToSelf = false, Func<EventArgs> args = null)
         {
-            this.fromAnyTransitions.Add(new Transition(this.GetOrAddNode(to).State, condition));
+            this.fromAnyTransitions.Add(new Transition(
+                this.GetOrAddNode(to).State, 
+                condition, 
+                canTransitionToSelf,
+                args
+            ));
         }
         
         /// <summary> Checks global and the current state's transitions to see if we should transition to a new state. </summary>
@@ -114,15 +125,14 @@ namespace Emericoude.StateMachine
         /// <returns> True if a transition should be done; otherwise false. </returns>
         private bool TryEvaluateTransitions(out ITransition transition)
         {
-            foreach (var fromAnyTransition in this.fromAnyTransitions)
-            {
+            foreach (var fromAnyTransition in this.fromAnyTransitions) {
+                if (!fromAnyTransition.CanTransitionToSelf && this.current.State == fromAnyTransition.To) continue;
                 if (!fromAnyTransition.Condition.Evaluate()) continue;
                 transition = fromAnyTransition;
                 return true;
             }
 
-            foreach (var currentStateTransitions in this.current.Transitions)
-            {
+            foreach (var currentStateTransitions in this.current.Transitions) {
                 if (!currentStateTransitions.Condition.Evaluate()) continue;
                 transition = currentStateTransitions;
                 return true;
@@ -157,8 +167,9 @@ namespace Emericoude.StateMachine
             return false;
         }
         
-        public Dictionary<Type, StateNode> GetNodes() => this.nodes;
         public HashSet<ITransition> GetFromAnyTransitions() => this.fromAnyTransitions;
-        public StateNode GetActiveNode() => this.current;
+        public Dictionary<Type, StateNode> GetStateNodes() => this.nodes;
+        public StateNode GetCurrentStateNode() => this.current;
+        public IState GetCurrentState() => this.current?.State;
     }
 }

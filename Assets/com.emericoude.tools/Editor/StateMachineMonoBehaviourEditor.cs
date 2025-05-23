@@ -36,20 +36,34 @@ namespace Emericoude.CustomEditors
                 richText = true
             };
             
-            var currentState = stateMachine.GetActiveNode();
-            foreach (var node in stateMachine.GetNodes())
-            {
+            var currentState = stateMachine.GetCurrentStateNode();
+            
+            //draw from any transitions
+            foreach (var transition in stateMachine.GetFromAnyTransitions()) {
+                var toState = transition.To.GetType().Name;
+                var isSelf = currentState.State == transition.To;
+                var fromStateColorRich = (transition.CanTransitionToSelf || currentState.State != transition.To) ? "green" : "red";
+                var toStateColorRich = transition.To.GetType() == currentState.State.GetType() ? "green" : "white";
+                EditorGUILayout.LabelField(
+                    $"<color={fromStateColorRich}>{(isSelf ? "SELF" : "ANY")}</color> " + $"-> <color={toStateColorRich}>{toState}</color>",
+                    transitionStyle
+                );
+            }
+            
+            EditorGUILayout.Space();
+            
+            //draw transitions
+            foreach (var node in stateMachine.GetStateNodes()) {
                 var transitions = node.Value.Transitions;
-                foreach (var transition in transitions)
-                {
+                foreach (var transition in transitions) {
                     var fromState = node.Key.Name;
                     var toState = transition.To.GetType().Name;
                     var fromStateColorRich =  node.Key == currentState.State.GetType() ? "green" : "white";
                     var toStateColorRich = transition.To.GetType() == currentState.State.GetType() ? "green" : "white";
-                    
-                    EditorGUILayout.LabelField($"<color={fromStateColorRich}>{fromState}</color> " +
-                                               $"-> <color={toStateColorRich}>{toState}</color>",
-                                                transitionStyle);
+                    EditorGUILayout.LabelField(
+                        $"<color={fromStateColorRich}>{fromState}</color> " + $"-> <color={toStateColorRich}>{toState}</color>",
+                        transitionStyle
+                    );
                 }
             }
             

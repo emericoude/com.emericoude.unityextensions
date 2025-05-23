@@ -7,6 +7,7 @@ namespace Emericoude.StateMachine
     {
         IState To { get; }
         IPredicate Condition { get; }
+        bool CanTransitionToSelf { get; }
         Func<EventArgs> FuncArgs { get; }
     }
 }
