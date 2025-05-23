@@ -24,8 +24,8 @@
 
         public bool Evaluate() => this.IsTriggered;
 
-        private async UniTask ResetTriggerNextFrame(PlayerLoopTiming timing)
-        {
+        private async UniTask ResetTriggerNextFrame(PlayerLoopTiming timing) {
+            await UniTask.Yield();
             await UniTask.NextFrame(timing);
             this.ResetTrigger();
         }
