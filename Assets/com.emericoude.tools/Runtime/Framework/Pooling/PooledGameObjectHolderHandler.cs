@@ -30,7 +30,7 @@ namespace Emericoude.Framework
         public float tickRate = 0.25f;
         [Tooltip("An initial delay before we start evaluating.")]
         public float startEvaluatingAfter = 0.25f;
-        [Tooltip("For each toggled type, checks if the object has any of the associated components, and if so add the proper holders for it. " +
+        [Tooltip("For each toggled type, adds a holder component, and if so add the proper holders for it. " +
                  "Generally it is better to have this to set 'None', and add the necessary components manually to your prefabs. " +
                  "This is done in awake.")]
         public CommonPoolHolders automaticallyAddHoldersFor = CommonPoolHolders.All;
@@ -93,25 +93,20 @@ namespace Emericoude.Framework
         {
             if (this.automaticallyAddHoldersFor == CommonPoolHolders.None) return;
             
-            if (this.automaticallyAddHoldersFor.HasFlag(CommonPoolHolders.AudioSource) && this.TryGetComponent(out AudioSource audioSource))
+            if (this.automaticallyAddHoldersFor.HasFlag(CommonPoolHolders.AudioSource))
             {
-                this.gameObject.GetOrAddComponent<AudioSourcePooledGameObjectHolder>();
+                this.gameObject.GetOrAddComponent<AudioSourcePoolHolder>();
             }
 
-            if (this.automaticallyAddHoldersFor.HasFlag(CommonPoolHolders.ParticleSystem) && this.TryGetComponent(out ParticleSystem ps))
+            if (this.automaticallyAddHoldersFor.HasFlag(CommonPoolHolders.ParticleSystem))
             {
-                this.gameObject.GetOrAddComponent<ParticleSystem>();
+                this.gameObject.GetOrAddComponent<ParticleSystemPoolHolder>();
             }
 
-            if (this.automaticallyAddHoldersFor.HasFlag(CommonPoolHolders.VisualEffect) && this.TryGetComponent(out VisualEffect visualEffect))
+            if (this.automaticallyAddHoldersFor.HasFlag(CommonPoolHolders.VisualEffect))
             {
-                this.gameObject.GetOrAddComponent<VisualEffect>();
+                this.gameObject.GetOrAddComponent<VisualEffectPoolHolder>();
             }
         }
-    }
-
-    public abstract class PooledGameObjectHolder : MonoBehaviour
-    {
-        public abstract bool IsReadyForRelease();
     }
 }

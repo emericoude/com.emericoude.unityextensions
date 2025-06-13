@@ -2,22 +2,10 @@ using UnityEngine;
 
 namespace Emericoude.Framework
 {
-    #if ODIN_INSPECTOR
-    [Sirenix.OdinInspector.InfoBox("Holds the object from returning to the pool until the particle system is no longer playing.")]
-    #endif
-    [RequireComponent(typeof(ParticleSystem),typeof(PooledGameObjectHolderHandler))]
-    public class ParticleSystemPooledGameObjectHolder : PooledGameObjectHolder
+    public class ParticleSystemPoolHolder : PooledComponentsHolder<ParticleSystem>
     {
-        private new ParticleSystem particleSystem;
-
-        private void Awake()
-        {
-            this.particleSystem = this.GetComponent<ParticleSystem>();
-        }
-
-        public override bool IsReadyForRelease()
-        {
-            return !this.particleSystem.isPlaying;
+        protected override bool IsComponentReadyForRelease(ParticleSystem component) {
+            return !component.IsAlive(false); //we don't check children because in this context we have already grabbed all children in Awake()
         }
     }
 }
