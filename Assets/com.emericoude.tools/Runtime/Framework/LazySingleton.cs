@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Emericoude.Framework
 {
@@ -11,8 +12,12 @@ namespace Emericoude.Framework
         /// <summary> The instance of this singleton. </summary>
         public static T Instance
         {
-            get
-            {
+            get {
+                if (!SceneManager.GetActiveScene().isLoaded) {
+                    Debug.LogError("Trying to access a lazy singleton from a scene that is not loaded.");
+                    return null;
+                }
+                
                 if (_instance == null)
                 {
                     _instance = new GameObject(typeof(T).Name).AddComponent<T>();
