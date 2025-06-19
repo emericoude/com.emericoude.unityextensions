@@ -11,7 +11,7 @@ namespace Emericoude.Helpers
             Rect rect = rectTransform.rect;
             float halfHeight = rect.height / 2f;
             float halfWidth = rect.width / 2f;
-            return localPoint.GetNearestPoint(new []{
+            return localPoint.NearestPoint(new []{
                 rect.center + Vector2.up * halfHeight,
                 rect.center + Vector2.down * halfHeight,
                 rect.center + Vector2.right * halfWidth,
@@ -22,7 +22,7 @@ namespace Emericoude.Helpers
         public static Vector2 GetNearestCorner(this RectTransform rectTransform, Vector3 point, bool isPointInWorldSpace = true) {
             Vector2 localPoint = isPointInWorldSpace ? rectTransform.InverseTransformPoint(point) : (Vector2)point;
             Rect rect = rectTransform.rect;
-            return localPoint.GetNearestPoint(new []{
+            return localPoint.NearestPoint(new []{
                 rect.min,
                 new Vector2(rect.min.x, rect.max.y),
                 new Vector2(rect.max.x, rect.min.y),
@@ -35,7 +35,7 @@ namespace Emericoude.Helpers
             Rect rect = rectTransform.rect;
             float halfHeight = rect.height / 2f;
             float halfWidth = rect.width / 2f;
-            return localPoint.GetNearestPoint(new []{
+            return localPoint.NearestPoint(new []{
                 //orthogonals
                 rect.center + Vector2.up * halfHeight,
                 rect.center + Vector2.down * halfHeight,

@@ -43,7 +43,7 @@ namespace Emericoude.Tests
             Vector2 centerScreen = this.camera.ViewportToScreenPoint(new Vector2(0.5f, 0.5f));
             
             Vector2 mouseDirectionFromCenter = (mousePosition - centerScreen).normalized;
-            Vector2 snappedDirection = mouseDirectionFromCenter.SnapDirection(this.snapDirectionSegments);
+            Vector2 snappedDirection = mouseDirectionFromCenter.ToSegmentedDirection(this.snapDirectionSegments);
 
             var distanceFromCamera = this.camera.transform.forward * (this.camera.nearClipPlane * 2f);
             var centerScreenToWorld = this.camera.ScreenToWorldPoint((Vector3)centerScreen + distanceFromCamera);
@@ -59,7 +59,7 @@ namespace Emericoude.Tests
         private void OnDrawGizmos_NearestPointOnCircleEdge() {
             Vector2 mousePosition = Mouse.current.position.ReadValue();
             Vector2 centerScreen = this.camera.ViewportToScreenPoint(new Vector2(0.5f, 0.5f));
-            Vector2 nearestPointOnCircleEdge = mousePosition.GetNearestPointOnCircleEdge(centerScreen, this.nearestPointOnCircleEdgeRadius);
+            Vector2 nearestPointOnCircleEdge = mousePosition.NearestPointOnRangeEdge(centerScreen, this.nearestPointOnCircleEdgeRadius);
             
             var distanceFromCamera = this.camera.transform.forward * (this.camera.nearClipPlane * 2f);
             var centerScreenToWorld = this.camera.ScreenToWorldPoint((Vector3)centerScreen + distanceFromCamera);

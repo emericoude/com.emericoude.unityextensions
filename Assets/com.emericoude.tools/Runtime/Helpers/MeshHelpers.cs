@@ -21,8 +21,8 @@ namespace Emericoude.Helpers
                 int i1 = indices[i  ];
                 int i2 = indices[i+1];
                 int i3 = indices[i+2];
-                Vector3 bary = Vector3Helpers.GetTriangleBarycentric(uvs[i1],uvs[i2],uvs[i3],aUVPos);
-                if (Vector3Helpers.IsBarycentricInTriangle(bary))
+                Vector3 bary = VectorHelpers.GetTriangleBarycentric(uvs[i1],uvs[i2],uvs[i3],aUVPos);
+                if (VectorHelpers.IsBarycentricInTriangle(bary))
                 {
                     Vector3 localP = bary.x * verts[i1] + bary.y * verts[i2] + bary.z * verts[i3];
                     result.Add(localP);

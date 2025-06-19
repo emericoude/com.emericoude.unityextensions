@@ -169,7 +169,7 @@ namespace Emericoude.UI
         {
             (Vector3 start, Vector3 end) = this.GetEndpoints();
             Vector2 startDirection = this.m_ElbowFromDirection switch {
-                ElbowEndpointDirections.Auto => ((Vector2)(start - this.m_From.position)).ToNearestOrthogonal(),
+                ElbowEndpointDirections.Auto => ((Vector2)(start - this.m_From.position)).ToOrthogonalDirection(),
                 ElbowEndpointDirections.Up => Vector2.up,
                 ElbowEndpointDirections.Down => Vector2.down,
                 ElbowEndpointDirections.Left => Vector2.left,
@@ -177,7 +177,7 @@ namespace Emericoude.UI
                 _ => throw new ArgumentOutOfRangeException()
             };
             Vector2 endDirection = this.m_ElbowToDirection switch {
-                ElbowEndpointDirections.Auto => ((Vector2)(end - this.m_To.position)).ToNearestOrthogonal(),
+                ElbowEndpointDirections.Auto => ((Vector2)(end - this.m_To.position)).ToOrthogonalDirection(),
                 ElbowEndpointDirections.Up => Vector2.up,
                 ElbowEndpointDirections.Down => Vector2.down,
                 ElbowEndpointDirections.Left => Vector2.left,
@@ -186,8 +186,8 @@ namespace Emericoude.UI
             };
 
             //backup, usually occurs when using center position as endpoint
-            if (startDirection == Vector2.zero) startDirection = ((Vector2)(end - start)).ToNearestOrthogonal();
-            if (endDirection == Vector2.zero) endDirection = ((Vector2)(start - end)).ToNearestOrthogonal();
+            if (startDirection == Vector2.zero) startDirection = ((Vector2)(end - start)).ToOrthogonalDirection();
+            if (endDirection == Vector2.zero) endDirection = ((Vector2)(start - end)).ToOrthogonalDirection();
             
             //we need only one corner while perpendicular
             if (startDirection.IsPerpendicularTo(endDirection)) {
