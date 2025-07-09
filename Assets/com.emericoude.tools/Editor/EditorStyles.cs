@@ -79,10 +79,7 @@ namespace Emericoude.CustomEditors
             var enumField = new EnumField(property.displayName)
             {
                 tooltip = property.tooltip,
-                style =
-                {
-                    unityTextAlign = new StyleEnum<TextAnchor>(TextAnchor.MiddleLeft)
-                }
+                style = { unityTextAlign = new StyleEnum<TextAnchor>(TextAnchor.MiddleLeft) }
             };
             enumField.BindProperty(property);
             if (onValueChanged != null)
@@ -93,15 +90,27 @@ namespace Emericoude.CustomEditors
             return enumField;
         }
 
+        public static FloatField AddFloatField(this VisualElement visualElement, SerializedProperty property, EventCallback<ChangeEvent<float>> onValueChanged = null) {
+            var floatField = new FloatField(property.displayName)
+            {
+                tooltip = property.tooltip,
+                style = { unityTextAlign = new StyleEnum<TextAnchor>(TextAnchor.MiddleLeft) }
+            };
+            floatField.BindProperty(property);
+            if (onValueChanged != null)
+            {
+                floatField.RegisterValueChangedCallback(onValueChanged);
+            }
+            visualElement.Add(floatField);
+            return floatField;
+        }
+
         public static Toggle AddToggleField(this VisualElement visualElement, SerializedProperty property, EventCallback<ChangeEvent<bool>> onValueChanged = null)
         {
             var toggleField = new Toggle(property.displayName)
             {
                 tooltip = property.tooltip,
-                style =
-                {
-                    unityTextAlign = new StyleEnum<TextAnchor>(TextAnchor.MiddleLeft)
-                }
+                style = { unityTextAlign = new StyleEnum<TextAnchor>(TextAnchor.MiddleLeft) }
             };
             toggleField.BindProperty(property);
             if (onValueChanged != null)
@@ -120,10 +129,7 @@ namespace Emericoude.CustomEditors
                 tooltip = property.tooltip,
                 objectType = typeof(T),
                 allowSceneObjects = allowSceneObjects,
-                style =
-                {
-                    unityTextAlign = new StyleEnum<TextAnchor>(TextAnchor.MiddleLeft)
-                }
+                style = { unityTextAlign = new StyleEnum<TextAnchor>(TextAnchor.MiddleLeft) }
             };
             objectField.BindProperty(property);
             if (onValueChanged != null)
@@ -139,10 +145,7 @@ namespace Emericoude.CustomEditors
             var propertyField = new PropertyField(property, property.displayName)
             {
                 tooltip = property.tooltip,
-                style =
-                {
-                    unityTextAlign = new StyleEnum<TextAnchor>(TextAnchor.MiddleLeft)
-                }
+                style = { unityTextAlign = new StyleEnum<TextAnchor>(TextAnchor.MiddleLeft) }
             };
             if (onValueChanged != null)
             {
@@ -163,10 +166,7 @@ namespace Emericoude.CustomEditors
             EventCallback<ChangeEvent<Vector4>> onValueChanged = null) {
             var vector4Field = new Vector4Field(property.displayName) {
                 tooltip = property.tooltip,
-                style =
-                {
-                    unityTextAlign = new StyleEnum<TextAnchor>(TextAnchor.MiddleLeft)
-                }
+                style = { unityTextAlign = new StyleEnum<TextAnchor>(TextAnchor.MiddleLeft) }
             };
             vector4Field.BindProperty(property);
             if (onValueChanged != null)
@@ -182,5 +182,37 @@ namespace Emericoude.CustomEditors
         }
         
         #endregion
+        #region Extras
+        
+        public static Label AddSuffix(this VisualElement visualElement, string suffix, string tooltip = "") {
+            var label = new Label(suffix) {
+                tooltip = tooltip,
+                style = { unityTextAlign = new StyleEnum<TextAnchor>(TextAnchor.MiddleRight) }
+            };
+            
+            var baseFieldInput = visualElement.Q<VisualElement>(className: "unity-base-field__input");
+            if (baseFieldInput != null) baseFieldInput.Add(label);
+            else visualElement.Add(label);
+            return label;
+        }
+
+        public static Label AddWarningLabel(this VisualElement visualElement, string warningText) {
+            var warningLabel = CreateWarningLabel(warningText);
+            visualElement.Add(warningLabel);
+            return warningLabel;
+        }
+        
+        public static Label CreateWarningLabel(string warningText) {
+            return new Label($"⚠️ {warningText}" ) {
+                style = {
+                    unityTextAlign = new StyleEnum<TextAnchor>(TextAnchor.MiddleLeft),
+                    whiteSpace = new StyleEnum<WhiteSpace>(WhiteSpace.Normal),
+                }
+            };
+        }
+        
+        #endregion
+
+        
     }
 }

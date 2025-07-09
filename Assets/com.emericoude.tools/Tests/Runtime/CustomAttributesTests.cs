@@ -1,3 +1,5 @@
+using System;
+
 using UnityEngine;
 
 namespace Emericoude.Tests
@@ -6,5 +8,8 @@ namespace Emericoude.Tests
     {
         [Layer]
         [SerializeField] private int layer;
+
+        [RadiansDisplayedAsDegrees]
+        [SerializeField] private float angle;
     }
 }
