@@ -4,7 +4,10 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/com.emericoude.tools/Tests/Shared/Test_Attributes.unity
+    guid: a85baecf45583e64a924a5de29228180
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 3000bdec4c9d0654bbef743270e82aa6, type: 3}
   m_UseUCBPForAssetBundles: 0
