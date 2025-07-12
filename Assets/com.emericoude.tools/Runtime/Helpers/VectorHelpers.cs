@@ -4,26 +4,42 @@ namespace Emericoude.Helpers
 {
     public static class VectorHelpers
     {
-        private const float TAU = Mathf.PI * 2f;
-        
+        public const float TAU = Mathf.PI * 2f;
+        private const float DIAGONAL_ROTATION_OFFSET = TAU * 0.125f;
+
+        #region Determinant
+
+        /// <summary> Similar to the Dot product, but instead of how much two vectors point in the same direction, it's how much it points left or right. </summary>
+        /// <returns> The determinant of the two vectors (i.e. how much is a point to the right or left of b). <br/><c>a.x * b.y - a.y * b.x</c> </returns>
+        public static float Determinant(this Vector2 a, Vector2 b) => a.x * b.y - a.y * b.x;
+
+        #endregion
+        #region Direction To
+
         /// <returns> The normalized direction to the point. <c>(to - from).normalized</c> </returns>
         public static Vector2 DirectionTo(this Vector2 from, Vector2 to) => (to - from).normalized;
         /// <returns> The normalized direction to the point. <c>(to - from).normalized</c> </returns>
         public static Vector3 DirectionTo(this Vector3 from, Vector3 to) => (to - from).normalized;
-        
-        
+
+        #endregion
+        #region Is Approximately
+
         /// <returns> True if the square distance between a and b is below tolerance; otherwise false. <br/><c>a.DistanceSqr(b) &lt;= tolerance</c> </returns>
         public static bool IsApproximately(this Vector2 a, Vector2 b, float tolerance = 0.0002f) => a.DistanceSqr(b) <= tolerance;
         /// <returns> True if the square distance between a and b is below tolerance; otherwise false. <br/><c>a.DistanceSqr(b) &lt;= tolerance</c> </returns>
         public static bool IsApproximately(this Vector3 a, Vector3 b, float tolerance = 0.0002f) => a.DistanceSqr(b) <= tolerance;
-        
-        
+
+        #endregion
+        #region Absolute
+
         /// <returns> The supplied vector, where each component is forced to be positive. </returns>
         public static Vector2 AbsoluteComponents(this Vector2 v) => new Vector2(Mathf.Abs(v.x), Mathf.Abs(v.y));
         /// <returns> The supplied vector, where each component is forced to be positive. </returns>
         public static Vector3 AbsoluteComponents(this Vector3 v) => new Vector3(Mathf.Abs(v.x), Mathf.Abs(v.y), Mathf.Abs(v.z));
-        
-        
+
+        #endregion
+        #region Get Smallest/Largest/Average Component
+
         /// <returns> The vector's X or Y component, whichever is largest. <br/><c>Mathf.Max(components)</c> </returns>
         public static float LargestComponent(this Vector2 vector) => Mathf.Max(vector.x, vector.y);
         /// <returns> The vector's X, Y or Z component, whichever is largest. <br/><c>Mathf.Max(components)</c> </returns>
@@ -38,8 +54,10 @@ namespace Emericoude.Helpers
         public static float AverageComponents(this Vector2 vector) => (vector.x + vector.y) / 2.0f;
         /// <returns> The average of vector's X, Y and Z components. <br/><c>(x + y + z) / 3f</c> </returns>
         public static float AverageComponents(this Vector3 vector) => (vector.x + vector.y + vector.z) / 3.0f;
-        
-        
+
+        #endregion
+        #region Is Perpendicular To / Is Parallel To
+
         /// <returns> True if a and b are 90° of each other. <br/><c>Mathf.Abs(Vector2.Dot(a, b)) &lt; Mathf.Epsilon</c>  </returns>
         public static bool IsPerpendicularTo(this Vector2 a, Vector2 b) => Mathf.Abs(Vector2.Dot(a, b)) < Mathf.Epsilon;
         /// <returns> True if a and b are 90° of each other. <br/><c>Mathf.Abs(Vector3.Dot(a, b)) &lt; Mathf.Epsilon</c> </returns>
@@ -49,7 +67,9 @@ namespace Emericoude.Helpers
         public static bool IsParallelTo(this Vector2 a, Vector2 b) => Mathf.Abs(Vector2.Dot(a, b)) > (1.0f - Mathf.Epsilon);
         /// <returns> True if a and b are pointing in the same or opposite directions. <br/><c>Mathf.Abs(Vector3.Dot(a, b)) &gt; (1.0f - Mathf.Epsilon)</c> </returns>
         public static bool IsParallelTo(this Vector3 a, Vector3 b) => Mathf.Abs(Vector3.Dot(a, b)) > (1.0f - Mathf.Epsilon);
-        
+
+        #endregion
+        #region Distance Squared / Is In Range Of
         
         /// <returns> The distance between point a and point b, squared. <br/><c>(from - to).sqrMagnitude</c> </returns>
         /// <example> When checking if something is in range of another thing, it's more efficient to do <c>if (DistanceSqr(a, b) &lt; (range * range)) { }</c>,
@@ -61,15 +81,17 @@ namespace Emericoude.Helpers
         /// than it is to do <c>if (Distance(a, b) &lt; range) { }</c>. Albeit less readable. You can use <see cref="IsInRangeOf(UnityEngine.Vector3,UnityEngine.Vector3,float)"/>. </example>
         /// <remark> More efficient than <see cref="Vector3.Distance(Vector3, Vector3)"/> (as this avoids calculating the Root). </remark>
         public static float DistanceSqr(this Vector3 from, Vector3 to) => (from - to).sqrMagnitude;
-
         
+
         /// <returns> True if from or to are in range of each other (using the provided range radially); otherwise false. </returns>
         /// <remarks> This uses the <see cref="DistanceSqr(UnityEngine.Vector2,UnityEngine.Vector2)"/>, which can be more efficient than performing normal distance checks. </remarks>
         public static bool IsInRangeOf(this Vector2 from, Vector2 to, float range) => DistanceSqr(from, to) <= (range * range);
         /// <returns> True if from or to are in range of each other (using the provided range spherically); otherwise false. </returns>
         /// <remarks> This uses the <see cref="DistanceSqr(UnityEngine.Vector3,UnityEngine.Vector3)"/>, which can be more efficient than performing normal distance checks. </remarks>
         public static bool IsInRangeOf(this Vector3 from, Vector3 to, float range) => DistanceSqr(from, to) <= (range * range);
-        
+
+        #endregion
+        #region Nearest Point
         
         /// <returns> If from is inside the range, then from; otherwise the nearest position on the edge of the range. </returns>
         public static Vector2 NearestPointInRange(this Vector2 from, Vector2 to, float radius) {
@@ -128,48 +150,35 @@ namespace Emericoude.Helpers
             return nearestPoint;
         }
 
+        #endregion
+        #region Segmented Directions
         
         /// <summary> Basically direction.ToSegmentedDirection(4). </summary>
-        /// <returns> The current direction snapped to the nearest orthogonal. </returns>
+        /// <returns> The direction snapped to the nearest orthogonal. </returns>
         public static Vector2 ToOrthogonalDirection(this Vector2 direction) => direction.ToSegmentedDirection(4);
 
         /// <summary> Basically direction.ToSegmentedDirection(8). </summary>
-        /// <returns> The current direction snapped to the nearest orthogonal or diagonal. </returns>
+        /// <returns> The direction snapped to the nearest orthogonal or diagonal. </returns>
         public static Vector2 ToOrthoDiagonalDirection(this Vector2 direction) => direction.ToSegmentedDirection(4);
-        
-        //TODO ToDiagonalDirection (we need a 4 + an rotation offset for this)
 
-        /// <summary>
-        /// Snaps the given direction to the nearest segmented direction.
-        /// For instance, if you have 4 segments, it will be orthogonal only.
-        /// If you have 8 segments, it will be orthogonal and diagonals.
-        /// </summary>
-        /// <returns> A clamped direction. </returns>
-        /// TODO: initial rotation? basically improve this beyond the Ai generation... I should understand what's going on here
-        /// TODO: 3D version?
-        public static Vector2 ToSegmentedDirection(this Vector2 direction, int segments) {
+        /// <summary> Basically direction.ToSegmentedDirection(4, TAU * 0.125f </summary>
+        /// <returns> The direction snapped to the nearest diagonal. </returns>
+        public static Vector2 ToDiagonalDirection(this Vector2 direction) => direction.ToSegmentedDirection(4, DIAGONAL_ROTATION_OFFSET);
+
+        /// <summary> Snaps the given direction to the nearest "segment". You can imagine a compass where each segment is an equally distributed area. </summary>
+        /// <param name="direction"> The direction to snap. This is expected to be normalized as it is a direction. </param>
+        /// <param name="segments"> The amount of possible directions to snap to. For instance, if you have 4, this will mean only orthogonal directions. </param>
+        /// <param name="compassRotationRad"> The rotation of the "compass" in radians. Basically, this will rotate the possible angles (but you will still snap to the nearest direction). </param>
+        /// <returns> The direction snapped to the nearest segmented direction. </returns>
+        public static Vector2 ToSegmentedDirection(this Vector2 direction, int segments, float compassRotationRad = 0f) {
             if (direction.sqrMagnitude < Mathf.Epsilon) return Vector2.zero; // if direction is zero, return zero
-            direction = direction.normalized;
-
-            // optimized path for 4 segments (i.e. orthogonal)
-            if (segments == 4) {
-                return Mathf.Abs(direction.x) > Mathf.Abs(direction.y)
-                    ? new Vector2(Mathf.Sign(direction.x), 0)
-                    : new Vector2(0, Mathf.Sign(direction.y));
-            }
-
-            //TODO: optimized path for 8
-            
-            float angle = Mathf.Atan2(direction.y, direction.x);
-            float snappedAngle = Mathf.Round(angle / TAU * segments) * TAU / segments;
-
-            // Return the normalized direction vector without rounding the components
-            return new Vector2(
-                Mathf.Cos(snappedAngle),
-                Mathf.Sin(snappedAngle)
-            );
+            float angleRad = direction.DirectionToAngle() - compassRotationRad;
+            float snappedAngle = Mathf.Round(angleRad / TAU * segments) * TAU / segments;
+            return TrigonometryHelpers.AngleToDirection(snappedAngle + compassRotationRad);
         }
         
+        #endregion
+        #region Lerp
         
         //TODO: understand this
         //TODO: 2D version
@@ -185,6 +194,8 @@ namespace Emericoude.Helpers
             return Vector3.Dot(AV, AB) / Vector3.Dot(AB, AB);
         }
         
+        #endregion
+        #region Rotate Around Pivot
         
         //TODO: 2D version
         /// <returns> The point rotated in space around the pivot by the given angles. </returns>
@@ -194,7 +205,9 @@ namespace Emericoude.Helpers
         /// <returns> The point rotated in space around the pivot by the given rotation. </returns>
         public static Vector3 RotateAroundPivot(this Vector3 point, Vector3 pivot, Quaternion rotation) => pivot + rotation * (point - pivot);
         
-        
+        #endregion
+        #region  Barycentric
+
         //TODO: I renamed this to specifically "Triangle" barycentric, but I have no clue if that's accurate lol...
         //sourced from https://discussions.unity.com/t/raycasthit-texturecoord-does-the-reverse-exist/36255/3
         /// <returns> The barycentric point (i.e. center of mass) from the given inputs.  </returns>
@@ -218,5 +231,7 @@ namespace Emericoude.Helpers
                                            && (barycentric.y >= 0.0f) && (barycentric.y <= 1.0f)
                                            && (barycentric.z >= 0.0f); //(barycentric.z <= 1.0f)
         }
+
+        #endregion
     }
 }

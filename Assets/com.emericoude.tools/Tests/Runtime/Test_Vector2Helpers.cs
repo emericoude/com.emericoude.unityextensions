@@ -36,6 +36,8 @@ namespace Emericoude.Tests
                 case Test.NearestPointOnCircleEdge: this.OnDrawGizmos_NearestPointOnCircleEdge(); break;
                 default: break;
             }
+            
+            GizmosHelpers.DrawArrow(Vector3.zero, new Vector3 (1f, 0.35f, 0.5f));
         }
 
         private void OnDrawGizmos_SnapDirection() {
