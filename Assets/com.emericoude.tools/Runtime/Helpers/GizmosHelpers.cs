@@ -4,8 +4,8 @@ namespace Emericoude.Helpers
 {
 	public static class GizmosHelpers
 	{
-		/// <summary> Thickness used by various functions. Default is 0.0001f. </summary>
-		private const float Thickness = 0.0001f;
+		/// <summary> Thickness used by various functions. Default value is 0.0001f. </summary>
+		private const float THICKNESS = 0.0001f;
 
 		#region Draw Capsule
 
@@ -98,7 +98,7 @@ namespace Emericoude.Helpers
 				float angle = 360f * i / resolution;
 				Quaternion q = Quaternion.AngleAxis(angle, Vector3.up);
 				Vector3 capsulePosition = position + rotation * q * Vector3.forward * radius;
-				Vector3 size = new Vector3(faceWidth, height, Thickness);
+				Vector3 size = new Vector3(faceWidth, height, THICKNESS);
 				Quaternion segmentRotation = rotation * q;
 				Matrix4x4 matrix = Matrix4x4.TRS(capsulePosition, segmentRotation, Vector3.one);
 				UnityEngine.Gizmos.matrix = matrix;
@@ -131,7 +131,7 @@ namespace Emericoude.Helpers
 				float angle = 360f * i / resolution;
 				Quaternion q = Quaternion.AngleAxis(angle, Vector3.up);
 				Vector3 capsulePosition = position + rotation * q * Vector3.forward * radius;
-				Vector3 size = new Vector3(faceWidth, height, Thickness);
+				Vector3 size = new Vector3(faceWidth, height, THICKNESS);
 				Quaternion segmentRotation = rotation * q;
 				Matrix4x4 matrix = Matrix4x4.TRS(capsulePosition, segmentRotation, Vector3.one);
 				UnityEngine.Gizmos.matrix = matrix;
@@ -201,6 +201,42 @@ namespace Emericoude.Helpers
 		}
 
 		#endregion
+		#region Draw Arrow
+
+		//TODO: could be nice if the arrowhead was drawn so its always visible from the active (or last) viewport.
+		/// <summary> Draws an arrow from start to the end point. </summary>
+		/// <param name="start"> The start point. </param>
+		/// <param name="end"> The end point. Where the arrow is dawn. </param>
+		/// <param name="headLength"> The length of the arrowhead lines. If is lengthRelative is true, this is ratio of the line's magnitude. </param>
+		/// <param name="headAngleDegrees"> The angle (in degrees) of the arrowhead lines. </param>
+		/// <param name="isLengthRelative"> If true, the length of the lines is relative to the magnitude (i.e. the length) of the arrow. If false, the length will be in meters. Default is true. </param>
+		public static void DrawArrow(Vector3 start, Vector3 end, float headLength = 0.2f, float headAngleDegrees = 45.0f, bool isLengthRelative = true) {
+			if (start.IsApproximately(end)) return; //safeguard to prevent unity's "Look rotation viewing vector is zero" log.
+			
+			Gizmos.DrawLine(start, end);
+			Vector3 direction = (end - start).normalized;
+			Vector3 arrowHeadRight = Quaternion.LookRotation(direction) * Quaternion.Euler(0, headAngleDegrees,0) * new Vector3(0,0,1);
+			Vector3 arrowHeadLeft = Quaternion.LookRotation(direction) * Quaternion.Euler(0, -headAngleDegrees,0) * new Vector3(0,0,1);
+			headLength = isLengthRelative ? headLength * (end - start).magnitude : headLength;
+			Gizmos.DrawLine(end, end - arrowHeadRight * headLength);
+			Gizmos.DrawLine(end, end - arrowHeadLeft * headLength);
+		}
+		
+		#endregion
+		#region Draw Segmented Directions
+		
+		/// <summary> A visualizer for possible direction outputs of <see cref="VectorHelpers.ToSegmentedDirection"/>. </summary>
+		public static void DrawSegmentedDirections(Vector3 position, Quaternion rotation, int segments, float rotationOffsetRad = 0f, float arrowLength = 1f, float arrowheadLengthRelative = 0.2f, float arrowheadAngleDegrees = 45.0f) {
+			for (int i = 0; i < segments; i++) {
+				float t = i / (float)segments;
+				float angle = rotationOffsetRad + t * VectorHelpers.TAU;
+				Vector3 direction = TrigonometryHelpers.AngleToDirection(angle);
+				direction = rotation * direction;
+				GizmosHelpers.DrawArrow(position, position + direction * arrowLength, arrowheadLengthRelative, arrowheadAngleDegrees);
+			}
+		}
+		
+		#endregion
 		#region Double Sided
 
 		/// <summary> Draws a hollow box at center with size. </summary>
@@ -211,7 +247,7 @@ namespace Emericoude.Helpers
 			Matrix4x4 oldMatrix = UnityEngine.Gizmos.matrix;
 
 			UnityEngine.Gizmos.matrix = Matrix4x4.TRS(center, rotation, size);
-			Vector3 thicknessVector = UnityEngine.Gizmos.matrix.lossyScale * Thickness;
+			Vector3 thicknessVector = UnityEngine.Gizmos.matrix.lossyScale * THICKNESS;
 			UnityEngine.Gizmos.DrawCube(new Vector3(0.5f, 0f, 0f), new Vector3(thicknessVector.x, 1f, 1f));
 			UnityEngine.Gizmos.DrawCube(new Vector3(-0.5f, 0f, 0f), new Vector3(thicknessVector.x, 1f, 1f));
 			UnityEngine.Gizmos.DrawCube(new Vector3(0f, 0.5f, 0f), new Vector3(1f, thicknessVector.y, 1f));
