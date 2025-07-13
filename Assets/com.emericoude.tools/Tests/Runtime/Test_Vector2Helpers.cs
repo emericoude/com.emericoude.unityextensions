@@ -11,7 +11,8 @@ namespace Emericoude.Tests
         {
             None,
             SnapDirection,
-            NearestPointOnCircleEdge
+            NearestPointOnCircleEdge,
+            QuadraticBezierCurve,
         }
 
         [Header("Test")]
@@ -25,19 +26,21 @@ namespace Emericoude.Tests
         [Header("Nearest point on circle edge")]
         [SerializeField] private float nearestPointOnCircleEdgeRadius = 1f;
 
+        [Header("Quadratic Bezier Curve")]
+        [SerializeField] private Vector2[] quadraticBezierCurvePoints;
+        [SerializeField, Range(0f, 1f)] private float quadraticBezierT = 0.5f;
+        
         private new Camera camera => Camera.main;
-
-
+        
         private void OnDrawGizmos() {
             if (test == Test.None) return;
 
             switch (this.test) {
                 case Test.SnapDirection: this.OnDrawGizmos_SnapDirection(); break;
                 case Test.NearestPointOnCircleEdge: this.OnDrawGizmos_NearestPointOnCircleEdge(); break;
+                case Test.QuadraticBezierCurve: this.OnDrawGizmos_QuadraticBezierCurve(); break;
                 default: break;
             }
-            
-            GizmosHelpers.DrawArrow(Vector3.zero, new Vector3 (1f, 0.35f, 0.5f));
         }
 
         private void OnDrawGizmos_SnapDirection() {
@@ -75,6 +78,29 @@ namespace Emericoude.Tests
             Gizmos.color = resultColor;
             Gizmos.DrawLine(mousePositionToWorld, nearestPointOnCircleEdgeToWorld);
             Gizmos.DrawSphere(nearestPointOnCircleEdgeToWorld, 0.01f);
+        }
+
+        private void OnDrawGizmos_QuadraticBezierCurve() {
+            if (this.quadraticBezierCurvePoints.Length < 2) return;
+
+            //draw the points / raw shape
+            Gizmos.color = Color.black;
+            for (int i = 0; i < this.quadraticBezierCurvePoints.Length; i++) {
+                Gizmos.DrawSphere(this.quadraticBezierCurvePoints[i], 0.025f);
+                if (i < this.quadraticBezierCurvePoints.Length - 1) {
+                    Gizmos.DrawLine(this.quadraticBezierCurvePoints[i], this.quadraticBezierCurvePoints[i + 1]);
+                }
+            }
+            
+            //draw the curve
+            Gizmos.color = Color.blue;
+            for (int i = 0; i <= (this.quadraticBezierCurvePoints.Length + 1) % 4; i++) {
+                Vector2 p0 = this.quadraticBezierCurvePoints[i];
+                Vector2 p1 = this.quadraticBezierCurvePoints[i + 1];
+                Vector2 p2 = this.quadraticBezierCurvePoints[i + 2];
+                Vector2 bezierPoint = VectorHelpers.QuadraticBezier(p0, p1, p2, this.quadraticBezierT);
+                Gizmos.DrawSphere(bezierPoint, 0.025f);
+            }
         }
     }
 }

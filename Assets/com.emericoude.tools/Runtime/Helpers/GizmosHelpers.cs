@@ -229,7 +229,7 @@ namespace Emericoude.Helpers
 		public static void DrawSegmentedDirections(Vector3 position, Quaternion rotation, int segments, float rotationOffsetRad = 0f, float arrowLength = 1f, float arrowheadLengthRelative = 0.2f, float arrowheadAngleDegrees = 45.0f) {
 			for (int i = 0; i < segments; i++) {
 				float t = i / (float)segments;
-				float angle = rotationOffsetRad + t * VectorHelpers.TAU;
+				float angle = rotationOffsetRad + t * MathHelpers.TAU;
 				Vector3 direction = TrigonometryHelpers.AngleToDirection(angle);
 				direction = rotation * direction;
 				GizmosHelpers.DrawArrow(position, position + direction * arrowLength, arrowheadLengthRelative, arrowheadAngleDegrees);

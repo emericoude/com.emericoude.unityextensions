@@ -137,7 +137,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &655462777
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -271,11 +271,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5920719251702aa4c80661de35c9df2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  test: 2
+  test: 3
   inputColor: {r: 0, g: 0, b: 1, a: 1}
   resultColor: {r: 0, g: 1, b: 0, a: 1}
   snapDirectionSegments: 4
   nearestPointOnCircleEdgeRadius: 100
+  quadraticBezierCurvePoints:
+  - {x: 0, y: 0}
+  - {x: 0, y: 1}
+  - {x: 1, y: 1}
+  - {x: 1, y: 0}
+  quadraticBezierT: 0.5
 --- !u!1 &1110059387
 GameObject:
   m_ObjectHideFlags: 0

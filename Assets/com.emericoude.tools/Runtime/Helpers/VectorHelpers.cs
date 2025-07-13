@@ -4,9 +4,6 @@ namespace Emericoude.Helpers
 {
     public static class VectorHelpers
     {
-        public const float TAU = Mathf.PI * 2f;
-        private const float DIAGONAL_ROTATION_OFFSET = TAU * 0.125f;
-
         #region Determinant
 
         /// <summary> Similar to the Dot product, but instead of how much two vectors point in the same direction, it's how much it points left or right. </summary>
@@ -163,7 +160,7 @@ namespace Emericoude.Helpers
 
         /// <summary> Basically direction.ToSegmentedDirection(4, TAU * 0.125f </summary>
         /// <returns> The direction snapped to the nearest diagonal. </returns>
-        public static Vector2 ToDiagonalDirection(this Vector2 direction) => direction.ToSegmentedDirection(4, DIAGONAL_ROTATION_OFFSET);
+        public static Vector2 ToDiagonalDirection(this Vector2 direction) => direction.ToSegmentedDirection(4, MathHelpers.TAU * 0.125f);
 
         /// <summary> Snaps the given direction to the nearest "segment". You can imagine a compass where each segment is an equally distributed area. </summary>
         /// <param name="direction"> The direction to snap. This is expected to be normalized as it is a direction. </param>
@@ -173,12 +170,12 @@ namespace Emericoude.Helpers
         public static Vector2 ToSegmentedDirection(this Vector2 direction, int segments, float compassRotationRad = 0f) {
             if (direction.sqrMagnitude < Mathf.Epsilon) return Vector2.zero; // if direction is zero, return zero
             float angleRad = direction.DirectionToAngle() - compassRotationRad;
-            float snappedAngle = Mathf.Round(angleRad / TAU * segments) * TAU / segments;
+            float snappedAngle = Mathf.Round(angleRad / MathHelpers.TAU * segments) * MathHelpers.TAU / segments;
             return TrigonometryHelpers.AngleToDirection(snappedAngle + compassRotationRad);
         }
         
         #endregion
-        #region Lerp
+        #region Inverse Lerp / Remap / Bezier
         
         //TODO: understand this
         //TODO: 2D version
@@ -186,13 +183,44 @@ namespace Emericoude.Helpers
         /// <param name="a">The start of the range.</param>
         /// <param name="b">The end of the range.</param>
         /// <param name="t">The point within the range you want to calculate.</param>
-        /// <returns>A value between 0 and 1, representing where <paramref name="t"/> falls between <paramref name="a"/> (0) and <paramref name="b"/> (1).</returns>
+        /// <returns> A value between 0 and 1, representing where <paramref name="t"/> falls between <paramref name="a"/> (0) and <paramref name="b"/> (1). </returns>
         public static float InverseLerp (Vector3 a, Vector3 b, Vector3 t)
         {
-            Vector3 AB = b - a;
-            Vector3 AV = t - a;
-            return Vector3.Dot(AV, AB) / Vector3.Dot(AB, AB);
+            Vector3 ab = b - a;
+            Vector3 av = t - a;
+            return Vector3.Dot(av, ab) / Vector3.Dot(ab, ab);
         }
+
+
+        /// <returns> The value t (within the iMin and iMax range), remapped into the range oMin and oMax. <br/><c>Vector3.Lerp(oMin, oMax, Vector3.InverseLerp(iMin, iMax, t));</c> </returns>
+        public static Vector2 Remap(Vector2 iMin, Vector2 iMax, Vector2 oMin, Vector2 oMax, Vector2 t) => Vector2.Lerp(oMin, oMax, InverseLerp(iMin, iMax, t));
+        /// <returns> The value t (within the iMin and iMax range), remapped into the range oMin and oMax. <br/><c>Vector3.Lerp(oMin, oMax, Vector3.InverseLerp(iMin, iMax, t));</c> </returns>
+        public static Vector3 Remap(Vector3 iMin, Vector3 iMax, Vector3 oMin, Vector3 oMax, Vector3 t) => Vector3.Lerp(oMin, oMax, InverseLerp(iMin, iMax, t));
+        
+        /// <returns> The value t (within the iMin and iMax range), remapped into the range oMin and oMax. <br/><c>Vector3.LerpUnclamped(oMin, oMax, Vector3.InverseLerp(iMin, iMax, t));</c> </returns>
+        public static Vector2 RemapUnclamped(Vector2 iMin, Vector2 iMax, Vector2 oMin, Vector2 oMax, Vector2 t) => Vector2.LerpUnclamped(oMin, oMax, InverseLerp(iMin, iMax, t));
+        /// <returns> The value t (within the iMin and iMax range), remapped into the range oMin and oMax. <br/><c>Vector3.LerpUnclamped(oMin, oMax, Vector3.InverseLerp(iMin, iMax, t));</c> </returns>
+        public static Vector3 RemapUnclamped(Vector3 iMin, Vector3 iMax, Vector3 oMin, Vector3 oMax, Vector3 t) => Vector3.LerpUnclamped(oMin, oMax, InverseLerp(iMin, iMax, t));
+
+        /// <returns> A bezier quadratic value. You can think of this as a lerp that outputs a Bézier curve (i.e. nested lerp between more than two points).
+        /// <br/> Optimized version of <c>Vector3.Lerp(Vector3.Lerp(p0, p1, t), Vector3.Lerp(p1, p2, t), t);</c></returns>
+        public static Vector2 QuadraticBezier(Vector2 p0, Vector2 p1, Vector2 p2, float t) {
+            //return Vector2.Lerp(Vector2.Lerp(p0, p1, t), Vector2.Lerp(p1, p2, t), t);
+            float u = 1f - t;
+            return p0 * u * u
+                 + p1 * 2f * u * t 
+                 + p2 * t * t;
+        }
+        /// <returns> A bezier quadratic value. You can think of this as a lerp that outputs a Bézier curve (i.e. nested lerp between more than two points).
+        /// <br/> Optimized version of <c>Vector3.Lerp(Vector3.Lerp(p0, p1, t), Vector3.Lerp(p1, p2, t), t);</c></returns>
+        public static Vector3 QuadraticBezier(Vector3 p0, Vector3 p1, Vector3 p2, float t) {
+            //return Vector3.Lerp(Vector3.Lerp(p0, p1, t), Vector3.Lerp(p1, p2, t), t);
+            float u = 1f - t;
+            return p0 * u * u
+                 + p1 * 2f * u * t 
+                 + p2 * t * t;
+        }
+        
         
         #endregion
         #region Rotate Around Pivot
@@ -213,13 +241,13 @@ namespace Emericoude.Helpers
         /// <returns> The barycentric point (i.e. center of mass) from the given inputs.  </returns>
         public static Vector3 GetTriangleBarycentric (Vector2 v1,Vector2 v2,Vector2 v3,Vector2 p)
         {
-            Vector3 B = new Vector3();
-            B.x = ((v2.y - v3.y)*(p.x-v3.x) + (v3.x - v2.x)*(p.y - v3.y)) /
+            Vector3 b = new Vector3();
+            b.x = ((v2.y - v3.y)*(p.x-v3.x) + (v3.x - v2.x)*(p.y - v3.y)) /
                   ((v2.y-v3.y)*(v1.x-v3.x) + (v3.x-v2.x)*(v1.y -v3.y));
-            B.y = ((v3.y - v1.y)*(p.x-v3.x) + (v1.x - v3.x)*(p.y - v3.y)) /
+            b.y = ((v3.y - v1.y)*(p.x-v3.x) + (v1.x - v3.x)*(p.y - v3.y)) /
                   ((v3.y-v1.y)*(v2.x-v3.x) + (v1.x-v3.x)*(v2.y -v3.y));
-            B.z = 1 - B.x - B.y;
-            return B;
+            b.z = 1 - b.x - b.y;
+            return b;
         }
         
         //TODO: understand this
