@@ -223,7 +223,7 @@ namespace Emericoude.Helpers
         
         
         #endregion
-        #region Rotate Around Pivot
+        #region Rotate / Rotate 90 / Rotate Around Pivot
         
         //TODO: 2D version
         /// <returns> The point rotated in space around the pivot by the given angles. </returns>
@@ -232,6 +232,32 @@ namespace Emericoude.Helpers
         //TODO: 2D version
         /// <returns> The point rotated in space around the pivot by the given rotation. </returns>
         public static Vector3 RotateAroundPivot(this Vector3 point, Vector3 pivot, Quaternion rotation) => pivot + rotation * (point - pivot);
+        
+
+        /// <returns> The supplied vector, rotated by 90° counter-clockwise. </returns>
+        /// <remarks> This is cheaper than any-angle rotating. Also, you can use this to calculate the normal of a 2D surface. </remarks>
+        public static Vector2 Rotate90(this Vector2 vector) => new Vector2(-vector.y, vector.x);
+        /// <returns> The supplied vector, rotated by 90° clockwise. </returns>
+        /// <remarks> This is cheaper than any-angle rotating. </remarks>
+        public static Vector2 Rotate90Clockwise(this Vector2 vector) => new Vector2(vector.y, -vector.x);
+
+        
+        /// <returns> The vector, rotated counter-clockwise by the given angle. </returns>
+        /// <remarks> <c>vector.Rotate(TrigonometryHelpers.AngleToDirection(angleRad))</c> </remarks>
+        public static Vector2 Rotate(this Vector2 vector, float angleRad) => vector.Rotate(TrigonometryHelpers.AngleToDirection(angleRad));
+        /// <returns> The vector, rotated counter-clockwise by the given direction angle. </returns>
+        public static Vector2 Rotate(this Vector2 vector, Vector2 angleVector) {
+            return new Vector2(
+                (angleVector.x * vector.x) - (angleVector.y * vector.y),
+                (angleVector.y * vector.x) + (angleVector.x * vector.y)
+            ); 
+            
+            //OLD CODE, basically the above is the same thing, but more optimize since we don't need to construct a matrix
+            //also, Matrix2x2 I had was removed because it was a no-license script on GitHub
+            //Vector2 vector90 = vector.Rotate90();
+            //Matrix2x2 vectorToWorldSpace = new Matrix2x2(vector.x, vector.y, vector90.x, vector90.y); 
+            //return vectorToWorldSpace * angleVector;
+        }
         
         #endregion
         #region  Barycentric
