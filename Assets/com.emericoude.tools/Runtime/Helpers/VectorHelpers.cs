@@ -202,6 +202,7 @@ namespace Emericoude.Helpers
         /// <returns> The value t (within the iMin and iMax range), remapped into the range oMin and oMax. <br/><c>Vector3.LerpUnclamped(oMin, oMax, Vector3.InverseLerp(iMin, iMax, t));</c> </returns>
         public static Vector3 RemapUnclamped(Vector3 iMin, Vector3 iMax, Vector3 oMin, Vector3 oMax, Vector3 t) => Vector3.LerpUnclamped(oMin, oMax, InverseLerp(iMin, iMax, t));
 
+        
         /// <returns> A bezier quadratic value. You can think of this as a lerp that outputs a Bézier curve (i.e. nested lerp between more than two points).
         /// <br/> Optimized version of <c>Vector3.Lerp(Vector3.Lerp(p0, p1, t), Vector3.Lerp(p1, p2, t), t);</c></returns>
         public static Vector2 QuadraticBezier(Vector2 p0, Vector2 p1, Vector2 p2, float t) {
@@ -219,6 +220,17 @@ namespace Emericoude.Helpers
             return p0 * u * u
                  + p1 * 2f * u * t 
                  + p2 * t * t;
+        }
+        
+        /// <returns> A bezier quadratic value with 4 points. You can think of this as a lerp that outputs a Bézier curve (i.e. nested lerp between more than two points).
+        /// <br/> Effectively <c>Vector2.Lerp(QuadraticBezier(p0, p1, p2, t), QuadraticBezier(p1, p2, p3, t), t);</c></returns>
+        public static Vector2 QuadraticBezier(Vector2 p0, Vector2 p1, Vector2 p2, Vector2 p3, float t) {
+            return Vector2.Lerp(QuadraticBezier(p0, p1, p2, t), QuadraticBezier(p1, p2, p3, t), t);
+        }
+        /// <returns> A bezier quadratic value with 4 points. You can think of this as a lerp that outputs a Bézier curve (i.e. nested lerp between more than two points).
+        /// <br/> Effectively <c>Vector3.Lerp(QuadraticBezier(p0, p1, p2, t), QuadraticBezier(p1, p2, p3, t), t);</c></returns>
+        public static Vector3 QuadraticBezier(Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3, float t) {
+            return Vector3.Lerp(QuadraticBezier(p0, p1, p2, t), QuadraticBezier(p1, p2, p3, t), t);
         }
         
         
