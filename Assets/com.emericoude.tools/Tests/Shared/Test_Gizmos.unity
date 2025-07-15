@@ -688,15 +688,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 805068345}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.6135703, y: 0.06771422, z: -0.29251254, w: 0.7303306}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.6432146, y: 0.30947173, z: 0.4851993, w: 0.5050583}
+  m_LocalPosition: {x: 0.349, y: 0.093, z: 0.027}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 169221711}
   - {fileID: 696236050}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 69.363, y: -47.547, z: -77.558}
+  m_LocalEulerAnglesHint: {x: 20.451, y: 91.162, z: 108.563}
 --- !u!114 &805068347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -709,6 +709,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 569a854ffbf68af4ebf44a3789faad69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  test: 2
   arrowSource: {fileID: 169221711}
   arrowTarget: {fileID: 696236050}
   arrowHeadLength: 0.19
@@ -717,6 +718,10 @@ MonoBehaviour:
   segmentedDirectionAngle: 9.189158
   segmentedDirectionLength: 0.99
   directionInput: {x: 0.1, y: 1}
+  turns: 256
+  resolutionPerTurn: 12
+  minorRadius: 0.05
+  majorRadius: 0.27
 --- !u!1 &1902253598
 GameObject:
   m_ObjectHideFlags: 0

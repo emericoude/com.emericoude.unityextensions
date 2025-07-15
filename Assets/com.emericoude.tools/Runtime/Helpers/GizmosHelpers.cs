@@ -201,6 +201,46 @@ namespace Emericoude.Helpers
 		}
 
 		#endregion
+		#region Draw Torus
+
+		/// <summary> Draws a "spring" torus. In other words, a torus drawn with lines that spiral around the radius. </summary>
+		/// <param name="position"> Position of the torus. </param>
+		/// <param name="orientation"> Rotation of the torus, not that in our context, the torus is standing up, as if you were looking through a doughnut's hole. </param>
+		/// <param name="minorRadius"> The radius of the tube, or in other words, the thickness of the doughnut. </param>
+		/// <param name="majorRadius"> The radius of the torus as a whole, or in other words how big the doughnut hole is. </param>
+		/// <param name="turns"> This is the amount of rotational turns that the spring will take along the torus. Increasing this increases the density of the lines. </param>
+		/// <param name="resolutionPerTurn"> This is the amount of lines drawn for each turn. Keep this to a lower number for better performance. </param>
+		public static void DrawTorusStrip(Vector3 position, Quaternion orientation, float minorRadius, float majorRadius, int turns = 64, int resolutionPerTurn = 10) {
+			int pointAmount = turns * resolutionPerTurn;
+			float rotationIncrement = 360f / pointAmount;
+			Vector3[] points = new Vector3[pointAmount];
+			Matrix4x4 rotationMatrix = Matrix4x4.Rotate(Quaternion.Euler(90f, 0f, 0f));
+			for (int i = 0; i < pointAmount; i++) {
+				//get interpolation values
+				float iLerp = Mathf.InverseLerp(0, pointAmount, i);
+				float iLerpInTurn = Mathf.InverseLerp(0, resolutionPerTurn, i % resolutionPerTurn);
+				
+				//calculate position at the torus' tube center
+				float torusAngle = Mathf.Lerp(0f, MathHelpers.TAU, iLerp);
+				Vector3 centerToTorusRadial = TrigonometryHelpers.AngleToDirection(torusAngle) * majorRadius;
+
+				//calculate the offset within the turn
+				float xzAngle = MathHelpers.TAU * iLerpInTurn;
+				Vector3 torusRadialOffset = TrigonometryHelpers.AngleToDirection(xzAngle);
+				
+				//So far we've been working in 2D, so we rotate each point using a matrix
+				rotationMatrix *= Matrix4x4.Rotate(Quaternion.Euler(0f, rotationIncrement, 0f));
+				torusRadialOffset = rotationMatrix.MultiplyVector(torusRadialOffset);
+				points[i] = centerToTorusRadial + (torusRadialOffset * minorRadius);
+			}
+			
+			Matrix4x4 oldMatrix = Gizmos.matrix;
+			Gizmos.matrix = Matrix4x4.TRS(position, orientation, Vector3.one);
+			Gizmos.DrawLineStrip(points, true);
+			Gizmos.matrix = oldMatrix;
+		}
+		
+		#endregion
 		#region Draw Arrow
 
 		//TODO: could be nice if the arrowhead was drawn so its always visible from the active (or last) viewport.
