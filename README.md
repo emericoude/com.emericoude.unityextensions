@@ -1,9 +1,9 @@
 # Emeric's Unity Extensions
 
 ## Warning / Foreword
-This package is a collection of utilities I use as part of personal projects. It is frequently updated with breaking changes as most of it is WIP and not necessarily meant for public usage, update at your own risk.
+This package is a collection of utilities I use and grow as part of personal projects. **It is frequently updated with breaking changes as most of it is WIP and not necessarily meant for public usage, update at your own risk***. As this gets bigger and bigger, I may break this down into multiple smaller packages. Feel free to get inspired or copy stuff you need.
+
 This is the repo for working in the package, see the 'How to add the package to your project' section below to install it.
-There's probably some cleanup and breaking apart that I might do as this gets bigger and bigger...
 
 ## How to add the package to your project
 1. Open your Unity Project.
